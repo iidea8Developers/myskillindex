@@ -398,18 +398,40 @@ confirm_password.onkeyup = validatePassword;
 					    		&nbsp;&nbsp;
 					    	    <span id="reset_fail" class="response_error" style="display: none;"></span>
 						    		<div class="clearfix"></div>
-						    		   <form action="../../service/common/forget.php" method="post">
+						    		   <form action="../../service/common/forget.php" method="post" id=forget_login_form>
 										<div class="form-group">
                                                                               
 									    	<div class="input-group">
 									      		<span class="input-group-addon glyphicon glyphicon-envelope"></span>
 									      		<input type="text" class="form-control" name="email" id="femail" placeholder="Email" required title="email required">
 									    	</div>
-									    	<span class="help-block has-error" data-error='0' id="femail-error"></span>
+									    	<span class="help-block has-error" data-error='0' id="error_message"></span>
 									  	</div>
 									  	
 							  			<center><button  type="submit" id="reset_btn" class="btn btn-block bt-login" data-loading-text="Please wait...." style="border:solid 1px #0074bf;width:200px;color:#0074bf;background:transparent;">Retrieve Password</button></center>
                                                                                             	</form>
+										<!--Ajax code for login error print-->
+										<script>
+                                            $(document).ready(function()
+											    {
+                                                    $("#reset_btn").click(function()
+                                                        {
+                                                           $.post( $("#forget_login_form").attr("action"),
+                                                           $("#forget_login_form:input").serialize(),
+		                                                   function(data)
+														        {
+			                                                    $("#error_message").html();
+		                                                        });
+		   
+	                                                       $("#forget_login_form").submit(function()
+														        {
+		                                                      return false;
+	                                                            });	   
+   
+                                                        });
+											    });
+                                        </script>	
+                                        <!--Ajax code ends -->										
 										<div class="clearfix"></div>
 										<div class="login-modal-footer">
 							  				<div class="row">

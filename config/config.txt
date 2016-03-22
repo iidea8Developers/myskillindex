@@ -2,7 +2,7 @@
 define("dbhost","localhost");
   define("dbuser","root");
   define("dbpass","shukla");
-  define("dbname","tool"); 
+  define("dbname","tool2"); 
 
 define("dbhost21","localhost");
   define("dbuser21","root");
