@@ -5,7 +5,7 @@
  
 	session_start();
   //$_SESSION['id'];
-	include('../../service/common/db_connection.php');
+	include_once('../../service/common/db_connection.php');
 
   $link = $_GET['link'];
   Echo "<font color='#FF6F00'><h3><br><br><br><br><br><br><br><br><br><center>My Skill Index require pop ups to be unblocked";

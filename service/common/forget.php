@@ -7,7 +7,7 @@
 // Modified Date: 
 
 	session_start();
-	include('db_connection.php');
+	include_once('db_connection.php');
 
 // Please specify your Mail Server - Example: mail.yourdomain.com.
 	if(isset($_POST['email']))
