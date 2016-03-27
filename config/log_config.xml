@@ -1,21 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <configuration xmlns="http://logging.apache.org/log4php/">
-    
-  <appender name="default" class="LoggerAppenderRollingFile">
-          <layout class="LoggerLayoutHtml">
-            <param name="locationInfo" value="true" />
-        </layout>	
-        <param name="file" value="log_assess.html" />
-        <param name="maxFileSize" value="20MB" />
-        <param name="maxBackupIndex" value="5" />
+    <!--Appender 1 - write to rolling file-->
+    <appender name="msiAppender" class="LoggerAppenderFile">
+    	<layout class="LoggerLayoutPattern"/>
+        <param name="file" value="../../log/myskillindex.log" />
+        <!--<param name="maxFileSize" value="1MB" />
+        <param name="maxBackupIndex" value="5" />-->
     </appender>
-	
-        <root>
-        <level value="INFO" />
-        <appender_ref ref="default" />				
-        </root>
-	
+	<!--Appender 2 - Send email to system admin in case of critical Failure-->
+    <appender name="msiEmailAppender" class="LoggerAppenderMailEvent">
+        <layout class="LoggerLayoutPattern" />
+        <param name="to" value="hello@iidea8.com" />
+        <param name="from" value="logger@iidea8.com" />
+    </appender>
 
-	
+    <logger name="errMailService">
+        <appender_ref ref="msiEmailAppender" />
+    </logger>
+
+    <root>
+        <level value="DEBUG" />
+        <appender_ref ref="msiAppender" />
+    </root>
+
 </configuration>
-

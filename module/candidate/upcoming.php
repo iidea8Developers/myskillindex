@@ -19,7 +19,10 @@ include  ("../../../limesurvey/third_party/kcfinder/core/autoload.php");
    	$name = $_SESSION['name'];
     $email = $_SESSION['email'];
     $id=$_SESSION['id'];
-
+ echo $name;
+ echo $email;
+ echo $id;
+ 
 error_reporting(E_ALL);
     
 if(isset($_GET['q']))
@@ -27,14 +30,15 @@ if(isset($_GET['q']))
         
 // Get exam id from DB for exam name passed and assign it to exam_id variable
 		$exam_name = $_GET['q'];
-	    $sql = "SELECT exam_id
+	    $sql = "SELECT *
                 FROM t_exam_org_qp 
                 WHERE exam_name= '{$exam_name}' ";
 	    $result = mysqli_query($connection,$sql);
 	    while($row=mysqli_fetch_assoc($result))
 	      	{
 	         $exam_id = $row['exam_id'];
-        	}
+			 echo $exam_id;
+			}
  // Commented below code as this is not used today.
      	 /*$sql2 = "SELECT * 
 					FROM lime_questions ";
@@ -111,9 +115,9 @@ if(isset($_GET['q']))
 		      } else {
 	 	                "Error creating table: " . $connection2->error;
                   }
-//******************************************************************************  
+//********** INSERT Token in Lime Survey Tables - Using Connection2 ********************************  
 
-        $sql2 = " INSERT INTO lime_tokens_".$survey_id." 
+        $sql2 = " INSERT INTO limesurvey.lime_tokens_".$survey_id." 
                               (tid,
                                participant_id,
                                firstname,
@@ -133,7 +137,7 @@ if(isset($_GET['q']))
                                mpid) 
                   VALUES ('', '{$id}', '{$name}', '', '{$email}', 'OK', '{$id}', 'en', NULL, 'N', 'N', 0, 'N', 1, NULL, NULL, NULL)";
 	
- 	      if ($connection2->query($sql2) === TRUE) 
+ 	      if ($connection->query($sql2) === TRUE) 
              {
 	             "Token Inserted Successfully - File:upcoming.php ";
               } else {
@@ -161,7 +165,7 @@ if(isset($_GET['q']))
 		<tbody style="height:10px;display:overflow-y:scroll">
 		
 			
-			<?php $query = "SELECT * 
+			<?php $query = "SELECT registration_date, exam_id
 							FROM t_candidate_exam 
 							WHERE candidate_id = '{$_SESSION['id']}'
 				            AND exam_date is null " ;
@@ -203,6 +207,7 @@ if(isset($_GET['q']))
 						 {
 						 //**************** missing ELSE logic****************
 						 }
+				$connection->close();
 			?>
 			
 		</tbody>

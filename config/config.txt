@@ -1,21 +1,20 @@
 <?php
 
+	define("dbhost","localhost");
+ 	define("dbuser","root");
+ 	define("dbpass","");
+ 	define("dbname","tool"); 
 
-define("dbhost","localhost");
-  define("dbuser","root");
-  define("dbpass","shukla");
-  define("dbname","tool"); 
+	define("dbhost21","localhost");
+	define("dbuser21","root");
+	define("dbpass21","shukla");
+	define("dbname21","tool"); 
 
-define("dbhost21","localhost");
-  define("dbuser21","root");
-  define("dbpass21","shukla");
-  define("dbname21","tool"); 
-
-
- define( 'LS_USER', 'prakash' );
+	define( 'LS_USER', 'prakash' );
 	define( 'LS_PASSWORD', 'shukla' );
-
-	define('admin_email', 'hello@iidea8.com')
+	
+	define('admin_email', 'hello@iidea8.com');
+	define('admin_pwd', 'Nimble2015');
  
 ?>
 

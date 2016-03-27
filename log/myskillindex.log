@@ -1,0 +1,29 @@
+2016-03-27T19:15:00+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-27T19:15:00+05:30 ERROR db_connection.php Could not connect to Limesurvey db. Check Connection paramanters for Connection2 in config.txt
+2016-03-27T19:15:00+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-27T19:15:00+05:30 DEBUG Login_check.php ****START - login_check.php****
+2016-03-27T19:15:00+05:30 DEBUG Login_check.php SQL Statement - SELECT candidate_email 
+					  FROM tool.t_candidate_1 
+					  WHERE candidate_email='pranabpandey@gmail.com' 
+					  AND candidate_password='1234567'
+2016-03-27T19:15:00+05:30 ERROR Login_check.php Error in creating DB connection for : Username = root , Password :  , DBName : tool , DBHost : localhost
+2016-03-27T19:15:00+05:30 ERROR Login_check.php 
+2016-03-27T19:15:00+05:30 DEBUG Login_check.php ****END - login_check.php****
+2016-03-27T19:24:35+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-27T19:24:35+05:30 ERROR db_connection.php Could not connect to Limesurvey db. Check Connection paramanters for Connection2 in config.txt
+2016-03-27T19:24:35+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-27T19:24:35+05:30 DEBUG bulkQimport.php ****START - bulkQimport.php****
+2016-03-27T19:25:26+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-27T19:25:26+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-27T19:25:26+05:30 DEBUG bulkQimport.php ****START - bulkQimport.php****
+2016-03-27T21:32:13+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-27T21:32:13+05:30 ERROR db_connection.php Could not connect to Limesurvey db. Check Connection paramanters for Connection2 in config.txt
+2016-03-27T21:32:13+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-27T21:32:13+05:30 DEBUG Login_check.php ****START - login_check.php****
+2016-03-27T21:32:13+05:30 DEBUG Login_check.php SQL Statement - SELECT candidate_email 
+					  FROM tool.t_candidate_1 
+					  WHERE candidate_email='pranabpandey@gmail.com' 
+					  AND candidate_password='12'
+2016-03-27T21:32:13+05:30 ERROR Login_check.php Error in creating DB connection for : Username = root , Password :  , DBName : tool , DBHost : localhost
+2016-03-27T21:32:13+05:30 ERROR Login_check.php 
+2016-03-27T21:32:13+05:30 DEBUG Login_check.php ****END - login_check.php****
