@@ -24,10 +24,13 @@ session_start();
 				header('Location:../../module/candidate/dashboard.php');
 			}
 			else    {
-				echo' <script type="text/javascript">     
+				/*echo' <script type="text/javascript">     
 				alert ("Login failed. Try Again!");
 				location.href = "../../module/candidate/index.php";
-				</script> ';
+				</script> '; */
+				
+				//modified code
+				die(header("location:../../module/candidate/index.php?loginFailed=true&reason=password"));
 			}	 
 			
 		}catch(exception $e)

@@ -26,16 +26,7 @@
 			 WHERE candidate_email='{$email}'";
 		 
 	$result=mysqli_query($connection,$query);
-	//AJAX object creation by jitendra 22-03-2016
-var reuest;
-if(window.XMLHttpRequest){
-	request = new XMLHttpRequest();
-		
-}Else{
-	request = new ActiveXObject(Microsoft.XMlHTTP());
-}
-if((request.status==200) && (request.readyState==4))
-{
+	
 	if (($result->num_rows > 0))
 	{ 
    
@@ -68,12 +59,12 @@ Please login to your account to change your password.
 		// send email
 		mail($email,$subject,$msg);
           // modified by jitendra on 22 march to check whether function is coming here or not
-          //Echo "Password changed successfully";
-		  document.getElementById("error_message").innerHTML="password Changed Successfully";
+        Echo "Password changed successfully";
+		 
 	}
 	Else
-	{
-		document.getElementById("error_message").innerHTML="The user does not exists. Please sign up!";
+	{   
+        echo "user does not exist. please sign in.";
 	}
    
 //header('Location: ../../module/candidate/index.php');

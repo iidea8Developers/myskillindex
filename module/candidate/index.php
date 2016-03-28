@@ -162,30 +162,40 @@ $(document).ready(function(){
 	 	e.preventDefault();
 	   	$('#forgetpass-taba').tab('show');
 	});
-     /*<!--Ajax code for login error print-->
-										
-                                                   $("#reset_btn").click(function()
-                                                        {  if($("#femail")=='')
-								                              {
-									                         $("#error_message").html("Enter email address");
-									                          }
-								                               Else
-								                             {
-                                                           $.post( $("#forget_login_form").attr("action"),
-                                                                   $("#forget_login_form:input").serialize(),
-		                                                      function(data)
-				                                          {
-			                                                    $("#error_message").html(data);
-		                                                        });
-															}	
-		   
-	                                                       $("#forget_login_form").submit(function()
-														        {
-		                                                      return false;
-	                                                            });	   
-   
-                                                        });                                        	
-                                       <!-- Ajax code ends -->		*/		
+	//Ajax code written on 23/3/2016 by jitendra to show error message on login form
+	$("#reset_btn").click(function(){
+		if($("#forgot_email").val()== " "){
+			$("#error_message").html("Enter email address");
+		}
+		else{
+			var request;
+			// create XMLHttpRequest object 
+			if(window.XMLHttpRequest){
+				request = new XMLHttpRequest();
+			}
+			else{
+				request = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			//request made to server
+            request.open("POST",$("#forget_login_form").attr("action"),true);
+			request.onreadystatechange = function() {
+				if((request.readyState == 4) && (request.status == 200)){
+					$("#error_message").html(request.responseText);
+				}
+			}
+			request.send();
+		}
+		// to stop form submission
+		$("#forget_login_form").submit(function(){
+		    return false;
+	    });	
+	});
+    
+// to clear input and error message 
+    $("#forgot_email").focus(function(){
+		$("#forgot_email").val=' ';
+		$("#error_message").html(' ');
+	});	
 });	
 </script>
 
@@ -225,17 +235,14 @@ confirm_password.onkeyup = validatePassword;
 <div class="container">
 	<div class="row">
 	<video class="col-md-6" id="v1" autoplay loop poster="polina.jpg" id="bgvid">
-   <source src="../../images/candidate/v2.webm" type="video/webm">
+	<source src="../../images/candidate/v2.webm" type="video/webm">
     <source src="../../images/candidate/v1.mp4" type="video/mp4">
-</video>
+	</video>
 
 <div class="col-md-6" style="font-family:LyonDisplay; Georgia, serif;margin-top: 130px;"><h1 style="font-color:#ffffff;">Online Assessment.<br class="visible-xs"> Take Anywhere.</h1></div>
-<div class="col-md-6">
-              
-				
-				<button id="button" class="btn btn-launch" href="javascript:;" data-toggle="modal" data-target="#loginModal" style="border:solid 1px #0074bf;width:200px;color:#0074bf;background:transparent;margin-left:160px;margin-top:40px">Sign in / Sign up</button>
-			
-</div>
+	<div class="col-md-6">
+		<button id="button" class="btn btn-launch" href="javascript:;" data-toggle="modal" data-target="#loginModal" style="border:solid 1px #0074bf;width:200px;color:#0074bf;background:transparent;margin-left:160px;margin-top:40px">Sign in / Sign up</button>
+	</div>
 </div>
 
 	
@@ -281,7 +288,14 @@ confirm_password.onkeyup = validatePassword;
 								    	</div>
 								    	<span class="help-block has-error" id="password-error"></span>
 								  	</div>
-						  			<center><button type="submit" id="login_btn" class="btn btn-block bt-login" style="border:solid 1px #0074bf;width:200px;color:#0074bf;background:transparent;" data-loading-text="Signing In....">Login</button></center>
+						  			<center>
+									<button type="submit" id="login_btn" class="btn btn-block bt-login" style="border:solid 1px #0074bf;width:200px;color:#0074bf;background:transparent;" data-loading-text="Signing In....">Login</button>
+									<!-- Added on 23/3/2016 by jitendra to display error message on same page but not working properly --> 
+									<?php 
+												$reasons = array("password" => "Wrong Username or Password", "blank" => "You have left one or more fields blank."); 
+												if ($_GET["loginFailed"]) echo $reasons[$_GET["reason"]]; 
+											?>
+									</center>
 						  			</form>
 						  			<div class="clearfix"></div>
 						  			<div class="login-modal-footer">
@@ -427,13 +441,16 @@ confirm_password.onkeyup = validatePassword;
                                                                               
 									    	<div class="input-group">
 									      		<span class="input-group-addon glyphicon glyphicon-envelope"></span>
-									      		<input type="text" class="form-control" name="email" id="femail" placeholder="Email" required title="email required">
+									      		<input type="text" class="form-control" name="email" id="forgot_email" placeholder="Email" required title="email required">
 									    	</div>
 									    	<span class="help-block has-error" data-error='0' id="error_message"></span>
 									  	</div>
 									  	
-							  			<center><button  type="submit" id="reset_btn" class="btn btn-block bt-login" data-loading-text="Please wait...." style="border:solid 1px #0074bf;width:200px;color:#0074bf;background:transparent;">Retrieve Password</button></center>
-                                                                                            	</form>
+							  			<center>
+										<button  type="submit" id="reset_btn" class="btn btn-block bt-login" data-loading-text="Please wait...." style="border:solid 1px #0074bf;width:200px;color:#0074bf;background:transparent;">Retrieve Password</button>
+											
+										</center>
+                                        </form>
 																
 										<div class="clearfix"></div>
 										<div class="login-modal-footer">
