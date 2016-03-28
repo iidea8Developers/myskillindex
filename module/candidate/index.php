@@ -164,7 +164,7 @@ $(document).ready(function(){
 	});
 	//Ajax code written on 23/3/2016 by jitendra to show error message on login form
 	$("#reset_btn").click(function(){
-		if($("#forgot_email").val()== " "){
+		if($("#forgot_email").value===""){
 			$("#error_message").html("Enter email address");
 		}
 		else{
@@ -191,9 +191,9 @@ $(document).ready(function(){
 	    });	
 	});
     
-// to clear input and error message 
+// to clear input and error message in forgot password tab 
     $("#forgot_email").focus(function(){
-		$("#forgot_email").value = ' ';
+		this.value = "";
 		$("#error_message").html(' ');
 	});	
 });	

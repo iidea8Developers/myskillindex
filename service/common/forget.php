@@ -64,7 +64,7 @@ Please login to your account to change your password.
 	}
 	Else
 	{   
-        echo "user does not exist. please sign in.";
+        Echo "user does not exist. please sign in.";
 	}
    
 //header('Location: ../../module/candidate/index.php');
