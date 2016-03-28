@@ -313,16 +313,10 @@
   xhttp.send();
 }
 
- function loadDoc5() {
- /* var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-     document.getElementById("profi").innerHTML = xhttp.responseText;
-    }
-  };
-  xhttp.open("GET", "profile_get.php", true);
-  xhttp.send();*/
-  window.location.assign("dashboard.php")
+
+ function loadDoc5() {   /*  this function is called when cancel button on profile edit section(profile.php)   */
+ 
+ location.reload(true);  /*  location.reload if set to true,reloads the page    */
 }
 
 
@@ -569,7 +563,7 @@
 			
 			
 			<div id="content" style="display:inline-block" class="container col-md-7">
-				<div class="jumbotron clearfix" style="width:800px;height:420px;position: relative;margin-top:1px;overflow:auto; ">
+				<div class="jumbotron clearfix" style="width:800px;height:420px;position: relative;margin-top:1px;overflow:auto;background-image:url("../../images/candidate/blue.svg") ">
 					
 					
 					<div id="column1" >
