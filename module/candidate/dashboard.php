@@ -356,7 +356,7 @@
 						document.getElementById("profi").innerHTML = xhttp.responseText;
 					}
 				};
-				$log->debug("Inside loadDoc3() - Call to profile.php");
+				//$log->debug("Inside loadDoc3() - Call to profile.php");
 				xhttp.open("GET", "profile.php", true);
 				xhttp.send();
 			}
@@ -470,6 +470,7 @@
 		<div id="topbar" >
 			<a href="logout.php" color="white" ><span style="margin-right:-1350px"><img src="../../images/candidate/exit.png" width="30px" height="28px" style="margin-top:-5px">&nbsp;&nbsp;<font color="white">Logout</font></span></a>
 		</div>
+		<!-- Side panel Navigation Tabs - profile / register or upcoming / certificates-->
 		<div class="container" style="margin-top:-50px;">
 			<div class="row" >
 				<div id="content1" class="col-md-3">
@@ -484,6 +485,7 @@
 								</button>
 								<span class="visible-xs navbar-brand">Sidebar menu</span>
 							</div> <!-- /navbar-header -->
+							<!-- Code to make nav bar verticle (default is horizontal)-->							
 							<div id="list" class="navbar-collapse collapse sidebar-navbar-collapse">
 								<ul class="nav navbar-nav" id="mynav" >
 									<li id="li1"><a  id="img1" style="background-image: url('../../images/candidate/blue.svg');border-top: dashed 1px #03A9F4;border-bottom: dashed 1px #03A9F4;border-left: dashed 1px #03A9F4;">
@@ -498,21 +500,21 @@
 					</div><!-- /side-bar nav -->
 				</div><!-- /col-md-3 -->
 				<div id="content" style="display:inline-block" class="container col-md-7">
-					<div class="jumbotron clearfix" style="width:800px;height:420px;position: relative;margin-top:1px;overflow:auto; ">
+					<div class="jumbotron clearfix" style="width:800px;height:420px;position: relative;margin-top:1px;overflow:auto;background-image: url('../../images/candidate/blue.svg'); ">
 						<div id="column1" >
-							<div><h3 style="position: absolute;margin-left:300px;margin-top:-35px;font-weight:bold" >Profile &nbsp; <img src="../../images/candidate/edit.png" height="20" width="20" onclick="loadDoc3()"/></h3> 
-							</div><!---- Image upload button code -->
-						<!---- Image upload code START-->
+							<div><h3 style="position:absolute;margin-left:300px;margin-top:-35px;font-weight:bold" >Profile &nbsp; <img src="../../images/candidate/edit.png" height="20" width="20" onclick="loadDoc3()"/></h3> 
+							</div><!---- Profile Update button code -->
+							<!---- Image load code START-->
 							<div id="userphoto" style="position: absolute;top: 0;right: 0;border: 2px solid #03A9F4;margin-top:5px;margin-right:5px">
 								<?php 
 									$log->debug("Dashboard.php - inside div id = userphoto ");
-									$query="SELECT * 
+									$query="SELECT candidate_image 
 											FROM t_candidate_1 
 											WHERE candidate_id = '{$_SESSION['id']}'";
 									$log->debug("Dashboard.php - SQL Query ".$query);
 									$result = mysqli_query($connection,$query);
 									$row = mysqli_fetch_assoc($result);
-									echo '<img "height="130" width="150" src="../../images/candidate/' . $row["candidate_image"] . '" >';
+									echo '<img "height="130" width="150" src="../../images/candidate/' . $row["candidate_image"]. '" >';
 								?>
 									<form id="form2" method="post" action="image_update.php" enctype="multipart/form-data">
 										<span class="select-wrapper">
