@@ -193,7 +193,7 @@ $(document).ready(function(){
     
 // to clear input and error message 
     $("#forgot_email").focus(function(){
-		$("#forgot_email").val=' ';
+		$("#forgot_email").value = ' ';
 		$("#error_message").html(' ');
 	});	
 });	
