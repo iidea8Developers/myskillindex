@@ -38,7 +38,7 @@
 					$_SESSION["user"] = $_POST['username'];
 					$log->info("LOGIN Successfull - Username: ".$username." Password: ".$password);
 					$log->info("Invoking Dashboard.php ");
-					header('Location:../../module/candidate/dashboard.php');
+					//header('Location:../../module/candidate/dashboard.php');
 				}else 	{
 						
 		                $log->debug(" User Login Failed : Invalid Username, Password");

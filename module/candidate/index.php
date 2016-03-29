@@ -203,6 +203,7 @@ Usage: Login , signup and forgot/retrieve password
     //written by jitendra on 29/03/2016
 
     $("#login_btn").click(function(){
+    	//var response;
     	//to check input fields are filled
 		if(($("#username").val() == "") || ($("#password").val() == "" )){
              $("#password_error").html("Username or password is missing");
@@ -226,6 +227,7 @@ Usage: Login , signup and forgot/retrieve password
 			// Access the onreadystatechange event for the XMLHttpRequest object
 			request1.onreadystatechange = function() {
 				if((request1.readyState == 4) && (request1.status == 200)){
+					//response=request1.responseText;
 					$("#password_error").html(request1.responseText);
 				}
 			}
@@ -234,7 +236,7 @@ Usage: Login , signup and forgot/retrieve password
 		}
 		// to stop form submission
 		$("#form1").submit(function(){
-		    return false;
+		   return false;
 	    });	
 	});
 
