@@ -39,6 +39,8 @@ Usage: Login , signup and forgot/retrieve password
 	<!-- Gem jQuery -->
 	<!--Script to validate entry of username / password on signin -->
 	<script>
+	
+
 		$('#form1').validate({   
 		   excluded: ':hidden', 
 		    	rules: 	{
@@ -128,6 +130,14 @@ Usage: Login , signup and forgot/retrieve password
 	</style>
 	<!-- Script to show the tabs for signin, signup and forget password -->
 	<script>
+	<?php
+	include_once('../../lib/log4php/Logger.php');
+	Logger::configure('../../config/log_config.xml');
+	$log = Logger::getLogger('index.php');
+	?>
+
+	//$log->info("****START index.php****");
+
 		$(document).ready(function(){
 		$(document).on('click','.signup-tab',function(e){
 			e.preventDefault();
@@ -145,12 +155,17 @@ Usage: Login , signup and forgot/retrieve password
 		});
 
 		//Ajax code written on 23/3/2016 by jitendra to show error message on login form
+		//last modified on 29/03/2016 by jitendra
 	$("#reset_btn").click(function(){
-		if($("#femail").val()== " "){
-			$("#error_message").html("Enter email address");
+		//$log->info(" reset button called ");
+		if($("#femail").val() == ""){
+             $("#error_message").html("Enter email address");
 		}
 		else{
 			var request;
+			// associated array is created that is passed using send()
+			// femail is key of array that is fetched by forget.php using post
+		    var fe = "femail="+ $("#femail").val();
 			// create XMLHttpRequest object 
 			if(window.XMLHttpRequest){
 				request = new XMLHttpRequest();
@@ -159,18 +174,28 @@ Usage: Login , signup and forgot/retrieve password
 				request = new ActiveXObject("Microsoft.XMLHTTP");
 			}
 			//request made to server
-            request.open("POST",$("#forget_login_form").attr("action"),true);
+            request.open("POST","../../service/common/forget.php",true);
+            // Set content type header information for sending url encoded variables in the request
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			// Access the onreadystatechange event for the XMLHttpRequest object
 			request.onreadystatechange = function() {
 				if((request.readyState == 4) && (request.status == 200)){
 					$("#error_message").html(request.responseText);
 				}
 			}
-			request.send();
+			// Send the data to PHP now..
+			request.send(fe);
 		}
 		// to stop form submission
 		$("#forget_login_form").submit(function(){
+			<?php $log->info("submission "); ?>
 		    return false;
 	    });	
+	});
+	//to clear error message and input value on focus
+	$('input').focus(function(){
+		this.value="";
+		$('#error_message').html("");
 	});
 	});	
 	</script>
@@ -390,16 +415,20 @@ Usage: Login , signup and forgot/retrieve password
 						    		&nbsp;&nbsp;
 						    	    	<span id="reset_fail" class="response_error" style="display: none;"></span>
 							    		<div class="clearfix"></div>
-							    		   <form action="../../service/common/forget.php" method="post">
+<!-- id added by jitendra in form-->
+							    		 <form  method="post" id="forget_login_form">
 											<div class="form-group">
 										    	<div class="input-group">
 										      		<span class="input-group-addon glyphicon glyphicon-envelope"></span>
 										      		<input type="text" class="form-control" name="email" id="femail" placeholder="Email" required title="Please enter a valid email id.">
 										    	</div>
-										    	<span class="help-block has-error" data-error='0' id="femail-error"></span>
+										    	<!--Id changed in span to error_message from femail_error-->
+										    	<span class="help-block has-error" data-error='0' id="error_message"></span>
 										  	</div>
-								  			<center><button  type="submit" id="reset_btn" class="btn btn-block bt-login" data-loading-text="Please wait...." style="border:solid 1px #0074bf;width:200px;color:#0074bf;background:transparent;">Retrieve Password</button></center>
-								  			</form>
+								  			<center>
+								  			<button type="submit" id="reset_btn" class="btn btn-block bt-login" data-loading-text="Please wait...." style="border:solid 1px #0074bf;width:200px;color:#0074bf;background:transparent;">Retrieve Password</button>
+								  			</center>
+								  			</form><!-- end form-->
 											<div class="clearfix"></div>
 											<div class="login-modal-footer">
 								  				<div class="row">
