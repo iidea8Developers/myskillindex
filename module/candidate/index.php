@@ -188,59 +188,15 @@ Usage: Login , signup and forgot/retrieve password
 		}
 		// to stop form submission
 		$("#forget_login_form").submit(function(){
+			<?php $log->info("submission "); ?>
 		    return false;
 	    });	
 	});
-
 	//to clear error message and input value on focus
 	$('input').focus(function(){
 		this.value="";
 		$('#error_message').html("");
-		$("#password_error").html("");
 	});
-
-    //login form validation 
-    //written by jitendra on 29/03/2016
-
-    $("#login_btn").click(function(){
-    	//var response;
-    	//to check input fields are filled
-		if(($("#username").val() == "") || ($("#password").val() == "" )){
-             $("#password_error").html("Username or password is missing");
-		}
-		else{
-			var request1;
-			// associated array is created that is passed using send()
-			// username and password are key of array that is fetched by login_check.php using post
-		    var fe1 = "username="+ $("#username").val() + "&password="+ $("#password").val();
-			// create XMLHttpRequest object 
-			if(window.XMLHttpRequest){
-				request1 = new XMLHttpRequest();
-			}
-			else{
-				request1 = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			//request made to server
-            request1.open("POST","../../service/candidate/login_check.php",true);
-            // Set content type header information for sending url encoded variables in the request
-            request1.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			// Access the onreadystatechange event for the XMLHttpRequest object
-			request1.onreadystatechange = function() {
-				if((request1.readyState == 4) && (request1.status == 200)){
-					//response=request1.responseText;
-					$("#password_error").html(request1.responseText);
-				}
-			}
-			// Send the data to PHP now..
-			request1.send(fe1);
-		}
-		// to stop form submission
-		$("#form1").submit(function(){
-		   return false;
-	    });	
-	});
-
-
 	});	
 	</script>
 	<!-- Script to validate if the pasword mathches with confirm password option-->
@@ -248,7 +204,7 @@ Usage: Login , signup and forgot/retrieve password
 	26-03-2016: function not used in code today. Signup page does not ask for password 2 times for confirmation.
 	-->
 	<script type="text/javascript">
-		var password = document.getElementById("password1");
+		var password = document.getElementById("password");
 		var confirm_password = document.getElementById("Cpassword");
 		
 		function validatePassword()
@@ -316,7 +272,7 @@ Usage: Login , signup and forgot/retrieve password
 						    		&nbsp;&nbsp;
 						    		<span id="login_fail" class="response_error" style="display: none;">Loggin failed, please try again.</span>
 						    		<div class="clearfix"></div>
-						    		<form method="post" id="form1">
+						    		<form action="../../service/candidate/login_check.php" method="post" id="form1">
 										<div class="form-group" id="user1">
 									    	<div class="input-group">
 									      		<span class="input-group-addon glyphicon glyphicon-user"></span> 
@@ -327,9 +283,9 @@ Usage: Login , signup and forgot/retrieve password
 									  	<div class="form-group" id="passw">
 									    	<div class="input-group">
 									      		<span class="input-group-addon glyphicon glyphicon-user"></span>
-									      		<input type="password" class="form-control" id="password"placeholder="Password" name="password" >
+									      		<input type="password" class="form-control" id="password" id="password" placeholder="Password" name="password" >
 									    	</div>
-									    	<span class="help-block has-error" id="password_error"></span>
+									    	<span class="help-block has-error" id="password-error"></span>
 									  	</div>
 								  		<center>
 								  			<button type="submit" id="login_btn" class="btn btn-block bt-login" style="border:solid 1px #0074bf;width:200px;color:#0074bf;background:transparent;" data-loading-text="Signing In....">Login</button>
@@ -421,7 +377,7 @@ Usage: Login , signup and forgot/retrieve password
 										  	<div class="form-group">
 										    	<div class="input-group">
 										      		<div class="input-group-addon"><i class="fa fa-at"></i></div>
-										      		<input type="password" name="password" class="form-control" id="password1" placeholder="password" minlength="6" required title="password required">
+										      		<input type="password" name="password" class="form-control" id="password" placeholder="password" minlength="6" required title="password required">
 										    	</div>
 										    	<span class="help-block has-error" data-error='0' id="password-error"></span>
 										  	</div>

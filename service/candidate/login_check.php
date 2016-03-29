@@ -17,7 +17,7 @@
 	//$elog = Logger::getLogger('errMailService');
 	$log->debug("****START - login_check.php****");
 
-	if(isset($_POST['username']) && isset($_POST['password']))
+	if(isSet($_POST['username']) && isSet($_POST['password']))
 	{
 		$username=$_POST['username'];
 		$password=$_POST['password'];
@@ -38,13 +38,14 @@
 					$_SESSION["user"] = $_POST['username'];
 					$log->info("LOGIN Successfull - Username: ".$username." Password: ".$password);
 					$log->info("Invoking Dashboard.php ");
-					//header('Location:../../module/candidate/dashboard.php');
+					header('Location:../../module/candidate/dashboard.php');
 				}else 	{
 						
 		                $log->debug(" User Login Failed : Invalid Username, Password");
-						//echo is modified and header is comment out by JD
-						echo' Login Failed. Try again';
-						//header('Location: ../../module/candidate/index.php');
+						echo' <script type="text/javascript">     
+							alert ("Login failed. Try Again!");
+							</script> ';
+						header('Location: ../../module/candidate/index.php');
 						}	 
 			$log->debug("****END - login_check.php****");
 			}catch(exception $e)
@@ -52,8 +53,7 @@
 				    // log error msg in log file
 				    $log->error($e->getMessage());
 				    //$elog->error("critical system failure"); -- update this to send email to system admin using errMailService
-				    // header comment out by JD on 29/03/2016
-				    //header('Location: ../../module/candidate/index.php');
+				    header('Location: ../../module/candidate/index.php');
 				    $log->debug("****END - login_check.php****");
 				}
 		}
