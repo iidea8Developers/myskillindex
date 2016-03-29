@@ -4,27 +4,35 @@
 // created by Jitendra Dayma 
 // Create Date : 21-03-2016
 // Modified By:
-// Modified Date: 
+// Modified Date:
+
+    // Inititate Log4php logger
+	include_once('../../lib/log4php/Logger.php');
+	Logger::configure('../../config/log_config.xml');
+	$log = Logger::getLogger('forget.php');
+	
+	$log->debug("****START - forget.php****");
 
 	session_start();
 	include_once('db_connection.php');
 
 // Please specify your Mail Server - Example: mail.yourdomain.com.
-	if(isset($_POST['email']))
+	if(isset($_POST["femail"]))
 		{
-			$email = $_POST['email'];
+			$email = $_POST["femail"];
 		}
 		// it checks whether email is exist and set the value of email variable 
 		else
 		{
-			$email = ['admin_email'];
+			//$email = ['admin_email'];
+			echo "email is not isset";
 		}
 // check if the user already exists
 
     $query= "SELECT candidate_id 
 			 FROM t_candidate_1 
 			 WHERE candidate_email='{$email}'";
-		 
+	$log->debug("forget.php SQL Query - ".$query);		 
 	$result=mysqli_query($connection,$query);
 
 	if (($result->num_rows > 0))
@@ -58,12 +66,13 @@ Please login to your account to change your password.
 		Reset your password here:: ';
 		// send email
 		mail($email,$subject,$msg);
+
 	}
 	Else
 	{
 		Echo "The user does not exists. Please sign up!";
 	}
    
-header('Location: ../../module/candidate/index.php');
+//header('Location: ../../module/candidate/index.php');
 $connection->close();	
 ?>

@@ -1,29 +1,323 @@
-2016-03-27T19:15:00+05:30 DEBUG db_connection.php ****START - db_connection.php****
-2016-03-27T19:15:00+05:30 ERROR db_connection.php Could not connect to Limesurvey db. Check Connection paramanters for Connection2 in config.txt
-2016-03-27T19:15:00+05:30 DEBUG db_connection.php ****END - db_connection.php****
-2016-03-27T19:15:00+05:30 DEBUG Login_check.php ****START - login_check.php****
-2016-03-27T19:15:00+05:30 DEBUG Login_check.php SQL Statement - SELECT candidate_email 
+2016-03-28T18:19:33+05:30 INFO  index.php submission 
+2016-03-28T18:19:54+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-28T18:19:54+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-28T18:19:54+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-28T18:19:54+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='Array'
+2016-03-28T18:23:56+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-28T18:23:56+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-28T18:23:56+05:30 INFO  index.php submission 
+2016-03-28T18:25:33+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-28T18:25:33+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-28T18:25:33+05:30 INFO  index.php submission 
+2016-03-28T18:25:53+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-28T18:25:53+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-28T18:25:53+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-28T18:25:53+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='Array'
+2016-03-28T18:28:19+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-28T18:28:19+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-28T18:28:19+05:30 INFO  index.php submission 
+2016-03-28T18:28:31+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-28T18:28:31+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-28T18:28:32+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-28T18:28:32+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='Array'
+2016-03-28T18:35:22+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-28T18:35:22+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-28T18:35:22+05:30 INFO  index.php submission 
+2016-03-28T18:36:12+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-28T18:36:12+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-28T18:36:12+05:30 INFO  index.php submission 
+2016-03-28T18:36:26+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-28T18:36:26+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-28T18:36:26+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-28T18:36:26+05:30 DEBUG db_connection.php forget.php admin_email - Array
+2016-03-28T18:36:26+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='Array'
+2016-03-28T18:39:25+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-28T18:39:25+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-28T18:39:25+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-28T18:39:25+05:30 DEBUG db_connection.php forget.php admin_email - Array
+2016-03-28T18:39:25+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='Array'
+2016-03-28T18:39:33+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-28T18:39:34+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-28T18:39:34+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-28T18:39:35+05:30 DEBUG db_connection.php forget.php admin_email - Array
+2016-03-28T18:39:35+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='Array'
+2016-03-28T18:39:37+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-28T18:39:37+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-28T18:39:37+05:30 INFO  index.php submission 
+2016-03-28T18:39:50+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-28T18:39:50+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-28T18:39:50+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-28T18:39:50+05:30 DEBUG db_connection.php forget.php admin_email - Array
+2016-03-28T18:39:50+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='Array'
+2016-03-28T18:41:40+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-28T18:41:40+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-28T18:41:40+05:30 INFO  index.php submission 
+2016-03-28T18:41:52+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-28T18:41:53+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-28T18:41:53+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-28T18:43:11+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-28T18:43:11+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-28T18:43:11+05:30 INFO  index.php submission 
+2016-03-28T18:43:23+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-28T18:43:23+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-28T18:43:23+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-28T18:43:24+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=Array
+2016-03-28T18:44:13+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-28T18:44:13+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-28T18:44:13+05:30 INFO  index.php submission 
+2016-03-28T18:44:27+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-28T18:44:27+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-28T18:44:27+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-28T18:44:27+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='Array'
+2016-03-28T18:47:16+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-28T18:47:16+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-28T18:47:16+05:30 INFO  index.php submission 
+2016-03-28T18:47:30+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-28T18:47:30+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-28T18:47:30+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-28T18:47:30+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-28T18:48:28+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-28T18:48:28+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-28T18:48:28+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-28T18:48:28+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='Array'
+2016-03-29T11:11:38+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T11:11:38+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T11:11:38+05:30 INFO  index.php submission 
+2016-03-29T11:12:03+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T11:12:03+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T11:12:03+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T11:12:03+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-29T11:56:40+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T11:56:40+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T11:56:40+05:30 INFO  index.php submission 
+2016-03-29T11:57:26+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T11:57:26+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T11:57:27+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T11:57:28+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-29T12:01:27+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T12:01:27+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T12:01:27+05:30 INFO  index.php submission 
+2016-03-29T12:01:31+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T12:01:31+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T12:01:31+05:30 INFO  index.php submission 
+2016-03-29T12:01:44+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T12:01:44+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T12:01:44+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T12:01:45+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-29T12:02:20+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T12:02:20+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T12:02:20+05:30 INFO  index.php submission 
+2016-03-29T12:06:10+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T12:06:10+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T12:06:10+05:30 INFO  index.php submission 
+2016-03-29T12:06:24+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T12:06:25+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T12:06:25+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T12:06:25+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-29T12:23:53+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T12:23:53+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T12:23:53+05:30 INFO  index.php submission 
+2016-03-29T12:24:14+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T12:24:14+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T12:24:14+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T12:24:14+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-29T12:49:33+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T12:49:33+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T12:49:33+05:30 INFO  index.php submission 
+2016-03-29T12:51:16+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T12:51:16+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T12:51:16+05:30 INFO  index.php submission 
+2016-03-29T12:51:45+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T12:51:45+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T12:51:45+05:30 INFO  index.php submission 
+2016-03-29T12:52:45+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T12:52:45+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T12:52:45+05:30 INFO  index.php submission 
+2016-03-29T12:52:53+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T12:52:53+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T12:52:53+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T12:52:53+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-29T13:00:13+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T13:00:13+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T13:00:13+05:30 INFO  index.php submission 
+2016-03-29T13:00:22+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T13:00:22+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T13:00:22+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T13:00:22+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-29T13:01:10+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T13:01:10+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T13:01:10+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T13:01:10+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-29T13:01:18+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T13:01:18+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T13:01:18+05:30 INFO  index.php submission 
+2016-03-29T13:01:26+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T13:01:26+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T13:01:26+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T13:01:26+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-29T13:04:22+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T13:04:22+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T13:04:22+05:30 INFO  index.php submission 
+2016-03-29T13:04:34+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T13:04:34+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T13:04:35+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T13:04:35+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-29T13:04:55+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T13:04:56+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T13:04:56+05:30 INFO  index.php submission 
+2016-03-29T13:08:27+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T13:08:27+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T13:08:27+05:30 INFO  index.php submission 
+2016-03-29T13:08:38+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T13:08:38+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T13:08:38+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T13:08:38+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-29T13:09:17+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T13:09:17+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T13:09:17+05:30 INFO  index.php submission 
+2016-03-29T13:09:25+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T13:09:25+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T13:09:25+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T13:09:25+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-29T13:13:13+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T13:13:13+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T13:13:13+05:30 INFO  index.php submission 
+2016-03-29T13:14:30+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T13:14:30+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T13:14:30+05:30 INFO  index.php submission 
+2016-03-29T13:14:39+05:30 INFO  index.php ****START onreadystatechange****
+2016-03-29T13:14:39+05:30 INFO  index.php  response : $("#error_message").html(request.responseText)"
+2016-03-29T13:14:39+05:30 INFO  index.php submission 
+2016-03-29T13:25:45+05:30 INFO  index.php submission 
+2016-03-29T13:25:58+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T13:25:58+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T13:25:58+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T13:25:58+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-29T13:31:00+05:30 INFO  index.php submission 
+2016-03-29T13:31:03+05:30 INFO  index.php submission 
+2016-03-29T13:31:12+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T13:31:12+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T13:31:12+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T13:31:12+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-29T13:34:17+05:30 INFO  index.php submission 
+2016-03-29T13:34:34+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T13:34:34+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T13:34:34+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T13:34:34+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='abc@gmail.com'
+2016-03-29T13:35:40+05:30 INFO  index.php submission 
+2016-03-29T13:36:02+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T13:36:02+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T13:36:03+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T13:36:03+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='Jitendradayma@gmail.com'
+2016-03-29T13:54:53+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T13:54:54+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T13:54:54+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T13:54:54+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='jitendradayma@gmail.com'
+2016-03-29T14:01:27+05:30 INFO  index.php submission 
+2016-03-29T14:01:36+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T14:01:36+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T14:01:37+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T14:01:37+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email=''
+2016-03-29T14:03:52+05:30 INFO  index.php submission 
+2016-03-29T14:52:03+05:30 INFO  index.php submission 
+2016-03-29T14:52:07+05:30 INFO  index.php submission 
+2016-03-29T14:52:18+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T14:52:18+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T14:52:18+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T14:52:18+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='abc@gmail.com'
+2016-03-29T14:52:22+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T14:52:22+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T14:52:22+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T14:52:22+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='abc@gmail.com'
+2016-03-29T14:53:35+05:30 INFO  index.php submission 
+2016-03-29T14:53:46+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T14:53:46+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T14:53:46+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T14:53:46+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='abc@gmail.com'
+2016-03-29T14:56:44+05:30 INFO  index.php submission 
+2016-03-29T14:56:53+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T14:56:53+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T14:56:53+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T14:56:53+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='abc@gmail.com'
+2016-03-29T14:57:05+05:30 DEBUG forget.php ****START - forget.php****
+2016-03-29T14:57:05+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T14:57:05+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T14:57:05+05:30 DEBUG db_connection.php forget.php SQL Query - SELECT candidate_id 
+			 FROM t_candidate_1 
+			 WHERE candidate_email='jitendradayma@gmail.com'
+2016-03-29T14:57:25+05:30 DEBUG db_connection.php ****START - db_connection.php****
+2016-03-29T14:57:25+05:30 DEBUG db_connection.php ****END - db_connection.php****
+2016-03-29T14:57:26+05:30 DEBUG Login_check.php ****START - login_check.php****
+2016-03-29T14:57:26+05:30 DEBUG Login_check.php SQL Statement - SELECT candidate_email 
 					  FROM tool.t_candidate_1 
-					  WHERE candidate_email='pranabpandey@gmail.com' 
-					  AND candidate_password='1234567'
-2016-03-27T19:15:00+05:30 ERROR Login_check.php Error in creating DB connection for : Username = root , Password :  , DBName : tool , DBHost : localhost
-2016-03-27T19:15:00+05:30 ERROR Login_check.php 
-2016-03-27T19:15:00+05:30 DEBUG Login_check.php ****END - login_check.php****
-2016-03-27T19:24:35+05:30 DEBUG db_connection.php ****START - db_connection.php****
-2016-03-27T19:24:35+05:30 ERROR db_connection.php Could not connect to Limesurvey db. Check Connection paramanters for Connection2 in config.txt
-2016-03-27T19:24:35+05:30 DEBUG db_connection.php ****END - db_connection.php****
-2016-03-27T19:24:35+05:30 DEBUG bulkQimport.php ****START - bulkQimport.php****
-2016-03-27T19:25:26+05:30 DEBUG db_connection.php ****START - db_connection.php****
-2016-03-27T19:25:26+05:30 DEBUG db_connection.php ****END - db_connection.php****
-2016-03-27T19:25:26+05:30 DEBUG bulkQimport.php ****START - bulkQimport.php****
-2016-03-27T21:32:13+05:30 DEBUG db_connection.php ****START - db_connection.php****
-2016-03-27T21:32:13+05:30 ERROR db_connection.php Could not connect to Limesurvey db. Check Connection paramanters for Connection2 in config.txt
-2016-03-27T21:32:13+05:30 DEBUG db_connection.php ****END - db_connection.php****
-2016-03-27T21:32:13+05:30 DEBUG Login_check.php ****START - login_check.php****
-2016-03-27T21:32:13+05:30 DEBUG Login_check.php SQL Statement - SELECT candidate_email 
-					  FROM tool.t_candidate_1 
-					  WHERE candidate_email='pranabpandey@gmail.com' 
-					  AND candidate_password='12'
-2016-03-27T21:32:13+05:30 ERROR Login_check.php Error in creating DB connection for : Username = root , Password :  , DBName : tool , DBHost : localhost
-2016-03-27T21:32:13+05:30 ERROR Login_check.php 
-2016-03-27T21:32:13+05:30 DEBUG Login_check.php ****END - login_check.php****
+					  WHERE candidate_email='' 
+					  AND candidate_password=''
+2016-03-29T14:57:26+05:30 DEBUG Login_check.php  User Login Failed : Invalid Username, Password
+2016-03-29T14:57:26+05:30 DEBUG Login_check.php ****END - login_check.php****
+2016-03-29T14:57:26+05:30 INFO  index.php submission 
