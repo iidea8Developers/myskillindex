@@ -1,8 +1,9 @@
 <?php
 	session_start();
 	
-	// Last Modified on : 26-03-2016
-	// Last Modified By : Pranab Pandey
+	// Last Modified on : 30-03-2016
+	// Last Modified By : Jitendra Dayma
+	// Modification: comment out Header function
 	
 	// Usage : Checks the Login Validation 
 		
@@ -38,12 +39,13 @@
 					$_SESSION["user"] = $_POST['username'];
 					$log->info("LOGIN Successfull - Username: ".$username." Password: ".$password);
 					$log->info("Invoking Dashboard.php ");
+					echo "success";
 					//header('Location:../../module/candidate/dashboard.php');
 				}else 	{
 						
 		                $log->debug(" User Login Failed : Invalid Username, Password");
 						//echo is modified and header is comment out by JD
-						echo' Login Failed. Try again';
+						echo "Login Failed. Try again";
 						//header('Location: ../../module/candidate/index.php');
 						}	 
 			$log->debug("****END - login_check.php****");
