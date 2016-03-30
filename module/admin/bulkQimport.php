@@ -68,10 +68,6 @@ h2 {
 	while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
 		// Make sure all data is inserted in capital case
 		$import="INSERT into t_qbank(qid, q_type_code, q_description, q_weightage, q_category, q_video, q_picture, q_lang_code, q_authorname, q_created_by, q_modified_by, q_modified_time, q_create_time) values('','$data[0]','$data[1]','$data[2]','$data[3]','$data[4]')";
-
-		INSERT INTO `t_ansbank` (`aid`, `qid`, `a_code`, `a_sortorder`, `a_lang_code`, `a_desc`, `a_iscorrect`, `a_scaleid`, `a_created_by`, `a_modified_by`, `a_create_time`, `a_modified_time`) VALUES(1, 236, 'A1', '1', 'en', 'Bath rooms', 1, 0, 'root', 'root', '2016-01-21 18:01:07', '2016-01-21 18:01:07');
-
-		INSERT INTO `t_pc` (`pc_code`, `pc_id`, `pc_name`, `pc_desc`, `pc_created_by`, `pc_modified_by`, `pc_created_time`, `pc_modified_time`) VALUES('PC_SoftSkill_QB1', 27, 'Check for cracks, defects and anomalies in th', 'myskillindex SoftSkills Question Bank 1', 'root', 'root', '2016-01-21 15:51:42', '2016-01-21 15:51:42');
 		
 		mysql_query($import) or die(mysql_error());
 	}
