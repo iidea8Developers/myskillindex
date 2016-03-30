@@ -1,8 +1,9 @@
 <!-- Candidate Site Login Screen-->
 
 <!-- 
-Modified on 26-03-2016
-Modified By : Pranab Pandey
+Modified on 30-03-2016
+Modified By : Jitendra Dayma
+Modification : Ajax code for forget password and log in tab 
 
 Definition: index.php is the landing page for myskillindex.com
 Usage: Login , signup and forgot/retrieve password
@@ -138,7 +139,7 @@ Usage: Login , signup and forgot/retrieve password
 
 	//$log->info("****START index.php****");
 
-		$(document).ready(function(){
+$(document).ready(function(){
 		$(document).on('click','.signup-tab',function(e){
 			e.preventDefault();
 		    $('#signup-taba').tab('show');
@@ -160,6 +161,7 @@ Usage: Login , signup and forgot/retrieve password
 		//$log->info(" reset button called ");
 		if($("#femail").val() == ""){
              $("#error_message").html("Enter email address");
+             return false;
 		}
 		else{
 			var request;
@@ -185,11 +187,8 @@ Usage: Login , signup and forgot/retrieve password
 			}
 			// Send the data to PHP now..
 			request.send(fe);
+			return false;
 		}
-		// to stop form submission
-		$("#forget_login_form").submit(function(){
-		    return false;
-	    });	
 	});
 
 	//to clear error message and input value on focus
@@ -203,10 +202,10 @@ Usage: Login , signup and forgot/retrieve password
     //written by jitendra on 29/03/2016
 
     $("#login_btn").click(function(){
-    	//var response;
     	//to check input fields are filled
 		if(($("#username").val() == "") || ($("#password").val() == "" )){
              $("#password_error").html("Username or password is missing");
+             return false;
 		}
 		else{
 			var request1;
@@ -222,45 +221,54 @@ Usage: Login , signup and forgot/retrieve password
 			}
 			//request made to server
             request1.open("POST","../../service/candidate/login_check.php",true);
+            
             // Set content type header information for sending url encoded variables in the request
             request1.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			
 			// Access the onreadystatechange event for the XMLHttpRequest object
 			request1.onreadystatechange = function() {
 				if((request1.readyState == 4) && (request1.status == 200)){
-					//response=request1.responseText;
-					$("#password_error").html(request1.responseText);
+					var response = request1.responseText.trim();
+					//$("#password_error").html(response);
+					//alert(response);
+					// to check whether logged in or not
+					 if(response == "success")
+					 {   //alert("success");
+					    //$("#password_error").html("success");
+					    window.location.href = "dashboard.php";
+                   }
+                   else{
+                   	    //alert("log in failed");
+                    	$("#password_error").html(response);
+                   }
 				}
 			}
 			// Send the data to PHP now..
 			request1.send(fe1);
+			// stop form submission
+			return false;
 		}
-		// to stop form submission
-		$("#form1").submit(function(){
-		   return false;
-	    });	
 	});
-
-
-	});	
+});
 	</script>
 	<!-- Script to validate if the pasword mathches with confirm password option-->
 	<!-- ********************Observation ***************
 	26-03-2016: function not used in code today. Signup page does not ask for password 2 times for confirmation.
 	-->
 	<script type="text/javascript">
-		var password = document.getElementById("password");
+		var password = document.getElementById("password1");
 		var confirm_password = document.getElementById("Cpassword");
 		
 		function validatePassword()
 		{
-		  	if(password.value != confirm_password.value) 
+		  	if(password1.value != confirm_password.value) 
 		  	{
 		    confirm_password.setCustomValidity("Passwords Don't Match");
 		  	} else {
 		    		confirm_password.setCustomValidity('');
 		  			}
 		}
-		password.onchange = validatePassword;
+		password1.onchange = validatePassword;
 		confirm_password.onkeyup = validatePassword;
 	</script>
 </head>
