@@ -114,12 +114,10 @@
 		$log->debug(" Register.php SQL Statement - ".trim($sql));
 
 		if ($connection->query($sql) === TRUE) {
-			//modified by jitendra on 29/03/2016
-			//added $subject,$message,mail()
-			$subject="Completed registration on myskillindex";
-			$message="Congratulations! your account is created. Please sign-in with your username :$email  and password : $password to access myskill index.";
+			//modified by jitendra on 30 march 
+			$subject = "Successful registration on myskillindex ";
+			$message = "Congratulations! your account is created. Please sign-in with your username : $email  and password : $password to access myskill index.";
 			mail($email,$subject,$message);
-
 			// ****************** Call service to send email with welcome note and username and password **********
 			$log->debug(" New user record created successfully ");
 			} else {
