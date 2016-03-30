@@ -248,7 +248,7 @@ Usage: Login , signup and forgot/retrieve password
 	26-03-2016: function not used in code today. Signup page does not ask for password 2 times for confirmation.
 	-->
 	<script type="text/javascript">
-		var password = document.getElementById("password1");
+		var password = document.getElementById("password");
 		var confirm_password = document.getElementById("Cpassword");
 		
 		function validatePassword()
