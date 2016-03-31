@@ -1,6 +1,6 @@
 <?php
-require('fpdf.php');
-require('htmlparser.inc.php');  
+require('../../lib/fpdf.php');
+require('../../lib/htmlparser.inc.php');  
 
 class PDF_HTML extends FPDF
 {
