@@ -6,7 +6,7 @@
 session_start();
 
 include('../../service/common/db_connection.php');
-// without composer this line can be used
+/* // without composer this line can be used
 include ("../../lib/jsonrpcphp/src/org/jsonrpcphp/JsonRPCClient.php");
 //require_once($_SERVER['DOCUMENT_ROOT'].'jsonrpcphp-master/src/org/jsonrpcphp/jsonRPCClient.php');
 // with composer support just add the autoloader
@@ -22,7 +22,7 @@ include  ("../../../limesurvey/third_party/kcfinder/core/autoload.php");
  echo $name;
  echo $email;
  echo $id;
- 
+*/ 
 error_reporting(E_ALL);
     
 if(isset($_GET['q']))
@@ -40,13 +40,13 @@ if(isset($_GET['q']))
 			 echo $exam_id;
 			}
  // Commented below code as this is not used today.
-     	 /*$sql2 = "SELECT * 
+     	 $sql2 = "SELECT * 
 					FROM lime_questions ";
 	      $result = mysqli_query($connection2,$sql2);
 	      while($row=mysqli_fetch_assoc($result))
         	{
 		        $qid = $row['qid'];
-			}*/
+			}
 			
 // Insert candidate to exam relation in t_candidate_exam table
 	      $sql = "INSERT INTO t_candidate_exam 
@@ -72,6 +72,20 @@ if(isset($_GET['q']))
          $result2=mysqli_query($connection,$query);
          $row=mysqli_fetch_assoc($result2);
          $survey_id=$row['survey_id'];
+         
+         // without composer this line can be used
+include ("../../lib/jsonrpcphp/src/org/jsonrpcphp/JsonRPCClient.php");
+//require_once($_SERVER['DOCUMENT_ROOT'].'jsonrpcphp-master/src/org/jsonrpcphp/jsonRPCClient.php');
+// with composer support just add the autoloader
+include  ("../../../limesurvey/third_party/kcfinder/core/autoload.php");		
+
+//Get Session parameters
+    $myJSONRPCClient = new \org\jsonrpcphp\JsonRPCClient( '../../../limesurvey/index.php/admin/remotecontrol' );
+	$sessionKey= $myJSONRPCClient->get_session_key( LS_USER, LS_PASSWORD );
+
+   	$name = $_SESSION['name'];
+    $email = $_SESSION['email'];
+    $id=$_SESSION['id'];
 	
 	//query for getting survey_id from exam
 
@@ -212,9 +226,10 @@ if(isset($_GET['q']))
 			
 		</tbody>
 		</table>
-		</div>
+
 	
-</hr>
+<hr>
+</div>
 
 
 
