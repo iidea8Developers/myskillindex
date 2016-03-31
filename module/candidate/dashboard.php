@@ -676,6 +676,7 @@
               						$query = "SELECT * 
               								  FROM t_candidate_result 
               								  WHERE candidate_id = '{$_SESSION['id']}' " ;
+               						$log->debug($query);
                						$result = mysqli_query($connection,$query);
                						while($row = mysqli_fetch_assoc($result))
                						{

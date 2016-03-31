@@ -5,24 +5,13 @@
 		
 session_start();
 
-include('../../service/common/db_connection.php');
-/* // without composer this line can be used
-include ("../../lib/jsonrpcphp/src/org/jsonrpcphp/JsonRPCClient.php");
-//require_once($_SERVER['DOCUMENT_ROOT'].'jsonrpcphp-master/src/org/jsonrpcphp/jsonRPCClient.php');
-// with composer support just add the autoloader
-include  ("../../../limesurvey/third_party/kcfinder/core/autoload.php");		
+	include_once('../../service/common/db_connection.php');
+	include_once('../../lib/log4php/Logger.php');
+	Logger::configure('../../config/log_config.xml');
+	$log = Logger::getLogger('upcoming.php');
 
-//Get Session parameters
-    $myJSONRPCClient = new \org\jsonrpcphp\JsonRPCClient( '../../../limesurvey/index.php/admin/remotecontrol' );
-	$sessionKey= $myJSONRPCClient->get_session_key( LS_USER, LS_PASSWORD );
+	$log->info("****START upcoming.php****");
 
-   	$name = $_SESSION['name'];
-    $email = $_SESSION['email'];
-    $id=$_SESSION['id'];
- echo $name;
- echo $email;
- echo $id;
-*/ 
 error_reporting(E_ALL);
     
 if(isset($_GET['q']))
@@ -30,7 +19,7 @@ if(isset($_GET['q']))
         
 // Get exam id from DB for exam name passed and assign it to exam_id variable
 		$exam_name = $_GET['q'];
-	    $sql = "SELECT *
+	    $sql = "SELECT exam_id
                 FROM t_exam_org_qp 
                 WHERE exam_name= '{$exam_name}' ";
 	    $result = mysqli_query($connection,$sql);
@@ -39,15 +28,7 @@ if(isset($_GET['q']))
 	         $exam_id = $row['exam_id'];
 			 echo $exam_id;
 			}
- // Commented below code as this is not used today.
-     	 $sql2 = "SELECT * 
-					FROM lime_questions ";
-	      $result = mysqli_query($connection2,$sql2);
-	      while($row=mysqli_fetch_assoc($result))
-        	{
-		        $qid = $row['qid'];
-			}
-			
+ //			
 // Insert candidate to exam relation in t_candidate_exam table
 	      $sql = "INSERT INTO t_candidate_exam 
                             (exam_id ,
@@ -221,6 +202,7 @@ include  ("../../../limesurvey/third_party/kcfinder/core/autoload.php");
 						 {
 						 //**************** missing ELSE logic****************
 						 }
+				$log->info("****END upcoming.php****");
 				$connection->close();
 			?>
 			
