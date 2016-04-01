@@ -259,11 +259,12 @@
 							document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
 							}
 						};
-						$log->debug("Inside showUser() - Call to exam_detail.php, where string ="+str);
+					
 						xmlhttp.open("GET","exam_detail.php?q="+str,true);
 						xmlhttp.send();
 						}
 			}
+			// showUser3 calls upcoming.php
 			function showUser3(str) 
 	     	{
          		if (str == "") {
@@ -282,11 +283,13 @@
 								document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
 							}
 						};
-						$log->debug("Inside loadDoc5() - upcoming.php?q="+str);
+					
 						xmlhttp.open("GET","upcoming.php?q="+str,true);
 						xmlhttp.send();
+            //windows.location.reload(true);                                               
 						}
 			}
+			// showUser5 calls profile_get.php
 			function showUser5(str) 
 			{
 				if (str == "") 
@@ -306,7 +309,7 @@
 							{
 								if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {document.getElementById("profi").innerHTML = xmlhttp.responseText;}
 							};
-						$log->debug("Inside showUser5() - Call to profile_get.php");
+					
 						xmlhttp.open("POST","profile_get.php",true);
 						xmlhttp.send();
 					}
@@ -323,7 +326,7 @@
 			  xhttp.send();
 			}
 			*/
-
+            // this function updates the profile of the candidate
 			function loadDoc() {
   				var xhttp = new XMLHttpRequest();
   				xhttp.onreadystatechange = function() {
@@ -331,10 +334,12 @@
 				    	document.getElementById("demo").innerHTML = xhttp.responseText;
     				}
   				};
-			  	$log->debug("Inside loadDoc2() - Call to profile_edit.php");
+			  
 			  	xhttp.open("GET", "profile_edit.php", true);
 			  	xhttp.send();
 			}
+
+             // this function is used in certificate 
       		function loadDoc2() 
       		{
   				var xhttp = new XMLHttpRequest();
@@ -343,7 +348,7 @@
      					document.getElementById("demo3").innerHTML = xhttp.responseText;
     				}
   				};
-				$log->debug("Inside loadDoc2() - Call to ceri.php");
+		
   				xhttp.open("GET", "ceri.php", true);
   				xhttp.send();
 			}
@@ -356,10 +361,12 @@
 						document.getElementById("profi").innerHTML = xhttp.responseText;
 					}
 				};
-				//$log->debug("Inside loadDoc3() - Call to profile.php");
+			
 				xhttp.open("GET", "profile.php", true);
 				xhttp.send();
 			}
+
+			// this function is used to return back to dashboard after click on cancel
 			function loadDoc5() 
 			{
 			 /* var xhttp = new XMLHttpRequest();
@@ -370,12 +377,11 @@
 			  };
 			  xhttp.open("GET", "profile_get.php", true);
 			  xhttp.send();*/
-			  $log->debug("Inside loadDoc5() - Call to dashboard.php");
+			
 			  window.location.assign("dashboard.php")
 			}
 	
-      		$(document).ready(function()
-      		{
+      		$(document).ready(function(){
 				$("#img1").click(function(){
 					$("#column2").addClass('hidden');
 					$("#column3").addClass('hidden');
@@ -670,6 +676,7 @@
               						$query = "SELECT * 
               								  FROM t_candidate_result 
               								  WHERE candidate_id = '{$_SESSION['id']}' " ;
+               						$log->debug($query);
                						$result = mysqli_query($connection,$query);
                						while($row = mysqli_fetch_assoc($result))
                						{
