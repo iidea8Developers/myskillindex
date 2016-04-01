@@ -13,6 +13,8 @@
 	session_start();
 	include_once('../../service/common/db_connection.php');
 	include_once('../../lib/log4php/Logger.php');
+	include_once('../../service/common/common_error.php');
+
 	Logger::configure('../../config/log_config.xml');
 	$log = Logger::getLogger('Dashboard.php');
 
@@ -224,6 +226,8 @@
 				margin-top: 100px;
 				padding: 0;
 			}
+
+			
 			/* ******************Check Below Syntax********************** 
 			Container to call jumbotron
 			*/
@@ -231,11 +235,31 @@
 				border-top-left-radius: 0px;
 				border-bottom-left-radius: 0px;
 			}
-			
+			}
 		</style>
     	<!--Java Script functions to display information on the screen-->
 		</script>
+
+
 		<script type="text/javascript">
+    $(document).ready(function(){
+       // $('#button1').click();
+        
+       /* var error_set_script = <?php echo "$error_set_php; "?>;
+        var error_set_header = <?php echo "$error_header_php; "?>;
+        var error_set_message = <?php echo "$error_message_php; "?>;
+        
+        if(error_set_script == 1)
+        {
+        	//$('#button1').click();
+        	$('#modal_header').text(error_set_header);
+            $('#main_text').text(error_set_message);
+        }*/
+    });
+</script>
+		
+		<script type="text/javascript">
+
 			// showUser() calls exam_detail.php
 			function showUser(str) 
 			{
@@ -470,6 +494,8 @@
 		</script> 
 	</head>
 	<body style="background-color:#fff">
+
+
 		<div id="topbar1">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../images/common/logo_myskillindex.jpeg" width="170px" height="95px" style="margin-top:-15px"></a>
 		</div>
@@ -508,18 +534,40 @@
 				<div id="content" style="display:inline-block" class="container col-md-7">
 					<div class="jumbotron clearfix" style="width:800px;height:420px;position: relative;margin-top:1px;overflow:auto;background-image: url('../../images/candidate/blue.svg'); ">
 						<div id="column1" >
+
+
 							<div><h3 style="position:absolute;margin-left:300px;margin-top:-35px;font-weight:bold" >Profile &nbsp; <img src="../../images/candidate/edit.png" height="20" width="20" onclick="loadDoc3()"/></h3> 
-							</div><!---- Profile Update button code -->
-							<!---- Image load code START-->
+							</div><!-- Profile Update button code -->
+							<!-- Image load code START-->
 							<div id="userphoto" style="position: absolute;top: 0;right: 0;border: 2px solid #03A9F4;margin-top:5px;margin-right:5px">
 								<?php 
 									$log->debug("Dashboard.php - inside div id = userphoto ");
-									$query="SELECT candidate_image 
+									try{
+									$query="SELECT candidate_image
 											FROM t_candidate_1 
 											WHERE candidate_id = '{$_SESSION['id']}'";
 									$log->debug("Dashboard.php - SQL Query ".$query);
 									$result = mysqli_query($connection,$query);
+									if($result == FALSE)
+									{
+										throw new Exception($result);
+									}
+
 									$row = mysqli_fetch_assoc($result);
+									//$error = 'Always throw this error';
+                                 
+                                    //throw new Exception($this->mysqli->error);
+									
+									}
+									catch(Exception $e){
+									$log->error("error in sql query: ".$query);
+									$log->error($e->getMessage());
+                                     
+                                     $error_header_php="Error retrieving profile details." ;
+                                     $error_message_php="Error in retrieving your profile details. Please try after some time. If the error persists, please contact admin@iidea8.com";
+
+                                     custom_error($error_header_php,$error_message_php);
+									}
 									echo '<img "height="130" width="150" src="../../images/candidate/' . $row["candidate_image"]. '" >';
 								?>
 									<form id="form2" method="post" action="image_update.php" enctype="multipart/form-data">
