@@ -76,12 +76,15 @@
 									  pc_modified_time)
 									VALUES('PC_SoftSkill_QB1', 27, 'Check for cracks, defects and anomalies in th', 'myskillindex SoftSkills Question Bank 1', 'root', 'root',NOW())";
 	*/	
-			mysqli_query($connection,$import) or die(mysql_error());
+			$result = mysqli_query($connection,$import);
+		    if($result == FALSE)
+									{
+										throw new Exception($result);
+									}
+
 			$log->debug("****query excecuted****");
 			//mysqli_query($import_ans) or die(mysql_error());
-			//mysqli_query($import_pc) or die(mysql_error());
-			
-		    throw new Exception();	
+			//mysqli_query($import_pc) or die(mysql_error());	
 		}
 		mysqli_commit($connection);
 		print "Import done";	
