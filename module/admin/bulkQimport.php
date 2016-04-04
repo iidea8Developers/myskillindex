@@ -64,11 +64,11 @@ h2 {
 
 	//Import uploaded file to Database
 	$handle = fopen($_FILES['filename']['tmp_name'], "r");
-    SET AUTOCOMMIT=  0;
+    mysqli_autocommit($connection, FALSE);
     try{
-    	START TRANSACTION;
+    	mysqli_begin_transaction($connection);
     	ini_set('auto_detect_line_endings', true);
-		while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+		while (($data = fgetcsv($handle, 8000, ",")) !== FALSE) {
 			// Make sure all data is inserted in capital case
 			$import="INSERT INTO t_qbank(qid,
 									q_type_code,
@@ -114,11 +114,11 @@ h2 {
 			mysql_query($import_pc) or die(mysql_error());
 
 		}
-	COMMIT;	
+	mysqli_commit($connection);	
 	}
 	catch{
 		if (TRANSCOUNT > 0){
-			ROLLBACK;
+			mysqli_rollback($connection);
 		}
 	}
 
@@ -132,7 +132,7 @@ h2 {
 
 	print "Upload new csv by browsing to file and clicking on Upload<br />\n";
 
-	print "<form enctype='multipart/form-data'  method='post'>";
+	print "<form enctype='multipart/form-data' action='bulkQimport.php'  method='post'>";
 
 	print "File name to import:<br />\n";
 
@@ -141,6 +141,7 @@ h2 {
 	print "<input type='submit' name='submit' value='Upload'></form>";
 
 }
+mysqli_close($connection);
 $log->debug("****END - bulkQimport.php****");
 ?>
 
