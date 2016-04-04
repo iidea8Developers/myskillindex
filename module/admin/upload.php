@@ -13,9 +13,9 @@
 	// Inititate Log4php logger
 	include_once('../../lib/log4php/Logger.php');
 	Logger::configure('../../config/log_config.xml');
-	$log = Logger::getLogger('bulkQimport.php');
+	$log = Logger::getLogger('upload.php');
 	
-	$log->debug("****START - bulkQimport.php****");
+	$log->debug("****START - upload.php****");
 
 	//Upload File
 	if (isset($_POST['submit'])) {
@@ -81,12 +81,14 @@
 			//mysqli_query($import_ans) or die(mysql_error());
 			//mysqli_query($import_pc) or die(mysql_error());
 			
+		    throw new Exception();	
 		}
 		mysqli_commit($connection);
 		print "Import done";	
 		$log->debug("****commit called****");
+
 	}
-	catch(Exception $error){
+	catch(Exception $e){
 		mysqli_rollback($connection);
 		$log->debug("****rollback called****");
 	}
@@ -97,6 +99,6 @@
 }
 //close the connection
 mysqli_close($connection);
-$log->debug("****END - bulkQimport.php****");
-header("Location:upload.php");
+$log->debug("****END - upload.php****");
+//header("Location:bulkQimport.php");
 ?>
