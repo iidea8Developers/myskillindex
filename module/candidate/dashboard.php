@@ -289,7 +289,7 @@
 						}
 			}
 			// showUser3 calls upcoming.php
-			function showUser3(str) 
+			 function showUser3(str) 
 	     	{
          		if (str == "") {
 					document.getElementById("txtHint").innerHTML = "";
@@ -308,11 +308,11 @@
 							}
 						};
 					
-						xmlhttp.open("GET","upcoming.php?q="+str,true);
+						xmlhttp.open("GET","register_exam.php?q="+str,true);
 						xmlhttp.send();
             //windows.location.reload(true);                                               
 						}
-			}
+			}  
 			// showUser5 calls profile_get.php
 			function showUser5(str) 
 			{
@@ -460,6 +460,22 @@
 					$("#img22").attr('src','../../images/candidate/register_black.png');
 					$("#img11").attr('src','../../images/candidate/profile_blue.png');
 					$("#img33").attr('src','../../images/candidate/certificate_orange.png');
+                    
+                    
+  				var xhttp = new XMLHttpRequest();
+  				xhttp.onreadystatechange = function() {
+				    if (xhttp.readyState == 4 && xhttp.status == 200) {
+				    	document.getElementById("upcoming").innerHTML = xhttp.responseText;
+    				}
+  				};
+			  
+			  	xhttp.open("GET", "upcoming_controller.php", true);
+			  	xhttp.send();
+			
+
+
+                     
+
 				});
 				$("#img3").click(function(){
 					/* $("#column3").removeClass('hidden'); */
@@ -516,7 +532,7 @@
 								<span class="icon-bar"><img src="images/profile_blue.png" width="" height=""></span>
 								</button>
 								<span class="visible-xs navbar-brand">Sidebar menu</span>
-							</div> <!-- /navbar-header -->
+							</div> </navbar-header -->
 							<!-- Code to make nav bar verticle (default is horizontal)-->							
 							<div id="list" class="navbar-collapse collapse sidebar-navbar-collapse">
 								<ul class="nav navbar-nav" id="mynav" >
@@ -592,6 +608,7 @@
 						</div><!-- /column 1-->
 						<!-- </div> --><!-- /container -->
 						<div id="column2" class="hidden" >
+                         <div id="txtHint"></div>
 							<center><h3 style="margin-top:-35px;">Register and Upcoming Exams </h3></center>
                       		<h5 style="font-weight:bold;margin-bottom:1px;">Register</h5>
 							<hr class="hr">
@@ -610,7 +627,7 @@
 									echo "</select>";
 								?>
 							</div><!-- / fleft-->
- 							<div id="txtHint"><h4></h4>
+ 							
 							 	<hr>
                             	<h4>Upcoming Exams</h4>
 								<div style="display:overflow-y:scroll">
@@ -619,58 +636,13 @@
 											<tr>
 												<th>Exam Name</th>
 												<th>Registered on</th>
-												<th>Duartion</th>
+												<th>Duration</th>
 												<th style="width:20%"></th>
 												<th></th>
 											</tr>
 										</thead>
-										<tbody style="height:10px;display:overflow-y:scroll">
-											<?php $query = "SELECT *
-															FROM t_candidate_exam 
-															WHERE candidate_id = '{$_SESSION['id']}'
-															AND exam_date is null " ;
-												$result=mysqli_query($connection,$query);
-												while ($row=mysqli_fetch_assoc($result))
-												{   $regon = $row['registration_date'];
-		       										$exam_id= $row['exam_id'];
-													$query2 = "SELECT * 
-																FROM t_exam_survey 
-																WHERE exam_id = '{$exam_id}'" ;
-													$result2=mysqli_query($connection,$query2);
-													while ($row2=mysqli_fetch_assoc($result2))
-		               									$survey_link= $row2['survey_link'];
-													{ 
-														$query3 = "SELECT * 
-																	FROM t_exam_org_qp 
-																	WHERE exam_id = '{$exam_id}' " ;
-														$result3=mysqli_query($connection,$query3);
-														while ($row3=mysqli_fetch_assoc($result3))
-														{ 
-															if($i%2 == 0 ){$class="warning";}
-															else if($i%3 == 0 ){$class="info";}
-															else if($i%4 == 0 ){$class="success";}
-															else if($i%5 == 0 ){$class="active";}
-															else {$class="danger";}
-															echo '<tr>
-																<td>' .$row3['exam_name'].'</td>
-																<td>'.$regon.'</td>
-																<td>'.$row3['exam_time'].'</td>';
-																echo '<td ><a href="end_date.php?link='.$survey_link.'"><font>Take now</font></a></td>
-																<td><span class="glyphicon glyphicon-remove"></span></td>
-															</tr>';
-															++$i;
-														}
-													}
-		        								}
-		        
-									
-												$rowcount=mysqli_num_rows($result3);
-			     								if($rowcount == 0){
-			     									echo '<tr><td><i>Looks like you have not registered for a Exam ....</td><td></td><td></td><td ></td></tr>';
-			     
-			     								} else {}
-							
-											?>
+										<tbody style="height:10px;display:overflow-y:scroll" id="upcoming">
+											
 										</tbody>
 									</table>
 								<hr>

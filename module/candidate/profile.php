@@ -1,20 +1,25 @@
-	
 <?php	session_start();
-	include('../../service/common/db_connection.php');
+	include_once('../../service/common/db_connection.php');
+	include_once('../../lib/log4php/Logger.php');
+	include_once('../../service/common/common_error.php');
+	Logger::configure('../../config/log_config.xml');
+	$log = Logger::getLogger('profile.php');
 	
-
+	$log->debug("***** START profile.php");
 	$query= "select * from t_candidate_1 where candidate_email='{$_SESSION['user']}'";
 	$result=mysqli_query($connection,$query);
 	$row=mysqli_fetch_assoc($result);
 	$_SESSION['name']=$row['candidate_fname']." ".$row['candidate_mname']. " ".$row['candidate_lname'];
-	
 	$_SESSION['email']=$row['candidate_email'];
 	$_SESSION['contact']=$row['candidate_contact'];
 	$_SESSION['address']=$row['candidate_address_home']." ".$row['candidate_address_street']." ".$row['candidate_address_city']." ".$row['candidate_address_postalcode'];
 	$_SESSION['aadhar']=$row['candidate_aadhar'];
 	$_SESSION['id']=$row['candidate_id'];
- ?>
- 
+
+	$log->debug("Session Details: Name: ".$_SESSION['name']." email: ".$_SESSION['email']." contact: ".$_SESSION['contact']." address: " $_SESSION['address']." aadhar : ".$_SESSION['aadhar']." id: ".$_SESSION['id']);
+
+	$log->debug("***** END profile.php");
+ ?> 
  
   <style>
 .form-page input[type="text"] {
@@ -46,4 +51,4 @@
               <input class="btn btn-success btn-sm" type="button" value="Cancel" style="display:inline;margin-left:5px;width:100px" onclick="loadDoc5()">
               </div>
                </center>
-               </form>
+	</form>
