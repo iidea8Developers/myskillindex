@@ -51,9 +51,20 @@
 									q_modified_by,
 									q_modified_time,
 									q_create_time) 
-								values('L','$data[0]',1,'NULL','null','null','en','global','global','NULL','NULL',NOW())";
+								values('L','$data[0]',1,'NULL','NULL','NULL','en','global','global','NULL','NULL',NOW())";
 
-			/*$import_ans= "INSERT INTO t_ansbank(qid,
+			$result = mysqli_query($connection,$import);
+		    if($result == FALSE)
+									{
+										throw new Exception($result);
+									}
+
+			$log->debug("****question bank related query excecuted****");
+			$q_id = "SELECT last_insert_id(qid) 
+			         FROM t_qbank 
+			         WITH (nolock)";
+			for($i=1; $i<6; $i++){          
+			$import_ans= "INSERT INTO t_ansbank(qid,
 											a_code,
 											a_sortorder,
 											a_lang_code,
@@ -64,9 +75,49 @@
 											a_modified_by,
 											a_create_time,
 											a_modified_time)
-										VALUES('', '$data[0]', '$data[1]', '$data[2]', '$data[3]','$data[4]','$data[5]', '$data[6]', 'NULL','NULL',NOW())";
-     
-        			$import_pc ="INSERT INTO t_pc(pc_code,
+										VALUES('$q_id', 'A.$i', '$i', 'en', '$data[$i]','1','0', 'global', 'NULL',NOW(),'NULL')";
+			$result1 = mysqli_query($connection, $import_ans);
+			if($result1 == FALSE)
+									{
+										throw new Exception($result1);
+									}
+
+			}
+			switch ($data[6]) {
+    			case "A":
+        			$ans=1;
+        			break;
+    			case "B":
+        			$ans=2;
+        			break;
+    			case "C":
+        			$ans=3;
+        			break;
+        		case "D":
+        			$ans=4;
+        			break;
+        		case "E":
+        			$ans=5;
+        			break;		
+    			default:
+        			echo "CSV file doen't have data or check the format of data";
+			}							
+			$update_ans=mysqli_query($connection, "UPDATE t_ansbank
+			 			 SET a_iscorrect=1
+			 			 WHERE a_sortorder=$ans ");
+			$log->debug("****update query excecuted****");
+			if($update_ans == FALSE)
+									{
+										throw new Exception($update_ans);
+									}
+
+
+
+		}
+
+
+		
+		/*$import_pc ="INSERT INTO t_pc(pc_code,
 									  pc_id,
 									  pc_name,
 									  pc_desc,
@@ -74,20 +125,10 @@
 									  pc_modified_by,
 									  pc_created_time,
 									  pc_modified_time)
-									VALUES('PC_SoftSkill_QB1', 27, 'Check for cracks, defects and anomalies in th', 'myskillindex SoftSkills Question Bank 1', 'root', 'root',NOW())";
-	*/	
-			$result = mysqli_query($connection,$import);
-		    if($result == FALSE)
-									{
-										throw new Exception($result);
-									}
-
-			$log->debug("****query excecuted****");
-			//mysqli_query($import_ans) or die(mysql_error());
-			//mysqli_query($import_pc) or die(mysql_error());	
-		}
+									VALUES('PC_SoftSkill_QB1', 27, 'Check for cracks, defects and anomalies in th', 'myskillindex SoftSkills Question Bank 1', 'root', 'root',NOW())";							
+			mysqli_query($connection, $import_pc);	*/
 		mysqli_commit($connection);
-		print "Import done";	
+		echo "success";	
 		$log->debug("****commit called****");
 
 	}
@@ -103,5 +144,4 @@
 //close the connection
 mysqli_close($connection);
 $log->debug("****END - upload.php****");
-//header("Location:bulkQimport.php");
 ?>
