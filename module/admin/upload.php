@@ -60,9 +60,7 @@
 									}
 
 			$log->debug("****question bank related query excecuted****");
-			$q_id = "SELECT last_insert_id(qid) 
-			         FROM t_qbank 
-			         WITH (nolock)";
+			$q_id ="last_insert_id($connection)";
 			for($i=1; $i<6; $i++){          
 			$import_ans= "INSERT INTO t_ansbank(qid,
 											a_code,
@@ -104,7 +102,7 @@
 			}							
 			$update_ans=mysqli_query($connection, "UPDATE t_ansbank
 			 			 SET a_iscorrect=1
-			 			 WHERE a_sortorder=$ans ");
+			 			 WHERE a_sortorder=$ans and qid=$q_id ");
 			$log->debug("****update query excecuted****");
 			if($update_ans == FALSE)
 									{
