@@ -404,9 +404,12 @@
 			
 			  window.location.assign("dashboard.php")
 			}
+
+
 	
       		$(document).ready(function(){
-				$("#img1").click(function(){
+
+                    $("#img1").click(function(){
 					$("#column2").addClass('hidden');
 					$("#column3").addClass('hidden');
 					$("#column1").removeClass('hidden');
@@ -471,13 +474,12 @@
 			  
 			  	xhttp.open("GET", "upcoming_controller.php", true);
 			  	xhttp.send();
-			
+			  });
 
+            
 
-                     
+                $("#img3").click(function(){
 
-				});
-				$("#img3").click(function(){
 					/* $("#column3").removeClass('hidden'); */
 					$("#column1").addClass('hidden');
 					$("#column2").addClass('hidden');
@@ -508,7 +510,27 @@
 				});  
 			});
 		</script> 
-	</head>
+
+		 <script type="text/javascript">
+
+
+                function cancel_exam(val1){
+            
+        var del_id = (val1.id).split('_')[1];
+        var info = 'id=' + del_id;
+		$.ajax({
+        type: "GET",
+        url: "delete_exam.php",
+        data: info,
+        success: function(){   
+    }
+	
+
+                  console.log((val1.id).split('_')[1]);
+
+                });
+	}
+    </script> 
 	<body style="background-color:#fff">
 
 
