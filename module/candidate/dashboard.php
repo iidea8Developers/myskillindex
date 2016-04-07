@@ -514,21 +514,32 @@
 		 <script type="text/javascript">
 
 
-                function cancel_exam(val1){
-            
-        var del_id = (val1.id).split('_')[1];
-        var info = 'id=' + del_id;
+       function cancel_exam(val1){
+           var del_id = (val1.id).split('_')[1];
+        /*var info = 'id=' + del_id;
 		$.ajax({
-        type: "GET",
-        url: "delete_exam.php",
+        type: "POST",
+        url: "./delete_exam.php",
         data: info,
         success: function(){   
     }
 	
 
-                  console.log((val1.id).split('_')[1]);
+                
 
-                });
+                }); */
+
+                var xhttp;
+               xhttp=new XMLHttpRequest();
+              xhttp.onreadystatechange = function() {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                       console.log("entered ajax");
+                        }
+                             };
+                xhttp.open("GET","delete_exam.php?q="+del_id, true);
+                xhttp.send();
+
+      console.log((val1.id).split('_')[1]);
 	}
     </script> 
 	<body style="background-color:#fff">
