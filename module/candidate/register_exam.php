@@ -144,7 +144,74 @@ include  ("../../../limesurvey/third_party/kcfinder/core/autoload.php");
  ?>
 
 <!-- Display for Up coming Exams on candidate Dashboard-->
+ <hr>
+		<h4>Upcoming Exams</h4>
+		<div style="display:overflow-y:scroll">
+		<table class="table" style="height:10px;display:overflow-y:scroll">
+		<thead >
+			<tr>
+				<th>Exam Name</th>
+				<th>Registered on</th>
+				<th>Duration</th>
+				<th style="width:20%"></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody style="height:10px;display:overflow-y:scroll"> 
+		
+			
+			<?php $query = "SELECT registration_date, exam_id
+							FROM t_candidate_exam 
+							WHERE candidate_id = '{$_SESSION['id']}'
+				            AND exam_date is null " ;
+				$result=mysqli_query($connection,$query);
+				while ($row=mysqli_fetch_assoc($result))
+					{  
+						$regon = $row['registration_date'];
+    					$exam_id= $row['exam_id'];
+    					$query2 = "select * from t_exam_survey where exam_id = '{$exam_id}' " ;
+    					$result2=mysqli_query($connection,$query2);
+    					while ($row2=mysqli_fetch_assoc($result2))
+						{ 
+    						
+    						$query3 = "select * from t_exam_org_qp where exam_id = '{$exam_id}' " ;
+    						$result3=mysqli_query($connection,$query3);
+    						while ($row3=mysqli_fetch_assoc($result3))
+    						{ 
+    					    	echo '<tr> 
+							    <td>' .$row3['exam_name'].'</td>
+							    <td>'.$regon.'</td>
+							    <td>'.$row3['exam_time'].'</td>';
+								echo '<td ><a href="end_date.php?link='.$survey_link.'"><font>Take now</font></a></td>
+							    <td><span class="glyphicon glyphicon-remove"></span></td>
+								</tr>';
+    						}
+  						}
+	    			}
+					$rowcount=mysqli_num_rows($result3);
+					if($rowcount == 0)
+						{
+							echo '<tr>
+  							<td><i>Looks like you have not registered for a Exam ....</td>
+	  						<td></td>
+		  					<td></td>
+			  				<td ></td>
+				  			</tr>';
+						}
+					else
+						 {
+						 //**************** missing ELSE logic****************
+						 }
+				$log->info("****END upcoming.php****");
+				$connection->close();
+			?>
+			
+		</tbody>
+		</table>
 
+	
+<hr>
+</div>
 
 
 
