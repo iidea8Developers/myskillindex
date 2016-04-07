@@ -2,6 +2,7 @@
 
 session_start();
 include_once('../../service/common/db_connection.php');
+include_once('../../config/config.txt');
 include_once('../../lib/log4php/Logger.php');
 include_once('../../service/common/common_error.php');
 Logger::configure('../../config/log_config.xml');
@@ -49,7 +50,7 @@ $log->debug("***** START upcoming_controller.php");
 								}
 				}
 			    						
-				$rowcount=mysqli_num_rows($result3);
+				$rowcount=mysqli_num_rows($result);
 				if($rowcount == 0){
 				echo '<tr><td><i>Looks like you have not registered for a Exam ....</td><td></td><td></td><td ></td></tr>';
 				} else {}
@@ -69,4 +70,5 @@ $log->debug("***** START upcoming_controller.php");
     $log->debug("***** END upcoming_controller.php"); 
     $connection->close();       
 ?>
+
 
