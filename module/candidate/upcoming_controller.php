@@ -1,7 +1,8 @@
 <?php
 
 session_start();
-include('../../service/common/db_connection.php');
+include_once('../../service/common/db_connection.php');
+include_once('../../config/config.txt');
 include_once('../../lib/log4php/Logger.php');
 include_once('../../service/common/common_error.php');
 Logger::configure('../../config/log_config.xml');
@@ -35,19 +36,21 @@ $log->debug("***** START upcoming_controller.php");
 											//else if($i%4 == 0 ){$class="success";}
 											//else if($i%5 == 0 ){$class="active";}
 											//else {$class="danger";}
-											echo '<tr>
+											echo '<tr id="qbank_'.$row3['exam_id'].'">
 												<td>' .$row3['exam_name'].'</td>
 												<td>'.$regon.'</td>
 												<td>'.$row3['exam_time'].'</td>';
 												echo '<td ><a href="end_date.php?link='.$survey_link.'"><font>Take now</font></a></td>
-												<td><span class="glyphicon glyphicon-remove"></span></td>
+												<td><span class="glyphicon glyphicon-remove" id="del_'.$row3["exam_id"].'" onclick="cancel_exam(this)"></span></td>
 											</tr>';
 											//++$i;
 											}
+
+										
 								}
 				}
 			    						
-				$rowcount=mysqli_num_rows($result3);
+				$rowcount=mysqli_num_rows($result);
 				if($rowcount == 0){
 				echo '<tr><td><i>Looks like you have not registered for a Exam ....</td><td></td><td></td><td ></td></tr>';
 				} else {}
@@ -67,3 +70,5 @@ $log->debug("***** START upcoming_controller.php");
     $log->debug("***** END upcoming_controller.php"); 
     $connection->close();       
 ?>
+
+

@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!-- It dispaly profile,upcoming exam of user,enable user to register for exam, and show certificated of exams completed user 
+      created by vivek singh
+      last time modified by jitendra dayma
+      modified on 07-04-2014
+      modifiction: added cancel exam and correct the indentation of code -->
 <?php
 	/*
 	Usage: Main Candidate display screen. 
@@ -93,8 +98,8 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
    		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
-		<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>
+		<!-- (Optional) Latest compiled and minified JavaScript translation files 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>-->
 		<style type="text/css">
 
 			.select-wrapper {
@@ -238,11 +243,8 @@
 			}
 		</style>
     	<!--Java Script functions to display information on the screen-->
-		</script>
-
-
-		<script type="text/javascript">
-    $(document).ready(function(){
+<script type="text/javascript">
+    //$(document).ready(function(){
        // $('#button1').click();
         
        /* var error_set_script = <?php echo "$error_set_php; "?>;
@@ -255,39 +257,35 @@
         	$('#modal_header').text(error_set_header);
             $('#main_text').text(error_set_message);
         }*/
-    });
+    //});
 </script>
-		
-		<script type="text/javascript">
-
-			// showUser() calls exam_detail.php
-			function showUser(str) 
-			{
-				if (str == "") 
-				{
-					document.getElementById("txtHint").innerHTML = "";
-					return;
-				} else { 
-						if (window.XMLHttpRequest) {
-						// code for IE7+, Firefox, Chrome, Opera, Safari
-						xmlhttp = new XMLHttpRequest();
-						} else 
-							{
-								// code for IE6, IE5
-								xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-							}
-						xmlhttp.onreadystatechange = function() 
+<script type="text/javascript">
+	// showUser() calls exam_detail.php
+	function showUser(str) 
+	{
+		if (str == "") {
+			document.getElementById("txtHint").innerHTML = "";
+			return;
+		} else { 
+				if (window.XMLHttpRequest) {
+					// code for IE7+, Firefox, Chrome, Opera, Safari
+					xmlhttp = new XMLHttpRequest();
+				} else 
+					{
+						// code for IE6, IE5
+						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+				xmlhttp.onreadystatechange = function() 
+				   {
+				 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
 						{
-							if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
-							{
 							document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-							}
-						};
-					
-						xmlhttp.open("GET","exam_detail.php?q="+str,true);
-						xmlhttp.send();
 						}
+					};
+				xmlhttp.open("GET","exam_detail.php?q="+str,true);
+				xmlhttp.send();
 			}
+	}
 			// showUser3 calls upcoming.php
 			 function showUser3(str) 
 	     	{
@@ -404,8 +402,7 @@
 			
 			  window.location.assign("dashboard.php")
 			}
-	
-      		$(document).ready(function(){
+			$(document).ready(function(){
 				$("#img1").click(function(){
 					$("#column2").addClass('hidden');
 					$("#column3").addClass('hidden');
@@ -460,23 +457,15 @@
 					$("#img22").attr('src','../../images/candidate/register_black.png');
 					$("#img11").attr('src','../../images/candidate/profile_blue.png');
 					$("#img33").attr('src','../../images/candidate/certificate_orange.png');
-                    
-                    
-  				var xhttp = new XMLHttpRequest();
-  				xhttp.onreadystatechange = function() {
-				    if (xhttp.readyState == 4 && xhttp.status == 200) {
-				    	document.getElementById("upcoming").innerHTML = xhttp.responseText;
-    				}
-  				};
-			  
-			  	xhttp.open("GET", "upcoming_controller.php", true);
-			  	xhttp.send();
-			
-
-
-                     
-
-				});
+                	var xhttp = new XMLHttpRequest();
+  					xhttp.onreadystatechange = function() {
+				    	if (xhttp.readyState == 4 && xhttp.status == 200) {
+				    		document.getElementById("upcoming").innerHTML = xhttp.responseText;
+    					}
+  					};
+			  		xhttp.open("GET", "upcoming_controller.php", true);
+			  		xhttp.send();
+			  	});
 				$("#img3").click(function(){
 					/* $("#column3").removeClass('hidden'); */
 					$("#column1").addClass('hidden');
@@ -506,24 +495,40 @@
 					$("#img11").attr('src','../../images/candidate/profile_blue.png');
 					$("#img33").attr('src','../../images/candidate/certificate_black.png');
 				});  
-			});
-		</script> 
-	</head>
-	<body style="background-color:#fff">
-
-
-		<div id="topbar1">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../images/common/logo_myskillindex.jpeg" width="170px" height="95px" style="margin-top:-15px"></a>
-		</div>
-		<div id="topbar" >
-			<a href="logout.php" color="white" ><span style="margin-right:-1350px"><img src="../../images/candidate/exit.png" width="30px" height="28px" style="margin-top:-5px">&nbsp;&nbsp;<font color="white">Logout</font></span></a>
-		</div>
-		<!-- Side panel Navigation Tabs - profile / register or upcoming / certificates-->
-		<div class="container" style="margin-top:-50px;">
-			<div class="row" >
-				<div id="content1" class="col-md-3">
-					<div class="sidebar-nav">
-						<div class="navbar navbar-default" role="navigation">
+			});	
+            // it will delete the exam 
+			function cancel_exam(val1){
+				var d_id = (val1.id).split('_')[1];
+				//alert(d_id);
+        		var del_id = "id="+ d_id;
+        		//alert(del_id);
+				var xhttp;
+        		xhttp = new XMLHttpRequest();
+        		xhttp.open("POST","delete_exam.php", true);
+        		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+       			xhttp.onreadystatechange = function() {
+       				//alert(" onreadystatechange=" + xhttp.readyState);
+            		if (xhttp.readyState == 4 && xhttp.status == 200) {
+                		//alert(xhttp.responseText);
+            		}
+        		};
+        		xhttp.send(del_id);
+				//alert('send called');
+			}	
+</script> 
+<body style="background-color:#fff">
+	<div id="topbar1">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../images/common/logo_myskillindex.jpeg" width="170px" height="95px" style="margin-top:-15px"></a>
+	</div>
+	<div id="topbar" >
+		<a href="logout.php" color="white" ><span style="margin-right:-1350px"><img src="../../images/candidate/exit.png" width="30px" height="28px" style="margin-top:-5px">&nbsp;&nbsp;<font color="white">Logout</font></span></a>
+	</div>
+	<!-- Side panel Navigation Tabs - profile / register or upcoming / certificates-->
+	<div class="container" style="margin-top:-50px;">
+		<div class="row" >
+			<div id="content1" class="col-md-3">
+				<div class="sidebar-nav">
+					<div class="navbar navbar-default" role="navigation">
 						<!--<div class="navbar-header">
 								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
 								<span class="sr-only">Toggle navigation</span>
@@ -532,66 +537,77 @@
 								<span class="icon-bar"><img src="images/profile_blue.png" width="" height=""></span>
 								</button>
 								<span class="visible-xs navbar-brand">Sidebar menu</span>
-							</div> </navbar-header -->
+							</div> navbar-header ends -->
 							<!-- Code to make nav bar verticle (default is horizontal)-->							
 							<div id="list" class="navbar-collapse collapse sidebar-navbar-collapse">
 								<ul class="nav navbar-nav" id="mynav" >
-									<li id="li1"><a  id="img1" style="background-image: url('../../images/candidate/blue.svg');border-top: dashed 1px #03A9F4;border-bottom: dashed 1px #03A9F4;border-left: dashed 1px #03A9F4;">
-									<center>
-									<img id="img11" src="../../images/candidate/profile_black.png" width="" height="">
-									</center></a></li>
-									<li id="li2"> <a   id="img2" style="border-right: dashed 1px #03A9F4"><center><img id="img22" src="../../images/candidate/register_green.png"></center></a></li>
-									<li id="li3"><a  id="img3" style="border-right: dashed 1px #03A9F4"><center><img id="img33" src="../../images/candidate/certificate_orange.png"></center></a></li>
+									<li id="li1">
+										<a  id="img1" style="background-image: url('../../images/candidate/blue.svg');border-top: dashed 1px #03A9F4;border-bottom: dashed 1px #03A9F4;border-left: dashed 1px #03A9F4;">
+											<center>
+												<img id="img11" src="../../images/candidate/profile_black.png" width="" height="">
+											</center>
+										</a>
+									</li>
+									<li id="li2"> 
+										<a   id="img2" style="border-right: dashed 1px #03A9F4">
+											<center>
+												<img id="img22" src="../../images/candidate/register_green.png">
+											</center>
+										</a>
+									</li>
+									<li id="li3">
+										<a  id="img3" style="border-right: dashed 1px #03A9F4">
+											<center>
+												<img id="img33" src="../../images/candidate/certificate_orange.png">
+											</center>
+										</a>
+									</li>
 								</ul>
 							</div><!--/.nav-collapse -->
-						</div><!-- /navbar navbar default-->
-					</div><!-- /side-bar nav -->
-				</div><!-- /col-md-3 -->
-				<div id="content" style="display:inline-block" class="container col-md-7">
-					<div class="jumbotron clearfix" style="width:800px;height:420px;position: relative;margin-top:1px;overflow:auto;background-image: url('../../images/candidate/blue.svg'); ">
-						<div id="column1" >
-
-
-							<div><h3 style="position:absolute;margin-left:300px;margin-top:-35px;font-weight:bold" >Profile &nbsp; <img src="../../images/candidate/edit.png" height="20" width="20" onclick="loadDoc3()"/></h3> 
-							</div><!-- Profile Update button code -->
+					</div><!-- /navbar navbar default-->
+				</div><!-- /side-bar nav -->
+			</div><!-- /col-md-3 -->
+			<div id="content" style="display:inline-block" class="container col-md-7">
+				<div class="jumbotron clearfix" style="width:800px;height:420px;position: relative;margin-top:1px;overflow:auto;background-image: url('../../images/candidate/blue.svg'); ">
+					<div id="column1" >
+						<div>
+							<h3 style="position:absolute;margin-left:300px;margin-top:-35px;font-weight:bold" >
+								Profile &nbsp; 
+								<img src="../../images/candidate/edit.png" height="20" width="20" onclick="loadDoc3()"/>
+							</h3> 
+						</div><!-- Profile Update button code -->
 							<!-- Image load code START-->
-							<div id="userphoto" style="position: absolute;top: 0;right: 0;border: 2px solid #03A9F4;margin-top:5px;margin-right:5px">
-								<?php 
-									$log->debug("Dashboard.php - inside div id = userphoto ");
-									try{
-									$query="SELECT candidate_image
-											FROM t_candidate_1 
-											WHERE candidate_id = '{$_SESSION['id']}'";
-									$log->debug("Dashboard.php - SQL Query ".$query);
-									$result = mysqli_query($connection,$query);
-									if($result == FALSE)
-									{
-										throw new Exception($result);
-									}
-
-									$row = mysqli_fetch_assoc($result);
-									//$error = 'Always throw this error';
-                                 
-                                    //throw new Exception($this->mysqli->error);
-									
-									}
-									catch(Exception $e){
+						<div id="userphoto" style="position: absolute;top: 0;right: 0;border: 2px solid #03A9F4;margin-top:5px;margin-right:5px">
+							<?php 
+								$log->debug("Dashboard.php - inside div id = userphoto ");
+								try{
+								$query="SELECT candidate_image
+										FROM t_candidate_1 
+										WHERE candidate_id = '{$_SESSION['id']}'";
+								$log->debug("Dashboard.php - SQL Query ".$query);
+								$result = mysqli_query($connection,$query);
+								if($result == FALSE)
+								{
+									throw new Exception($result);
+								}
+								$row = mysqli_fetch_assoc($result);
+								//$error = 'Always throw this error';
+                                //throw new Exception($this->mysqli->error);
+								}
+								catch(Exception $e){
 									$log->error("error in sql query: ".$query);
 									$log->error($e->getMessage());
-                                     
-                                     $error_header_php="Error retrieving profile details." ;
-                                     $error_message_php="Error in retrieving your profile details. Please try after some time. If the error persists, please contact admin@iidea8.com";
-
-                                     custom_error($error_header_php,$error_message_php);
-									}
-									echo '<img "height="130" width="150" src="../../images/candidate/' . $row["candidate_image"]. '" >';
-								?>
-									<form id="form2" method="post" action="image_update.php" enctype="multipart/form-data">
-										<span class="select-wrapper">
-											<input type="file" name="img2" id="file"  onchange="this.form.submit()">
-										</span>
-								
-									</form>
+                                	$error_header_php="Error retrieving profile details." ;
+                                	$error_message_php="Error in retrieving your profile details. Please try after some time. If the error persists, please contact admin@iidea8.com";
+                                	custom_error($error_header_php,$error_message_php);
+								}
+								echo '<img "height="130" width="150" src="../../images/candidate/' . $row["candidate_image"]. '" >';
+							?>
+							<form id="form2" method="post" action="image_update.php" enctype="multipart/form-data">
+								<span class="select-wrapper">
+									<input type="file" name="img2" id="file"  onchange="this.form.submit()">
+								</span>
+							</form>
 							</div> <!-- /userphoto -->
 							<div id="profi" >
 								<table class="table">
