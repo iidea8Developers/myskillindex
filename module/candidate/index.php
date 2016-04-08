@@ -211,7 +211,7 @@ $(document).ready(function(){
 			var request1;
 			// associated array is created that is passed using send()
 			// username and password are key of array that is fetched by login_check.php using post
-		    var fe1 = "username="+ $("#username").val() + "&password="+ $("#password").val();
+		    var fe1 = "username="+ $("#username").val() + "&password="+ $("#password").val() + "&requestor="+ "candidate";
 			// create XMLHttpRequest object 
 			if(window.XMLHttpRequest){
 				request1 = new XMLHttpRequest();
@@ -220,7 +220,7 @@ $(document).ready(function(){
 				request1 = new ActiveXObject("Microsoft.XMLHTTP");
 			}
 			//request made to server
-            request1.open("POST","../../service/candidate/login_check.php",true);
+            request1.open("POST","../../service/common/login_check.php",true);
             
             // Set content type header information for sending url encoded variables in the request
             request1.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
