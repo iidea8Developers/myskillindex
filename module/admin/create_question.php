@@ -3,13 +3,17 @@
 	//created by prakash shukla and vivek kumar
 	//this page create and search question
 	session_start();
-	include('db_connection.php');
+	include_once('../../service/common/db_connection.php');
+	include_once('../../lib/log4php/Logger.php');
+	Logger::configure('../../config/log_config.xml');
+	$log = Logger::getLogger('create_question.php');
+	$log->debug("****START -create_question.php****");
 	
 	
 	if ((isset($_SESSION["user"]))){
 	}else
 	{
-		header("Location: error_page.php");
+		header("Location: ../../service/common/error_page.php");
 	}
 ?>
 <html>
@@ -17,19 +21,19 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<meta name="description" content="Awesome Bubble Navigation with jQuery" />
 		<meta name="keywords" content="jquery, circular menu, navigation, round, bubble"/>
-		<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
+		<!--<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
-		<link rel="stylesheet" type="text/css" href="css/style3.css" />
+		<link rel="stylesheet" type="text/css" href="css/style3.css" />-->
 		<link href='http://fonts.googleapis.com/css?family=Alegreya+SC:700,400italic' rel='stylesheet' type='text/css' />
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-		<link rel="stylesheet" href="/resources/demos/style.css">
+		<!--<link rel="stylesheet" href="/resources/demos/style.css">-->
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 		<!-- header footer buttons line  CSS -->
-		<link rel="stylesheet" href="css/head_foot_line_button.css"/>
+		<link rel="stylesheet" href="../../css/admin/author_qb.css"/>
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<!-- jQuery library -->
 		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
@@ -38,7 +42,7 @@
 		
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 		
-		<script type="text/javascript" src="author.js"></script>
+		<!--<script type="text/javascript" src="author.js"></script>-->
 		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script
 		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -46,9 +50,9 @@
 		<script>
 		
 		//functions for autofill in input boxes
-			$(function() {
+			$('document').ready(function() {
 				$( "#skills" ).autocomplete({
-					source: 'search/search.php'
+					source: 'search.php'
 				});
 			});
 		</script>
@@ -189,7 +193,7 @@
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">
-				<a class="navbar-brand" class="pull-left"><img src="image/title.png" style="margin-top:-15px;margin-left:-14px;" height="50" width="200"></a>
+				<a class="navbar-brand" class="pull-left"><img src="../../images/common/logo_myskillindex.jpeg" style="margin-top:-15px;margin-left:-14px;" height="50" width="200"></a>
 				</div>
 				<div>
 					

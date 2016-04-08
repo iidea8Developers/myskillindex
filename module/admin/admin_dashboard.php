@@ -108,7 +108,7 @@
 						</div>
 						
 						<div class="col-md-3">
-							<a href="search_exam.php" style="text-decoration: none">
+							<a href="assessment.php" style="text-decoration: none">
 								<center>
 									<div id="zoomable">    
 										<img src="../../images/admin/assessment.jpg" class="img-rounded" height="300" width="200">
