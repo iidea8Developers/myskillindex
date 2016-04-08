@@ -108,7 +108,7 @@
 								<form enctype="application/x-www-form-urlencoded" method="post">
 									<h4><font color="#3b5998" size="5">
 									Welcome Back</font></h4>
-									<input type="text" id="username" name="username"class="form-control input-sm chat-input" placeholder="Username" required//>
+									<input type="text" id="username" name="username"class="form-control input-sm chat-input" placeholder="Username" required/>
 									</br>
 									<input type="text" id="password" name="password" class="form-control input-sm chat-input" placeholder="Password" required/>
 									</br>

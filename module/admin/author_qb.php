@@ -5,7 +5,7 @@
 	// this page is for searching and creating questions
 	
 	// below code is for db conn setup and session check
-	include_once('../../service/common/db_connection.php');
+	//include_once('../../service/common/db_connection.php');
 	include_once('../../lib/log4php/Logger.php');
 	Logger::configure('../../config/log_config.xml');
 	$log = Logger::getLogger('author_qb.php');
@@ -142,8 +142,8 @@
 					</div>	
 					<div class="col-md-4">
 						<div>
-							<button  style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;" id="button"  onclick="ajax_post();" >Search Questions</button>&nbsp;&nbsp;
-							<button  id="button" style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;"  onclick="window.location.href='author_qb_c.php'" >Create New</button>
+							<button  style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;" id="button"  onclick="ajax_post();" >Search</button>&nbsp;&nbsp;
+							<button  id="button" style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;"  onclick="window.location.href='create_question.php'" >Create New</button>
 						</div>
 						<div>
 						</div>
