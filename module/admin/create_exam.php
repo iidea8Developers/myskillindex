@@ -110,13 +110,8 @@
 			}
 		</script>
 		<style>
-			#back{
-				background:#DFDFDF;
-				width:60px;
-				height:80px;
-				position: fixed;
-				bottom:0;
-				left:20;
+			body{
+			background-color:#dfe3ee;
 			}
 			.checkbxinput {
 				color: green;
@@ -136,7 +131,7 @@
 				bottom:0;
 				left:0;
 			}
-			#buttons{
+			#add_nos{
 				background:#DFDFDF;
 				width:128px;
 				height:80px;
@@ -144,9 +139,16 @@
 				bottom:0;
 				right:0;
 			}
-			body{
-			background-color:#dfe3ee;
+			#back{
+				background:#DFDFDF;
+				width:128px;
+				height:80px;
+				position: fixed;
+				bottom:0;
+				left:-20;
 			}
+
+			
 		</style>
 	</head>
 	<body> 
@@ -163,162 +165,164 @@
 					</nav>
 				</div><!--closed header-->
 				<div class="table-responsive" style="margin-top:-20px;">
-				<table class="table table-bordered table-stripped">
-					<div class="row">
-						<th  bgcolor="#3b5998" class="col-md-12"><font color="#FFFFFF">Dashboard > Search Exams > Author Exam</font>
-						</th>						
-					</div>
-				</table>
-			</div>
-			<form id="select_form"  action="insert_exam_nos.php" method="post" >
-				<div class="container">
-					<div class="row">
-						<div class="col-md-3">
-							<div>
-							<b><font color="#3b5998">Organisation</font><b>
-							<br>
-								<div class="ui-widget">
-									<input name="org" type="text" placeholder="Global" id="search_org" required>
+					<table class="table table-bordered table-stripped">
+						<div class="row">
+							<th  bgcolor="#3b5998" class="col-md-12"><font color="#FFFFFF">Dashboard > Search Exams > Author Exam</font>
+							</th>						
+						</div>
+					</table>
+				</div>
+				<form id="select_form"  action="insert_exam_nos.php" method="post" >
+					<div class="container">
+						<div class="row">
+							<div class="col-md-3">
+								<div>
+									<b><font color="#3b5998">Organisation</font><b>
+									<br>
+									<div class="ui-widget">
+										<input name="org" type="text" placeholder="Global" id="search_org" required>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-3">
-							<div>
-								<b><font color="#3b5998"> Sector</font></b>
-								<br>
-								<input name="sector" type="text" id="search_sector"required>
+							<div class="col-md-3">
+								<div>
+									<b><font color="#3b5998"> Sector</font></b>
+									<br>
+									<input name="sector" type="text" id="search_sector"required>
+								</div>
+							</div> 
+							<div class="col-md-3">
+								<div>
+									<b><font color="#3b5998"> QP</font></b>
+									<br>
+									<input name="qp" type="text" id="search_qp" required>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div>
+									<b><font color="#3b5998"> Name Of Exam</font><b><br>
+									<input type="text" name="exam" value="" name="name_of_exam" required>
+								</div>
 							</div>
 						</div> 
-						<div class="col-md-3">
-							<div>
-								<b><font color="#3b5998"> QP</font></b>
-								<br>
-								<input name="qp" type="text" id="search_qp" required>
+					</div>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-3">
+								<div>
+									<b><font color="#3b5998"> Exam Description</font></b>
+									<br>
+									<input type="text" name="desc" value="" name="name_of_exam" required>
+								</div>
 							</div>
-						</div>
-						<div class="col-md-3">
-							<div>
-								<b><font color="#3b5998"> Name Of Exam</font><b><br>
-								<input type="text" name="exam" value="" name="name_of_exam" required>
+							<div class="col-md-3"  >
+								<div>
+									<div  class="form-group">
+	  									<label for="sel1"><b><font color="#3b5998">Exam Time</font></label>
+	  									<select style="height:25px;width:185px;font-size: 13px;"  name="	time" class="form-control" id="sel1">
+	    									<option value="30">30 Minutes</option>
+	    									<option value="45" >45 Minutes</option>
+	    									<option value="60" > 60 Minutes</option>
+	    								</select>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div> 
-				</div>
-				<div class="container">
-					<div class="row">
-						<div class="col-md-3">
-							<div>
-								<b><font color="#3b5998"> Exam Description</font></b>
-								<br>
-								<input type="text" name="desc" value="" name="name_of_exam" required>
+							<div class="col-md-3">
+								<div>
+									<b><font color="#3b5998"> Exam Skill Level</font></b>
+									<br>
+									<input type="text" name="skill" value="" name="name_of_exam" required>
+								</div>
 							</div>
-						</div>
-						<div class="col-md-3"  >
-							<div>
-								<div  class="form-group">
-	  								<label for="sel1"><b><font color="#3b5998">Exam Time</label>
-	  								<select style="height:25px;width:185px;font-size: 13px;"  name="	time" class="form-control" id="sel1">
-	    								<option value="30">30 Minutes</option>
-	    								<option value="45" >45 Minutes</option>
-	    								<option value="60" > 60 Minutes</option>
-	    							</select>
+							<div class="col-md-3">
+								<div>
+									<b><font color="#3b5998"> Exam Passing Percentile</font></b>
+									<br>
+									<input type="number" step="0.01" name="percent" value="" required>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-3">
-							<div>
-								<b><font color="#3b5998"> Exam Skill Level</font></b>
-								<br>
-								<input type="text" name="skill" value="" name="name_of_exam" required>
+					</div>
+				<!-- input field ends-->
+					<div class="container">
+						<br>
+						<br>
+						<div class="row clearfix">
+							<div class="col-md-12 column">
+								<table class="table table-bordered table-hover" id="tableToModify">
+									<thead>
+										<tr>
+											<th class="text-center">
+												<font color="#3b5998"> <b> NOS</b> </font>
+											</th>
+											<th class="text-center">
+												<font color="#3b5998"><b>NOS Description</b></font>
+											</th>
+											<th class="text-center">
+												<font color="#3b5998"><b>Select PC</b></font>
+											</th>
+										</tr>
+									</thead>
+									<tbody >
+										<tr id="rowToClone">
+											<td>
+												<div>
+													<div class="col-md-3">
+														<?php
+															//Query used to pull list of Nos in drop down box
+															$sql = "SELECT nos_code 
+																	FROM t_nos";
+															$result = mysqli_query($connection,$sql);
+															echo "<select onchange='showUser(this.value)' name='nos' style='width:150px' >
+																<option value='' >Select NOS ID</option>";
+																while ($row = mysqli_fetch_assoc($result)){
+																	echo "<option value='" . $row['nos_code'] . "'>" . $row['nos_code'] . "
+																						</option>";
+																}
+															echo "</select>";
+														?>
+													</div>
+												</div>
+											</td>
+											<td>
+												<div class="col-md-3">
+													<div style="width:100px" class="input_fields_wrap" id="pcDiv2">
+														<div id="nos_desc">
+														</div>
+														<br>
+													</div>
+												</div>
+											</td>
+											<td>
+												<div class="col-md-3" style="width:600px" >
+													<div id="pc_fetch">
+													</div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
-						<div class="col-md-3">
-						<div>
-							<b><font color="#3b5998"> Exam Passing Percentile</font></b>
-							<br>
-							<input type="number" step="0.01" name="percent" value="" required>
-						</div>
-						</div>
+					</div>		
+					<div id="back" align="left">
+						<button  type="back"  onclick="window.location.href='search_exam.php'" style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;">Back
+						</button>
 					</div>
-				</div>
-				<!-- input field ends-->	
-				<br>
-				<br>
-				<div class="row clearfix">
-					<div class="col-md-12 column">
-						<table class="table table-bordered table-hover" id="tableToModify">
-							<thead>
-								<tr>
-									<th class="text-center">
-										<font color="#3b5998"> <b> NOS</b> </font>
-									</th>
-									<th class="text-center">
-										<font color="#3b5998"><b>NOS Description</b></font>
-									</th>
-									<th class="text-center">
-										<font color="#3b5998"><b>Select PC</b></font>
-									</th>
-								</tr>
-							</thead>
-							<tbody >
-								<tr id="rowToClone">
-									<td>
-										<div>
-											<div class="col-md-3">
-												<?php
-													//Query used to pull list of Nos in drop down box
-													$sql = "SELECT nos_code 
-															FROM t_nos";
-													$result = mysqli_query($connection,$sql);
-													echo "<select onchange='showUser(this.value)' name='nos' style='width:150px' >
-															<option value='' >Select NOS ID</option>";
-															while ($row = mysqli_fetch_assoc($result)){
-																echo "<option value='" . $row['nos_code'] . "'>" . $row['nos_code'] . "
-																					</option>";
-															}
-													echo "</select>";
-												?>
-											</div>
-										</div>
-									</td>
-									<td>
-										<div class="col-md-3">
-											<div style="width:100px" class="input_fields_wrap" id="pcDiv2">
-												<div id="nos_desc">
-												</div>
-												<br>
-											</div>
-										</div>
-									</td>
-									<td>
-										<div class="col-md-3" style="width:600px" >
-											<div id="pc_fetch">
-											</div>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						</div>
+					<div id="add_nos" align="right">
+						<button type="submit" type="button" style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;">
+						Add NOS
+						</button>
 					</div>
+				</form>
+				<div id="footer">
+					<br>
+					<center>
+						<code>Copyright @ 2015 iidea8. All rights reserved | <a href="#">Privacy Policy</a> | <a href="#" color="#C7254E">Terms of Use </a>
+						</code>
+					</center>
 				</div>
-				<div id="back" align="left">
-					<button  type="button"  onclick="window.location.href='search_exam.php'" style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;">
-					</button>
-				</div>
-				<div id="buttons" align="right">
-					<button type="submit" type="button" style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;">
-					Add NOS
-					</button>
-				</div>
-			</form>
-			<div id="footer">
-				<br>
-				<center>
-					<code>Copyright @ 2015 iidea8. All rights reserved | <a href="#">Privacy Policy</a> | <a href="#" color="#C7254E">Terms of Use </a>
-					</code>
-				</center>
-			</div>
+			</div>	
 		</div>
 	</body>					
 </html>													
