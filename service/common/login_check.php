@@ -8,8 +8,7 @@
 	// Usage : Checks the Login Validation 
 		
 	//db conn and session check
-	include_once('../common/db_connection.php');
-	include_once('../../config/config.txt');
+	
 	
 	// Inititate Log4php logger
 	include_once('../../lib/log4php/Logger.php');
@@ -17,6 +16,8 @@
 	$log = Logger::getLogger('Login_check.php');
 	//$elog = Logger::getLogger('errMailService');
 	$log->debug("****START - login_check.php****");
+	include_once('../common/db_connection.php');
+	include_once('../../config/config.txt');
 
 	if(isset($_POST['username']) && isset($_POST['password']))
 	{

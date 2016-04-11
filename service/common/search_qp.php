@@ -1,10 +1,10 @@
 <?php
     //database configuration
-  include_once('../../service/common/db_connection.php');
   include_once('../../lib/log4php/Logger.php');
   Logger::configure('../../config/log_config.xml');
   $log = Logger::getLogger('search_qp.php');
   $log->debug("****START -search_qp.php****");
+  include_once('../../service/common/db_connection.php');
      
 $data=array();
     //get search term
