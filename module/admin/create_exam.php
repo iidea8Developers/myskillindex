@@ -20,7 +20,7 @@
 ?>
 <html lang="eng" >
 	<head>		
-		<title>Author Exam</title>
+		<title>Create Exam</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -167,7 +167,7 @@
 				<div class="table-responsive" style="margin-top:-20px;">
 					<table class="table table-bordered table-stripped">
 						<div class="row">
-							<th  bgcolor="#3b5998" class="col-md-12"><font color="#FFFFFF">Dashboard > Search Exams > Author Exam</font>
+							<th  bgcolor="#3b5998" class="col-md-12"><font color="#FFFFFF">Dashboard > Search Exams > Create Exam</font>
 							</th>						
 						</div>
 					</table>
@@ -219,7 +219,7 @@
 								<div>
 									<div  class="form-group">
 	  									<label for="sel1"><b><font color="#3b5998">Exam Time</font></label>
-	  									<select style="height:25px;width:185px;font-size: 13px;"  name="	time" class="form-control" id="sel1">
+	  									<select style="height:25px;width:185px;font-size: 13px;"  name="time" class="form-control" id="sel1">
 	    									<option value="30">30 Minutes</option>
 	    									<option value="45" >45 Minutes</option>
 	    									<option value="60" > 60 Minutes</option>
@@ -288,6 +288,7 @@
 												<div class="col-md-3">
 													<div style="width:100px" class="input_fields_wrap" id="pcDiv2">
 														<div id="nos_desc">
+															<!--code to write description of nos -->	
 														</div>
 														<br>
 													</div>
@@ -296,6 +297,7 @@
 											<td>
 												<div class="col-md-3" style="width:600px" >
 													<div id="pc_fetch">
+													<?php // PHP function or code to give Pc list?>
 													</div>
 												</div>
 											</td>
