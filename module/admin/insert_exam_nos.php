@@ -176,9 +176,11 @@
 	
 	//insert into nos_pc relational table
 	if( isset($_POST['checked']) && is_array($_POST['checked']) ) {
+		$log->info("entered second query ");
 		foreach($_POST['checked'] as $pc) {
 			// eg. "I have a grapefruit!"
 			//echo "I have a {$pc}!";
+			$log->info("entered for loop ");
 			try{
 				$sql2= "SELECT pc_id 
 						FROM t_pc 
@@ -209,7 +211,8 @@
 											VALUES ('{$_SESSION['exam_id']}','{$_POST["nos"]}','0','{$pc_id}','0','{$_SESSION["user"]}','{$_SESSION["user"]}',NOW(),'NULL')";
 			if ($connection->query($pc_query) === TRUE) {
 				echo "New record created successfully";
-				header('Location: create_exam.php');
+				header('Location:create_exam.php');
+				$log->info("DATABASE query 2 executed ");
 				//echo "New record created successfully. Last inserted ID is: " . $last_id;
 			} else {
 				echo "Error: " . $pc_query . "<br>" . $connection->error;

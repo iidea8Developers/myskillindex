@@ -43,35 +43,36 @@
 		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 		<script>
-			// jquery function to Autofill input boxes
-			$("select#search_org").change(function(){
-				var id = $("select#category option:selected").attr('value');
-				$.post("select_type.php", {id:id}, function(data){
-					$("select#type").html(data);
+			$("document").ready(function(){	
+				// jquery function to Autofill input boxes
+				$("select#search_org").change(function(){
+					var id = $("select#category option:selected").attr('value');
+					$.post("select_type.php", {id:id}, function(data){
+						$("select#type").html(data);
+					});
 				});
-			});
-			
-			$(function() {
-				$( "#search_org" ).autocomplete({
-					source: '../../service/common/search_org.php'
-					
-				});
-			});
-			
-			$(function() {
-				$( "#search_qp" ).autocomplete({
-					source: '../../service/common/search_qp.php'
-					
-				});
-			});
+				
+				//$(function() {
+					$( "#search_org" ).autocomplete({
+						source: '../../service/common/search_org.php'
+						
+					});
+				//});
+				
+				//$(function() {
+					$( "#search_qp" ).autocomplete({
+						source: '../../service/common/search_qp.php'
+						
+					});
+				//});
 
-			$(function() {
-				$( "#search_sector" ).autocomplete({
-					source: '../../service/common/search_sector.php'
-					
-				});
-			});
-			
+				//$(function() {
+					$( "#search_sector" ).autocomplete({
+						source: '../../service/common/search_sector.php'
+						
+					});
+				//});
+			});	
 			//ajax function to pull list of Pc dynamically on the page
 			
 			function showUser(str) {
@@ -81,33 +82,32 @@
 					
 					return;
 					} else { 
-					if (window.XMLHttpRequest) {
-						// code for IE7+, Firefox, Chrome, Opera, Safari
-						xmlhttp = new XMLHttpRequest();
-			            xmlhttp2 = new XMLHttpRequest();
-						
-						} else {
-						// code for IE6, IE5
-						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-			            xmlhttp2 = new ActiveXObject("Microsoft.XMLHTTP");
-						
+						if (window.XMLHttpRequest) {
+							// code for IE7+, Firefox, Chrome, Opera, Safari
+							xmlhttp = new XMLHttpRequest();
+			            	xmlhttp2 = new XMLHttpRequest();
+							} else {
+								// code for IE6, IE5
+								xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			            		xmlhttp2 = new ActiveXObject("Microsoft.XMLHTTP");
+							}
+						xmlhttp.open("GET","pc_get.php?p="+str,true);
+						xmlhttp.onreadystatechange = function() {
+							if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+								document.getElementById("pc_fetch").innerHTML = xmlhttp.responseText;
+							}
+						};
+						xmlhttp.send();
+						//request to get description of nos
+						xmlhttp2.open("GET","nos_desc_get.php?q="+str,true);
+						xmlhttp2.onreadystatechange = function() {	
+							if (xmlhttp2.readyState == 4 && xmlhttp.status == 200) {
+								document.getElementById("nos_desc").innerHTML = xmlhttp2.responseText;
+							}
+						};
+						xmlhttp2.send();
 					}
-					xmlhttp.open("GET","pc_get.php?p="+str,true);
-					xmlhttp.onreadystatechange = function() {
-						if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-							document.getElementById("pc_fetch").innerHTML = xmlhttp.responseText;
-						}
-					};
-					xmlhttp.send();
-					xmlhttp2.open("GET","nos_desc_get.php?q="+str,true);
-					xmlhttp2.onreadystatechange = function() {	
-						if (xmlhttp2.readyState == 4 && xmlhttp.status == 200) {
-							document.getElementById("nos_desc").innerHTML = xmlhttp2.responseText;
-						}
-					};
-					xmlhttp2.send();
 				}
-			}
 		</script>
 		<style>
 			body{
@@ -220,7 +220,7 @@
 									<div  class="form-group">
 	  									<label for="sel1"><b><font color="#3b5998">Exam Time</font></label>
 	  									<select style="height:25px;width:185px;font-size: 13px;"  name="time" class="form-control" id="sel1">
-	    									<option value="30">30 Minutes</option>
+	    									<option value="30" selected="selected">30 Minutes</option>
 	    									<option value="45" >45 Minutes</option>
 	    									<option value="60" > 60 Minutes</option>
 	    								</select>
@@ -270,14 +270,13 @@
 													<div class="col-md-3">
 														<?php
 															//Query used to pull list of Nos in drop down box
-															$sql = "SELECT nos_code 
+															$nos_query = "SELECT nos_code 
 																	FROM t_nos";
-															$result = mysqli_query($connection,$sql);
-															echo "<select onchange='showUser(this.value)' name='nos' style='width:150px' >
-																<option value='' >Select NOS ID</option>";
-																while ($row = mysqli_fetch_assoc($result)){
-																	echo "<option value='" . $row['nos_code'] . "'>" . $row['nos_code'] . "
-																						</option>";
+															$result = mysqli_query($connection,$nos_query);
+															echo "<select name='nos' onchange='showUser(this.value)' style='width:150px'>";
+															echo '<option value="0">Select a NOS please</option>';
+															while ($row = mysqli_fetch_assoc($result)){
+																echo "<option value='".$row['nos_code']."'>".$row['nos_code']."</option>";
 																}
 															echo "</select>";
 														?>
