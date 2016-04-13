@@ -105,11 +105,6 @@
 			$row4 = mysqli_fetch_assoc($result4);
 			$exam_link= $row4['survey_link'];
 			
-			
-			
-			
-			
-			
 			echo'
 			<style>
 			.tim{
@@ -141,22 +136,14 @@
 			
 			<th class="col-md-2"><font color="#3b5998" style="font-size:16px;text-transform: capitalize;">'.$exam_name4.' Minutes</font></th>
 			<th class="col-md-2"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="tim" type="button" value="" onClick="confSubmit(this.form);"></th>
-			
-			
-			
 			</table>
 			</div>
 			</form>
 			</div>
 			';
-			
-			
-			
-			
 		}}catch(Exception $e){
 		header("Location: ../../service/common/error_page.php");
 	}
-	//echo "success";
 	mysqli_close($connection);
 	$log->debug("********END search_exam *********");	
 ?>
