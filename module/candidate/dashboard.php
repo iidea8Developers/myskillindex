@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <!-- It dispaly profile,upcoming exam of user,enable user to register for exam, and show certificated of exams completed user 
       created by vivek singh
-      last time modified by jitendra dayma
-      modified on 07-04-2014
-      modifiction: added cancel exam and correct the indentation of code -->
+      last time modified by vivek singh
+      modified on 12-04-2016
+      modifiction: corrected original get request as get is more fast than post and post is not required for this small data -->
 <?php
 	/*
 	Usage: Main Candidate display screen. 
@@ -97,7 +97,7 @@
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
-   		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+   		
 		<!-- (Optional) Latest compiled and minified JavaScript translation files 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>-->
 		<style type="text/css">
@@ -244,29 +244,21 @@
 		</style>
     	<!--Java Script functions to display information on the screen-->
 <script type="text/javascript">
-    //$(document).ready(function(){
-       // $('#button1').click();
-        
-       /* var error_set_script = <?php echo "$error_set_php; "?>;
-        var error_set_header = <?php echo "$error_header_php; "?>;
-        var error_set_message = <?php echo "$error_message_php; "?>;
-        
-        if(error_set_script == 1)
-        {
-        	//$('#button1').click();
-        	$('#modal_header').text(error_set_header);
-            $('#main_text').text(error_set_message);
-        }*/
-    //});
-</script>
-<script type="text/javascript">
-	// showUser() calls exam_detail.php
-	function showUser(str) 
-	{
-		if (str == "") {
-			document.getElementById("txtHint").innerHTML = "";
-			return;
+    $(document).ready(function(){
+    $("#hidden_span").hide();
+    $("#cd-dropdown").change(function(){
+
+		if (this.value == "") {
+			
+			$("#txtHint").hide();
+			$("#txtHint2").show();
+			$("#hidden_span").hide();
+
 		} else { 
+			   
+			   $("#txtHint").show();
+			   $("#txtHint2").hide();
+			   $("#hidden_span").show();
 				if (window.XMLHttpRequest) {
 					// code for IE7+, Firefox, Chrome, Opera, Safari
 					xmlhttp = new XMLHttpRequest();
@@ -281,11 +273,22 @@
 						{
 							document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
 						}
-					};
-				xmlhttp.open("GET","exam_detail.php?q="+str,true);
+					}
+					var url = 'exam_detail.php';
+				xmlhttp.open("GET","exam_detail.php?q="+this.value,true);
+			
 				xmlhttp.send();
 			}
-	}
+
+});
+
+
+
+});
+</script>
+<script type="text/javascript">
+	
+
 			// showUser3 calls upcoming.php
 			 function showUser3(str) 
 	     	{
@@ -302,12 +305,12 @@
 								}
  						xmlhttp.onreadystatechange = function() {
 							if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-								document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+								document.getElementById("txtHint2").innerHTML = xmlhttp.responseText;
 							}
 						};
 					
 						xmlhttp.open("GET","register_exam.php?q="+str,true);
-						xmlhttp.send();
+						xmlhttp.send(null);
             //windows.location.reload(true);                                               
 						}
 			}  
@@ -466,6 +469,8 @@
 			  		xhttp.open("GET", "upcoming_controller.php", true);
 			  		xhttp.send();
 			  	});
+             
+
 				$("#img3").click(function(){
 					/* $("#column3").removeClass('hidden'); */
 					$("#column1").addClass('hidden');
@@ -498,23 +503,23 @@
 			});	
             // it will delete the exam 
 			function cancel_exam(val1){
-				var d_id = (val1.id).split('_')[1];
-				//alert(d_id);
-        		var del_id = "id="+ d_id;
-        		//alert(del_id);
 				var xhttp;
         		xhttp = new XMLHttpRequest();
-        		xhttp.open("POST","delete_exam.php", true);
-        		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        		xhttp.open("GET","delete_exam.php?id=" + (val1.id).split('_')[1], true);
        			xhttp.onreadystatechange = function() {
-       				//alert(" onreadystatechange=" + xhttp.readyState);
+       				
             		if (xhttp.readyState == 4 && xhttp.status == 200) {
-                		//alert(xhttp.responseText);
+                		
             		}
         		};
-        		xhttp.send(del_id);
-				//alert('send called');
+        		xhttp.send();                
+             
 			}	
+            
+            // this function is used to hide deleted exam on the front end side
+			function cancel_exam_front(val2){
+            $(val2).parent().parent().hide();
+            }
 </script> 
 <body style="background-color:#fff">
 	<div id="topbar1">
@@ -601,11 +606,11 @@
                                 	$error_message_php="Error in retrieving your profile details. Please try after some time. If the error persists, please contact admin@iidea8.com";
                                 	custom_error($error_header_php,$error_message_php);
 								}
-								echo '<img "height="130" width="150" src="../../images/candidate/' . $row["candidate_image"]. '" >';
+	 echo '<img "height="130" width="150" src="../../images/candidate/' . $row["candidate_image"]. '" >';
 							?>
-							<form id="form2" method="post" action="image_update.php" enctype="multipart/form-data">
+		<form id="form2" method="post" action="image_update.php" enctype="multipart/form-data">
 								<span class="select-wrapper">
-									<input type="file" name="img2" id="file"  onchange="this.form.submit()">
+									<input type="file" name="image" id="file"  onchange="this.form.submit()">
 								</span>
 							</form>
 							</div> <!-- /userphoto -->
@@ -624,7 +629,7 @@
 						</div><!-- /column 1-->
 						<!-- </div> --><!-- /container -->
 						<div id="column2" class="hidden" >
-                         <div id="txtHint"></div>
+                         
 							<center><h3 style="margin-top:-35px;">Register and Upcoming Exams </h3></center>
                       		<h5 style="font-weight:bold;margin-bottom:1px;">Register</h5>
 							<hr class="hr">
@@ -634,37 +639,40 @@
 									$sql = "SELECT * FROM t_exam_org_qp";
 									$result = mysqli_query($connection,$sql);
 									$log->debug("in CLass fleft - SQL Statement - ".$sql);
-									echo "<select class='selectpicker' name='users' onchange='showUser(this.value)' style='width:150px;'  id='cd-dropdown' class='cd-select' >
-									<option value='' >Register For The Exam</option>";
+									echo "<select class='selectpicker' name='users' style='width:150px;'  id='cd-dropdown' class='cd-select' >
+									<option value='' id='select-option'>Register For The Exam</option>";
 									while ($row = mysqli_fetch_assoc($result)) {
 										echo "<option value='" . $row['exam_name'] . "'>" . $row['exam_name'] . "</option>";
 										$log->debug("in CLass fleft / result rows - ".$row['exam_name']);
 									}
 									echo "</select>";
+
 								?>
 							</div><!-- / fleft-->
- 							
+			              <span id="hidden_span"><font color="red">*** click on Register exam in the menu to see upcoming exam</font></span>
+						
+ 							<div id="txtHint"></div><!-- / txtHint-->
 							 	<hr>
+							 	<div id="txtHint2"><!-- this div is used to append  upcoming exam part-->
                             	<h4>Upcoming Exams</h4>
-								<div style="display:overflow-y:scroll">
-									<table class="table" style="height:10px;display:overflow-y:scroll">
-										<thead >
-											<tr>
-												<th>Exam Name</th>
-												<th>Registered on</th>
-												<th>Duration</th>
-												<th style="width:20%"></th>
-												<th></th>
-											</tr>
-										</thead>
-										<tbody style="height:10px;display:overflow-y:scroll" id="upcoming">
-											
-										</tbody>
-									</table>
-								<hr>
-								</div>
-							</div> <!-- / txtHint-->
-						</div> <!-- /column2 -->
+									<div style="display:overflow-y:scroll">
+										<table class="table" style="height:10px;display:overflow-y:scroll">
+											<thead >
+												<tr>
+													<th>Exam Name</th>
+													<th>Registered on</th>
+													<th>Duartion</th>
+													<th style="width:20%"></th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody style="height:10px;display:overflow-y:scroll" id="upcoming">
+											</tbody>
+										</table>
+									<hr>
+									</div> <!-- display:overflow-y:scroll -->
+							 </div> <!-- txthint2 -->
+						</div> <!-- /  column2 -->
 						<div id="column3" class="hidden">
 							<div id="demo3">
 								<center><h3 style="margin-top:-35px;">Certificates </h3><img onclick="loadDoc2()" src="../../images/common/refresh.png" height="30" width="30" ></center>

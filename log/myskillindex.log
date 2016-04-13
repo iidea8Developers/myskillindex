@@ -1,10 +1,15 @@
-2016-04-07T13:23:42+02:00 DEBUG db_connection.php ****START - db_connection.php****
-2016-04-07T13:23:42+02:00 DEBUG db_connection.php ****END - db_connection.php****
-2016-04-07T13:23:47+02:00 DEBUG db_connection.php ****START - db_connection.php****
-2016-04-07T13:23:47+02:00 DEBUG db_connection.php ****END - db_connection.php****
-2016-04-07T13:23:47+02:00 INFO  Dashboard.php ****START Dashboard.php****
-2016-04-07T13:23:47+02:00 DEBUG Dashboard.php SESSION OK - Session User :vivek.singh2k50@gmail.com
-2016-04-07T13:23:47+02:00 DEBUG Dashboard.php Fetching Candidate Details - SQL Statement - SELECT candidate_id,
+2016-04-13T08:21:01+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:21:01+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:21:01+02:00 INFO  image_update.php ****START image_update.php****
+2016-04-13T08:21:01+02:00 DEBUG image_update.php C:\wamp\tmp\php7042.tmp = C:\wamp\tmp\php7042.tmp
+2016-04-13T08:21:01+02:00 DEBUG image_update.php ../../myskillindex/images/profiles/76028profile_black.png
+2016-04-13T08:21:01+02:00 DEBUG image_update.php Error in move_uploaded_file 
+2016-04-13T08:21:01+02:00 INFO  image_update.php ****END image_update.php****
+2016-04-13T08:21:01+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:21:01+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:21:01+02:00 INFO  Dashboard.php ****START Dashboard.php****
+2016-04-13T08:21:01+02:00 DEBUG Dashboard.php SESSION OK - Session User :vivek.singh2k50@gmail.com
+2016-04-13T08:21:01+02:00 DEBUG Dashboard.php Fetching Candidate Details - SQL Statement - SELECT candidate_id,
 						candidate_fname,
 						candidate_mname,
 						candidate_lname,
@@ -20,16 +25,147 @@
 						candidate_image
 				 	FROM t_candidate_1 
 				 	WHERE candidate_email='vivek.singh2k50@gmail.com'
-2016-04-07T13:23:47+02:00 DEBUG Dashboard.php Dashboard.php - inside div id = userphoto 
-2016-04-07T13:23:47+02:00 DEBUG Dashboard.php Dashboard.php - SQL Query SELECT candidate_image
+2016-04-13T08:21:01+02:00 DEBUG Dashboard.php Dashboard.php - inside div id = userphoto 
+2016-04-13T08:21:01+02:00 DEBUG Dashboard.php Dashboard.php - SQL Query SELECT candidate_image
 										FROM t_candidate_1 
 										WHERE candidate_id = '071233'
-2016-04-07T13:23:47+02:00 DEBUG Dashboard.php in CLass fleft - SQL Statement - SELECT * FROM t_exam_org_qp
-2016-04-07T13:23:47+02:00 DEBUG Dashboard.php in CLass fleft / result rows - Mason General
-2016-04-07T13:23:47+02:00 DEBUG Dashboard.php SELECT * 
+2016-04-13T08:21:01+02:00 DEBUG Dashboard.php in CLass fleft - SQL Statement - SELECT * FROM t_exam_org_qp
+2016-04-13T08:21:01+02:00 DEBUG Dashboard.php in CLass fleft / result rows - Mason General
+2016-04-13T08:21:01+02:00 DEBUG Dashboard.php SELECT * 
               								  FROM t_candidate_result 
               								  WHERE candidate_id = '071233' 
-2016-04-07T13:24:03+02:00 DEBUG db_connection.php ****START - db_connection.php****
-2016-04-07T13:24:03+02:00 DEBUG db_connection.php ****END - db_connection.php****
-2016-04-07T13:24:03+02:00 DEBUG upcoming_controller.php ***** START upcoming_controller.php
-2016-04-07T13:24:03+02:00 DEBUG upcoming_controller.php ***** END upcoming_controller.php
+2016-04-13T08:23:51+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:23:51+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:23:51+02:00 INFO  Dashboard.php ****START Dashboard.php****
+2016-04-13T08:23:51+02:00 DEBUG Dashboard.php SESSION OK - Session User :vivek.singh2k50@gmail.com
+2016-04-13T08:23:51+02:00 DEBUG Dashboard.php Fetching Candidate Details - SQL Statement - SELECT candidate_id,
+						candidate_fname,
+						candidate_mname,
+						candidate_lname,
+						candidate_email,
+						candidate_password,
+						candidate_address_home,
+						candidate_address_street,
+						candidate_address_city,
+						candidate_address_state,
+						candidate_address_postalcode,
+						candidate_aadhar,
+						candidate_contact,
+						candidate_image
+				 	FROM t_candidate_1 
+				 	WHERE candidate_email='vivek.singh2k50@gmail.com'
+2016-04-13T08:23:51+02:00 DEBUG Dashboard.php Dashboard.php - inside div id = userphoto 
+2016-04-13T08:23:51+02:00 DEBUG Dashboard.php Dashboard.php - SQL Query SELECT candidate_image
+										FROM t_candidate_1 
+										WHERE candidate_id = '071233'
+2016-04-13T08:23:51+02:00 DEBUG Dashboard.php in CLass fleft - SQL Statement - SELECT * FROM t_exam_org_qp
+2016-04-13T08:23:51+02:00 DEBUG Dashboard.php in CLass fleft / result rows - Mason General
+2016-04-13T08:23:51+02:00 DEBUG Dashboard.php SELECT * 
+              								  FROM t_candidate_result 
+              								  WHERE candidate_id = '071233' 
+2016-04-13T08:24:03+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:24:03+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:24:03+02:00 INFO  image_update.php ****START image_update.php****
+2016-04-13T08:24:03+02:00 DEBUG image_update.php C:\wamp\tmp\php36BD.tmp = C:\wamp\tmp\php36BD.tmp
+2016-04-13T08:24:03+02:00 DEBUG image_update.php ../../images/profiles/645527profile_black.png
+2016-04-13T08:24:04+02:00 DEBUG image_update.php UPDATE t_candidate_1 
+  			SET candidate_image = 'profile_black.png' 
+  			WHERE candidate_id = '071233' 
+2016-04-13T08:24:04+02:00 INFO  image_update.php ****END image_update.php****
+2016-04-13T08:24:04+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:24:04+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:24:04+02:00 INFO  Dashboard.php ****START Dashboard.php****
+2016-04-13T08:24:04+02:00 DEBUG Dashboard.php SESSION OK - Session User :vivek.singh2k50@gmail.com
+2016-04-13T08:24:04+02:00 DEBUG Dashboard.php Fetching Candidate Details - SQL Statement - SELECT candidate_id,
+						candidate_fname,
+						candidate_mname,
+						candidate_lname,
+						candidate_email,
+						candidate_password,
+						candidate_address_home,
+						candidate_address_street,
+						candidate_address_city,
+						candidate_address_state,
+						candidate_address_postalcode,
+						candidate_aadhar,
+						candidate_contact,
+						candidate_image
+				 	FROM t_candidate_1 
+				 	WHERE candidate_email='vivek.singh2k50@gmail.com'
+2016-04-13T08:24:04+02:00 DEBUG Dashboard.php Dashboard.php - inside div id = userphoto 
+2016-04-13T08:24:04+02:00 DEBUG Dashboard.php Dashboard.php - SQL Query SELECT candidate_image
+										FROM t_candidate_1 
+										WHERE candidate_id = '071233'
+2016-04-13T08:24:04+02:00 DEBUG Dashboard.php in CLass fleft - SQL Statement - SELECT * FROM t_exam_org_qp
+2016-04-13T08:24:04+02:00 DEBUG Dashboard.php in CLass fleft / result rows - Mason General
+2016-04-13T08:24:04+02:00 DEBUG Dashboard.php SELECT * 
+              								  FROM t_candidate_result 
+              								  WHERE candidate_id = '071233' 
+2016-04-13T08:25:46+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:25:46+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:25:46+02:00 DEBUG upcoming_controller.php ***** START upcoming_controller.php
+2016-04-13T08:25:46+02:00 DEBUG upcoming_controller.php ***** END upcoming_controller.php
+2016-04-13T08:26:44+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:26:44+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:26:44+02:00 DEBUG upcoming_controller.php ***** START upcoming_controller.php
+2016-04-13T08:26:44+02:00 DEBUG upcoming_controller.php ***** END upcoming_controller.php
+2016-04-13T08:28:42+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:28:42+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:28:42+02:00 INFO  delete_exam.php ****START delete_exam.php****
+2016-04-13T08:28:42+02:00 INFO  delete_exam.php ****END delete_exam.php****
+2016-04-13T08:28:58+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:28:58+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:28:58+02:00 DEBUG upcoming_controller.php ***** START upcoming_controller.php
+2016-04-13T08:28:58+02:00 DEBUG upcoming_controller.php ***** END upcoming_controller.php
+2016-04-13T08:29:11+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:29:11+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:29:12+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:29:13+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:29:13+02:00 INFO  upcoming.php ****START upcoming.php****
+2016-04-13T08:29:22+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:29:22+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:29:22+02:00 DEBUG upcoming_controller.php ***** START upcoming_controller.php
+2016-04-13T08:29:22+02:00 DEBUG upcoming_controller.php ***** END upcoming_controller.php
+2016-04-13T08:29:27+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:29:27+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:29:27+02:00 INFO  Dashboard.php ****START Dashboard.php****
+2016-04-13T08:29:27+02:00 DEBUG Dashboard.php SESSION OK - Session User :vivek.singh2k50@gmail.com
+2016-04-13T08:29:27+02:00 DEBUG Dashboard.php Fetching Candidate Details - SQL Statement - SELECT candidate_id,
+						candidate_fname,
+						candidate_mname,
+						candidate_lname,
+						candidate_email,
+						candidate_password,
+						candidate_address_home,
+						candidate_address_street,
+						candidate_address_city,
+						candidate_address_state,
+						candidate_address_postalcode,
+						candidate_aadhar,
+						candidate_contact,
+						candidate_image
+				 	FROM t_candidate_1 
+				 	WHERE candidate_email='vivek.singh2k50@gmail.com'
+2016-04-13T08:29:27+02:00 DEBUG Dashboard.php Dashboard.php - inside div id = userphoto 
+2016-04-13T08:29:27+02:00 DEBUG Dashboard.php Dashboard.php - SQL Query SELECT candidate_image
+										FROM t_candidate_1 
+										WHERE candidate_id = '071233'
+2016-04-13T08:29:27+02:00 DEBUG Dashboard.php in CLass fleft - SQL Statement - SELECT * FROM t_exam_org_qp
+2016-04-13T08:29:27+02:00 DEBUG Dashboard.php in CLass fleft / result rows - Mason General
+2016-04-13T08:29:27+02:00 DEBUG Dashboard.php SELECT * 
+              								  FROM t_candidate_result 
+              								  WHERE candidate_id = '071233' 
+2016-04-13T08:29:29+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:29:29+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:29:29+02:00 DEBUG upcoming_controller.php ***** START upcoming_controller.php
+2016-04-13T08:29:29+02:00 DEBUG upcoming_controller.php ***** END upcoming_controller.php
+2016-04-13T08:29:34+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:29:34+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:29:48+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:29:48+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:29:57+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:29:57+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:30:08+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:30:08+02:00 DEBUG db_connection.php ****END - db_connection.php****
+2016-04-13T08:39:17+02:00 DEBUG db_connection.php ****START - db_connection.php****
+2016-04-13T08:39:17+02:00 DEBUG db_connection.php ****END - db_connection.php****
