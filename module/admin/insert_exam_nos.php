@@ -5,11 +5,11 @@
 	// modified on: 11-04-2016
 
 	//function for db conn and session check
+	include_once('../../service/common/db_connection.php');
 	include_once('../../lib/log4php/Logger.php');
 	Logger::configure('../../config/log_config.xml');
 	$log = Logger::getLogger('insert_exam_nos.php');
 	$log->debug("****START -insert_exam_nos.php****");
-	include_once('../../service/common/db_connection.php');
 	session_start();
 	if (isset($_SESSION["user"])){
 	}else
@@ -19,60 +19,52 @@
 	
 	$log->INFO("First page: Create Exam ---- USER: ".$_SESSION["user"]."  SESSION ID: ".session_id());
 	
-	
-	
 	if(isset($_POST["org"])){
 		$_SESSION["org"] = $_POST["org"];
-	}else
-	{
+	}else{
 		$_POST["org"]="Not set";
-	}
+		}
 	if(isset($_POST["sector"])){
 		$_SESSION["sector"] = $_POST["sector"];
-	}else
-	{
+	}else{
 		$_POST["sector"]="Not set";
-		}if(isset($_POST["qp"])){
+		}
+	if(isset($_POST["qp"])){
 		$_SESSION["qp"] = $_POST["qp"];
-	}else
-	{
-		$_POST["qp"]="Not set";
-		}if(isset($_POST["time"])){
+	}else{
+			$_POST["qp"]="Not set";
+		}
+	if(isset($_POST["time"])){
 		$_SESSION["time"] = $_POST["time"];
-	}else
-	{
-		$_POST["time"]="Not set";
-		}if(isset($_POST["skill"])){
+	}else{
+			$_POST["time"]="Not set";
+		}
+	if(isset($_POST["skill"])){
 		$_SESSION["skill"] = $_POST["skill"];
-	}else
-	{
-		$_POST["skill"]="Not set";
+	}else{
+			$_POST["skill"]="Not set";
 		}
 	if(isset($_POST["desc"])){
 		$_SESSION["desc"] = $_POST["desc"];
-	}else
-	{
-		$_POST["desc"]="Not set";
-	}
+	}else{
+			$_POST["desc"]="Not set";
+		}
 	if(isset($_POST["exam"])){
 		$_SESSION["exam"] = $_POST["exam"];
-	}else
-	{
-		$_POST["exam"]="Not set";
-	}
+	}else{
+			$_POST["exam"]="Not set";
+		 }
 	if(isset($_POST["desc"])){
 		$_SESSION["desc"] = $_POST["desc"];
-	}else
-	{
-		$_POST["desc"]="Not set";
-	}
+	}else{
+			$_POST["desc"]="Not set";
+		}
 	if(isset($_POST["nos"])){
 		echo "nos is set ";
 		echo $_POST["nos"];
-	}else
-	{
+	}else{
 		$_POST["nos"]="Not set";
-	}
+		}
 	if(isset($_POST["total_marks"])){
 		
 		echo $_POST["total_marks"];
@@ -176,9 +168,11 @@
 	
 	//insert into nos_pc relational table
 	if( isset($_POST['checked']) && is_array($_POST['checked']) ) {
+		$log->info("entered second query ");
 		foreach($_POST['checked'] as $pc) {
 			// eg. "I have a grapefruit!"
 			//echo "I have a {$pc}!";
+			$log->info("entered for loop ");
 			try{
 				$sql2= "SELECT pc_id 
 						FROM t_pc 
@@ -209,7 +203,8 @@
 											VALUES ('{$_SESSION['exam_id']}','{$_POST["nos"]}','0','{$pc_id}','0','{$_SESSION["user"]}','{$_SESSION["user"]}',NOW(),'NULL')";
 			if ($connection->query($pc_query) === TRUE) {
 				echo "New record created successfully";
-				header('Location: create_exam.php');
+				header('Location:create_exam.php');
+				$log->info("DATABASE query 2 executed ");
 				//echo "New record created successfully. Last inserted ID is: " . $last_id;
 			} else {
 				echo "Error: " . $pc_query . "<br>" . $connection->error;
