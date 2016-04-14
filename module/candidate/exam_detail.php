@@ -66,12 +66,12 @@ $row = mysqli_fetch_assoc($result);
  '<center>
  <div class="btn-group" style="margin-top:-22px">
 	 <button class="btn btn-success btn-sm" onclick="showUser3(this.value)" name="'.$exam_name.'"  value="'.$exam_name.'" style="width:100px;margin-right:5px">Register</button>
-			<input  class="btn btn-success btn-sm" type="button" onclick="showUser2(this.value)" value="Go Back" style="width:100px;display:inline;margin-left:5px">
+			
       </div>
+      
      </center>'
 	;
 
 
 
  ?>
-

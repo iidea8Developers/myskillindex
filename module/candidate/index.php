@@ -499,7 +499,7 @@ $(document).ready(function(){
     <div id="footer" >
 		<br>
 		<center>
-		<code style="background-color:#ffffff;">Copyright @ 2015 iidea8. All rights reserved | <a href="#">Privacy Policy</a> | <a href="#" color="#C7254E">Terms of Use </a></code>
+			<code style="background-color:#ffffff;">Copyright @ 2015 iidea8. All rights reserved | <a href="#">Privacy Policy</a> | <a href="#" color="#C7254E">Terms of Use </a></code>
 		</center>
 	</div>
 </body>
