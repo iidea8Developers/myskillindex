@@ -25,25 +25,76 @@
 		header("Location: ../../service/common/error_page.php");
 	}
 
+	$xml = new DOMDocument("1.0","UTF-8");
+	$xml->formatOutput=true;
+
+	$myskillindex = $xml->createElement("myskillindex");
+	$myskillindex = $xml->appendChild($myskillindex);
+
+	$org = $xml->createElement("org",$organisation);
+	$org = $myskillindex->appendChild($org);
+
+	$sector = $xml->createElement("sector",$sector);
+	$sector = $myskillindex->appendChild($sector);
+
+	$examId = $xml->createElement("examId");
+	$examId = $myskillindex->appendChild($examId);
+
+	$examName = $xml->createElement("examName",$exam_name);
+	$examName = $myskillindex->appendChild($examName);
+
+	$examDesc = $xml->createElement("examDesc",$exam_description);
+	$examDesc = $myskillindex->appendChild($examDesc);
+
+	$examDuration = $xml->createElement("examDuration",$exam_time);
+	$examDuration = $myskillindex->appendChild($examDuration);
+
+	$examSkillLevel = $xml->createElement("examSkillLevel",$exam_level);
+	$examSkillLevel = $myskillindex->appendChild($examSkillLevel);
+
+	$examPassPercentage = $xml->createElement("examPassPercentage", $pass_percentage);
+	$examPassPercentage = $myskillindex->appendChild($examPassPercentage);
+
+	$QP = $xml->createElement("QP");
+	$QP = $myskillindex->appendChild($QP);
+
+	$qpName = $xml->createElement("qpName",$qp);
+	$qpName = $QP->appendChild($qpName);
+
+	$qpId = $xml->createElement("qpId");
+	$qpId = $QP->appendChild($qpId);
+
+	$nos = $xml->createElement("nos");
+	$nos = $QP->appendChild($nos);
+
+	$nosName = $xml->createElement("nosName");
+	$nosName = $nos->appendChild($nosName);
+
+	$nosId = $xml->createElement("nosId");
+	$nosId = $nos->appendChild($nosId);
+
+	$nosWeightage = $xml->createElement("nosWeightage");
+	$nosWeightage = $nos->appendChild($nosWeightage);
+
+	$pc = $xml->createElement("pc");
+	$pc = $nos->appendChild($pc);
+
+	$pcName = $xml->createElement("pcName");
+	$pcName = $pc->appendChild($pcName);
+
+	$pcId = $xml->createElement("pcId");
+	$pcId = $pc->appendChild($pcId);
+
+	$pcWeightage = $xml->createElement("pcWeightage");
+	$pcWeightage = $pc->appendChild($pcWeightage);
+
+	echo "<xmp>".$xml->saveXML()."</xmp>";
 	
-	$doc = new DOMDocument();
-	$doc->load("../../lib/XML schema/create_exam_xml_schema.xsd");
-	$xpath = new DOMXPath($doc);
-	$xpath->registerNamespace('xs', 'http://www.w3.org/2001/XMLSchema');
-	function echoElements($indent, $elementDef) {
-       	global $doc, $xpath;
-       	echo "<div>" . $indent . $elementDef->getAttribute('name') . "</div>\n";
-  		$elementDefs = $xpath->evaluate("xs:complexType/xs:sequence/xs:element", $elementDef);
-  		foreach($elementDefs as $elementDef) {
-    		echoElements($indent . "&nbsp;&nbsp;&nbsp;&nbsp;", $elementDef);
-  		}
-	}
-
-	$elementDefs = $xpath->evaluate("/xs:schema/xs:element");
-	foreach($elementDefs as $elementDef) {
-  	echoElements("", $elementDef);
-	} 
-    
-
+	
+	/*this section will create xml file in location entered in save() function.
+	$doc->formatOutput=true;
+	$string_value = $doc->saveXML();
+	$doc->save("Exam.xml");*/
+	
 	$log->debug("****END-xsd_to_xml.php****");
 ?>
