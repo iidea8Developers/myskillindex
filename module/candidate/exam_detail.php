@@ -22,7 +22,7 @@ $row = mysqli_fetch_assoc($result);
 		$query= " select org_name from t_org where org_code='{$org_code }' " ;
 		$result = mysqli_query($connection,$query);
 		if(!$result){
-			throw new exception($connection21->error);
+			throw new exception($connection->error);
 			$log->ERROR("DATABASE QUERY FAILED ");
 			//echo "org query fail";
 		}
