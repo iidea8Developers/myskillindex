@@ -1,0 +1,145 @@
+		#footer {
+			background:#DFDFDF;
+			width:100%;
+			height:50px;
+			position: fixed;
+			bottom:0;
+			left:0
+			}
+			#back{
+			background:#DFDFDF;
+			width:80px;
+			height:80px;
+			position: fixed;
+			bottom:0;
+			left:0;
+			}
+			
+			.line{
+		
+		color:#000;
+		background-color:#000;
+		height:1px
+		}
+			
+			form{
+			color:#222;
+			font-size:18px; 
+			line-height:33px;
+			text-shadow:1px 1px 1px #fff;
+			text-transform:uppercase;
+			}
+			p{	
+			color:#222;
+			font-size:18px;
+			text-indent:10px;
+			line-height:33px;
+			text-shadow:1px 1px 1px #fff;
+			}
+			
+			button{  
+			color:#009AD9;
+			}
+			
+			
+			#asd{
+			
+			margin-top: 50px;
+			}
+			#asd2{
+			margin-top: 50px;
+			}
+			#asd3{
+			margin-top: 50px;
+			}
+			#asd4{
+			margin-top: 50px;
+			}
+			
+			
+			
+#footer {
+		background:#DFDFDF;
+		width:100%;
+		height:50px;
+		position: fixed;
+		bottom:0;
+		left:0
+		}
+		#back{
+		background:#DFDFDF;
+		width:60px;
+		height:80px;
+		position: fixed;
+		bottom:0;
+		left:20;
+		}
+		
+		.line{
+		
+		color:#000;
+		background-color:#000;
+		height:1px
+		}
+		
+		.invisible{
+		color: #fff;
+		background-color: #fff;
+		height:10px;
+		
+		}
+		
+		#button{
+		
+		margin-top: 20px;
+		height:26.9px;
+		border-radius: 8px;
+		padding: 5px 5px;
+		}
+		
+		#buttons{
+		background:#DFDFDF;
+		width:150px;
+		height:80px;
+		position: fixed;
+		bottom:0;
+		right:0;
+		}
+
+
+
+
+
+
+	hr
+	{
+	color: #000;
+	background-color: #000;
+	height: 1px;
+	}
+	.checkbxinput {
+	color: green;
+	background-color: green;
+	}
+	
+	
+	input[type=checkbox] {
+  width: 30px
+  height: 30px;
+  margin-right: 8px;
+  cursor: pointer;
+  font-size: 27px;
+}
+
+
+input[type=checkbox]:after {
+    content: " ";
+    background-color: #9FFF9D;
+    display: inline-block;
+    visibility: visible;
+}
+
+input[type=checkbox]:checked:after {
+    content: "\2714";
+}
+		

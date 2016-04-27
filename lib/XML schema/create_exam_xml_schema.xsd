@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="myskillindex">
+	<xs:complexType>
+	<xs:sequence>
+		<xs:element name="org" type="xs:string" minOccurs="1"/>
+		<xs:element name="sector" type="xs:string" minOccurs="1"/>
+		<xs:element name="examId" type="xs:positiveInteger" minOccurs="1"/>
+		<xs:element name="examName" type="xs:string" minOccurs="1"/>
+		<xs:element name="examDesc" type="xs:string" minOccurs="1"/>
+		<xs:element name="examDuration" type="xs:duration" minOccurs="1"/>
+		<xs:element name="examSkillLevel" type="xs:string" minOccurs="1"/>
+		<xs:element name="examPassPercentage" type="xs:positiveInteger" minOccurs="1"/>
+		<xs:element name="QP" minOccurs="1" maxOccurs="unbounded">
+			<xs:complexType >
+			<xs:sequence>
+				<xs:element name="qpName" type="xs:string"/>
+				<xs:element name="qpId" type="xs:positiveInteger"/>
+				<xs:element name="nos" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType >
+					<xs:sequence>
+						<xs:element name="nosName" type="xs:string"/>
+						<xs:element name="nosId" type="xs:positiveInteger"/>
+						<xs:element name="nosWeightage" type="xs:decimal"/>
+						<xs:element name="pc" minOccurs="1" maxOccurs="unbounded">
+							<xs:complexType >
+							<xs:sequence>
+								<xs:element name="pcName" type="xs:string"/>
+								<xs:element name="pcId" type="xs:positiveInteger"/>
+								<xs:element name="pcWeightage" type="xs:decimal"/>
+								<xs:element name="questions">
+									<xs:complexType >
+									<xs:sequence>
+										<xs:element name="questionId" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+									</xs:sequence>
+									</xs:complexType>	
+								</xs:element>
+							</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+	</xs:sequence>
+	</xs:complexType>
+	</xs:element>	
+</xs:schema>

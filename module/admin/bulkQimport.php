@@ -48,6 +48,7 @@ h2 {
 <body>
 	<div id="container">
     	<div id="form">
+    	    <span id="upload_message" ></span>
     
     		<h1>Upload new csv by browsing to file and clicking on Upload</h1><br>
 
@@ -55,9 +56,9 @@ h2 {
 
 	 			<h2>File name to import:</h2><br>
 
-	 			<input size='50' type='file' name='filename'><br>
+	 			<input size='50' type='file' name='filename' id='filename'><br>
 
-     			<input type='submit' name='submit' value='Upload'>
+     			<input type='submit' name='submit' value='Upload' id='upload_btn'>
      		</form>
 		</div>
 	</div>
