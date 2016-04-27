@@ -172,7 +172,7 @@
 						</div>
 					</table>
 				</div>
-				<form id="select_form"  action="insert_exam_nos.php" method="post" >
+				<form id="select_form"  action="xsd_to_xml.php" method="post" >
 					<div class="container">
 						<div class="row">
 							<div class="col-md-3">
@@ -201,7 +201,7 @@
 							<div class="col-md-3">
 								<div>
 									<b><font color="#3b5998"> Name Of Exam</font><b><br>
-									<input type="text" name="exam" value="" name="name_of_exam" required>
+									<input type="text" value="" name="name_of_exam" required>
 								</div>
 							</div>
 						</div> 
@@ -212,7 +212,7 @@
 								<div>
 									<b><font color="#3b5998"> Exam Description</font></b>
 									<br>
-									<input type="text" name="desc" value="" name="name_of_exam" required>
+									<input type="text" name="desc" value="" required>
 								</div>
 							</div>
 							<div class="col-md-3"  >
@@ -231,12 +231,12 @@
 								<div>
 									<b><font color="#3b5998"> Exam Skill Level</font></b>
 									<br>
-									<input type="text" name="skill" value="" name="name_of_exam" required>
+									<input type="text" name="skill_level" value="" required>
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div>
-									<b><font color="#3b5998"> Exam Passing Percentile</font></b>
+									<b><font color="#3b5998"> Exam Passing Percentage</font></b>
 									<br>
 									<input type="number" step="0.01" name="percent" value="" required>
 								</div>

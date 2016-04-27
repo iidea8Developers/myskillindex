@@ -7,6 +7,7 @@
 		<xs:element name="sector" type="xs:string" minOccurs="1"/>
 		<xs:element name="examId" type="xs:positiveInteger" minOccurs="1"/>
 		<xs:element name="examName" type="xs:string" minOccurs="1"/>
+		<xs:element name="examDesc" type="xs:string" minOccurs="1"/>
 		<xs:element name="examDuration" type="xs:duration" minOccurs="1"/>
 		<xs:element name="examSkillLevel" type="xs:string" minOccurs="1"/>
 		<xs:element name="examPassPercentage" type="xs:positiveInteger" minOccurs="1"/>

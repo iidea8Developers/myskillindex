@@ -41,7 +41,7 @@ $log->debug("***** START upcoming_controller.php");
 												<td>'.$regon.'</td>
 												<td>'.$row3['exam_time'].'</td>';
 												echo '<td ><a href="end_date.php?link='.$survey_link.'"><font>Take now</font></a></td>
-												<td><span class="glyphicon glyphicon-remove" id="del_'.$row3["exam_id"].'" onclick="cancel_exam(this)"></span></td>
+												<td><span class="glyphicon glyphicon-remove" id="del_'.$row3["exam_id"].'" onclick="cancel_exam(this);cancel_exam_front(this)"></span></td>
 											</tr>';
 											//++$i;
 											}
@@ -68,7 +68,7 @@ $log->debug("***** START upcoming_controller.php");
 	             custom_error($error_header_php,$error_message_p);
 	            }			
     $log->debug("***** END upcoming_controller.php"); 
-    $connection->close();       
+    $connection->close();  
+    return;     
 ?>
-
 
