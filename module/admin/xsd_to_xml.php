@@ -90,7 +90,11 @@
 
 	echo "<xmp>".$xml->saveXML()."</xmp>";
 	
-	
+	// save thisxml in to a .xml file in the folder called tmp
+	// file name should be like - userid_GUID_e.xml
+	// pass the file name to the process called saveExamDB.php
+
+
 	/*this section will create xml file in location entered in save() function.
 	$doc->formatOutput=true;
 	$string_value = $doc->saveXML();
