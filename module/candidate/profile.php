@@ -1,12 +1,29 @@
-<?php	session_start();
+<?php	
+/* Usage: Code to display candidate details on dashboard
+Updated By PP on 29/04/2016
+*/
+	session_start();
 	include_once('../../service/common/db_connection.php');
 	include_once('../../lib/log4php/Logger.php');
 	include_once('../../service/common/common_error.php');
 	Logger::configure('../../config/log_config.xml');
 	$log = Logger::getLogger('profile.php');
 	
-	$log->debug("***** START profile.php");
-	$query= "select * from t_candidate_1 where candidate_email='{$_SESSION['user']}'";
+	$log->debug("***** START profile.php********");
+
+	$query= "SELECT candidate_fname,
+					candidate_mname,
+					candidate_lname,
+					candidate_email,
+					candidate_contact,
+					candidate_address_home,
+					candidate_address_street,
+					candidate_address_city,
+					candidate_address_postalcode,
+					candidate_aadhar,
+					candidate_id
+			 FROM t_candidate_1 
+			 WHERE candidate_email='{$_SESSION['user']}'";
 	$result=mysqli_query($connection,$query);
 	$row=mysqli_fetch_assoc($result);
 	$_SESSION['name']=$row['candidate_fname']." ".$row['candidate_mname']. " ".$row['candidate_lname'];
@@ -18,7 +35,8 @@
 
 	$log->debug("Session Details: Name: ".$_SESSION['name']." email: ".$_SESSION['email']." contact: ".$_SESSION['contact']." address: " $_SESSION['address']." aadhar : ".$_SESSION['aadhar']." id: ".$_SESSION['id']);
 
-	$log->debug("***** END profile.php");
+	$log->debug("***** END profile.php*******");
+	mysqli_close($connection);
  ?> 
  
   <style>
