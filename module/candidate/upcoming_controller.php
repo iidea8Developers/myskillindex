@@ -2,7 +2,6 @@
 
 session_start();
 include_once('../../service/common/db_connection.php');
-include_once('../../config/config.txt');
 include_once('../../lib/log4php/Logger.php');
 include_once('../../service/common/common_error.php');
 Logger::configure('../../config/log_config.xml');
@@ -63,7 +62,7 @@ $log->debug("***** START upcoming_controller.php");
 	             $log->error($e->getMessage());
 	                             
 	             $error_header_php="Error retrieving exam details." ;
-	             $error_message_php="Error in retrieving your upcoming exam details. Please try after some time. If the error persists, please contact admin@iidea8.com";
+	             $error_message_php="Error in retrieving your upcoming exam details. Please try after some time. If the error persists, please contact hello@iidea8.com";
 
 	             custom_error($error_header_php,$error_message_p);
 	            }			

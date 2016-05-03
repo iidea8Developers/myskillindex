@@ -1,16 +1,28 @@
 
-  <?php
-  session_start();
-include('../../service/common/db_connection.php');
-  
+<?php
+/* Usage: Code to display exam details while registering for an exam
+Updated By PP on 29/04/2016
+*/
+session_start();
+include_once('../../service/common/db_connection.php');
+include_once('../../lib/log4php/Logger.php');
+include_once('../../service/common/common_error.php');
+	Logger::configure('../../config/log_config.xml');
+	$log = Logger::getLogger('exam_detail.php');
+
+	$log->info("****START exam_detail.php****");
+
+
  $q = $_GET['q'];
 //  $q = "Banksman";
-  $query = "select * from t_exam_org_qp where exam_name = '{$q}' ";
-  $result = mysqli_query($connection,$query);
-$row = mysqli_fetch_assoc($result);
+  $query = "SELECT exam_id,exam_name,exam_desc,org_code,qp_code,exam_time 
+  			FROM t_exam_org_qp 
+  			WHERE exam_name = '{$q}' ";
+  	$result = mysqli_query($connection,$query);
+	$row = mysqli_fetch_assoc($result);
  
   
-  $exam_id = $row['exam_id'];
+ $exam_id = $row['exam_id'];
  $exam_name = $row['exam_name'];
  $exam_desc = $row['exam_desc'];
  $org_code = $row['org_code'];
@@ -19,24 +31,24 @@ $row = mysqli_fetch_assoc($result);
   
     
   try{
-		$query= " select org_name from t_org where org_code='{$org_code }' " ;
+		$query= " SELECT org_name FROM t_org WHERE org_code='{$org_code }' " ;
 		$result = mysqli_query($connection,$query);
 		if(!$result){
 			throw new exception($connection->error);
 			$log->ERROR("DATABASE QUERY FAILED ");
-			//echo "org query fail";
+
 		}
 		while ($row= mysqli_fetch_assoc($result))
 		{
 			$org_name = $row['org_name'];
-			//echo $org_code."this is org";
+
 		}
 		}catch(Exception $e){
-		//header("Location: ../../service/common/error_page.php");
+		header("Location: ../../service/common/error_page.php");
 	}	
 	//get qp code
 	try{
-		$query= " select qp_name from t_qp where qp_code='{$qp_code}' " ;
+		$query= " SELECT qp_name FROM t_qp WHERE qp_code='{$qp_code}' " ;
 		$result = mysqli_query($connection,$query);
 		if(!$result){
 			throw new exception($connection->error);
@@ -45,7 +57,7 @@ $row = mysqli_fetch_assoc($result);
 		while ($row= mysqli_fetch_assoc($result))
 		{
 			$qp_name = $row['qp_name'];
-			//echo $qp_code."this is qp";
+			
 		}}catch(Exception $e){
 		//header("Location: ../../service/common/error_page.php");
 		echo "Exception caught ";
@@ -71,7 +83,6 @@ $row = mysqli_fetch_assoc($result);
       
      </center>'
 	;
-
-
-
- ?>
+	$log->info("****END exam_detail.php****");
+	mysqli_close($connection);
+?>

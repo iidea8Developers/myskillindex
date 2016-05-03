@@ -1,16 +1,15 @@
 <?php
-	//USAGE: on SignUP - call from index.php
+	// USAGE: on SignUP - call from index.php
 	// Code to register a candidate user in myskillindex
 	
 	//db conn and session check
 	session_start();
 	include_once('../common/db_connection.php');
-	include_once('../../config/config.txt');
 	
 	// Inititate Log4php logger
 	include_once('../../lib/log4php/Logger.php');
 	Logger::configure('../../config/log_config.xml');
-	$log = Logger::getLogger('Login_check.php');
+	$log = Logger::getLogger('register.php');
 	$log->debug("****START - register.php****");
 	
 	// Set variable values for all attributes of registration form
@@ -127,5 +126,6 @@
 	
 		header('Location: ../../module/candidate/index.php');
 		}
+		$log->debug("****END - register.php****");
 		$connection->close();
 ?>
