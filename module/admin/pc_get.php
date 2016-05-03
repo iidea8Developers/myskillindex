@@ -50,13 +50,11 @@ input[type=checkbox]:checked:after {
 	$result = mysqli_query($connection,$sql);
 	$log->debug("****select query executed****");
 	while ($row = mysqli_fetch_assoc($result)) {
-		echo '<input type="checkbox" style="width:20px;height:20px;" id="green" name="checked[]" value="' . $row['pc_name'] . '" id="' . $row['pc_name'] . '"  />';
+		echo '<input type="checkbox" style="width:20px;height:20px;" name="checked[]" value="' . $row['pc_name'] . '" id="' . $row['pc_name'] . '"  />';
 		echo '&nbsp;&nbsp;';
 		echo $row['pc_name'].'  '.'('.$row['pc_code'].')';
 		echo '&nbsp;&nbsp;';
-		
-		
-		echo'<br>';echo'<br>';
+		echo'<br />';
 	}
 	
 	mysqli_close($connection);

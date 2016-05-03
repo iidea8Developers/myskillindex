@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+	// This is a file which is used to create new question and added them to data base
 	//created by prakash shukla and vivek kumar
 	//this page create and search question
 	session_start();

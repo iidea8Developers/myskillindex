@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<?php  
+<?php 
+	// this page is to create Assesment 
 	// page created by vivek kumar and prakash shukla
 	// modified by: Jitendra dayma
-	// modified on: 08-04-2016
-	// this page is to create Assesment
+	// modified on: 03-05-2016
+	//modification: added submitForm function
 	
 	//function for db conn and session check
+	include_once('../../service/common/db_connection.php');
 	include_once('../../lib/log4php/Logger.php');
 	Logger::configure('../../config/log_config.xml');
 	$log = Logger::getLogger('create_exam.php');
 	$log->debug("****START -create_exam.php****");
-	include_once('../../service/common/db_connection.php');
 	session_start();
 	if (isset($_SESSION["user"])){
 	}else
@@ -72,7 +73,17 @@
 						
 					});
 				//});
-			});	
+			});
+			//Javascript/jQuery function to submit form on two address
+			function submitForm(){
+				document.getElementById['select_form'].action='xsd_to_xml.php';
+				document.getElementById['select_form'].submit();
+
+				document.getElementById['select_form'].action='';
+				document.getElementById['select_form'].target='_self';
+				document.getElementById['select_form'].submit();
+			}
+
 			//ajax function to pull list of Pc dynamically on the page
 			
 			function showUser(str) {
@@ -172,7 +183,7 @@
 						</div>
 					</table>
 				</div>
-				<form id="select_form"  action="xsd_to_xml.php" method="post" >
+				<form id="select_form" method="post" >
 					<div class="container">
 						<div class="row">
 							<div class="col-md-3">
@@ -311,7 +322,7 @@
 						</button>
 					</div>
 					<div id="add_nos" align="right">
-						<button type="submit" type="button" style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;">
+						<button type="submit" onclick= "submitForm()" style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;">
 						Add NOS
 						</button>
 					</div>
