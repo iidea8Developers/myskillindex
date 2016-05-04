@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <!-- It dispaly profile,upcoming exam of user,enable user to register for exam, and show certificated of exams completed user 
       created by vivek singh
-<<<<<<< HEAD
-      last time modified by Vivek singh
-      modified on 08-04-2014
-=======
       last time modified by vivek singh
       modified on 12-04-2016
->>>>>>> origin/master
       modifiction: corrected original get request as get is more fast than post and post is not required for this small data -->
 <?php
 	/*
@@ -249,8 +244,6 @@
 		</style>
     	<!--Java Script functions to display information on the screen-->
 <script type="text/javascript">
-<<<<<<< HEAD
-=======
     $(document).ready(function(){
     $("#hidden_span").hide();
     $("#cd-dropdown").change(function(){
@@ -294,7 +287,6 @@
 });
 </script>
 <script type="text/javascript">
->>>>>>> origin/master
 	
 
 			// showUser3 calls upcoming.php
@@ -318,16 +310,60 @@
 						};
 					
 						xmlhttp.open("GET","register_exam.php?q="+str,true);
-<<<<<<< HEAD
-						xmlhttp.send();
-                                                        
-=======
 						xmlhttp.send(null);
             //windows.location.reload(true);                                               
->>>>>>> origin/master
 						}
 			}  
-			
+			// showUser5 calls profile_get.php
+			function showUser5(str) 
+			{
+				if (str == "") 
+				{
+					document.getElementById("profi").innerHTML = "";
+					return;
+				} else { 
+						if (window.XMLHttpRequest) 
+							{
+								// code for IE7+, Firefox, Chrome, Opera, Safari
+								xmlhttp = new XMLHttpRequest();
+							} else {
+									// code for IE6, IE5
+									xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+									}
+						xmlhttp.onreadystatechange = function() 
+							{
+								if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {document.getElementById("profi").innerHTML = xmlhttp.responseText;}
+							};
+					
+						xmlhttp.open("POST","profile_get.php",true);
+						xmlhttp.send();
+					}
+			}
+     		 /*  ******************OBSERVATION there are 2 loadDoc functions in the scripts here *****WHY??*******
+		    function loadDoc() {
+  				var xhttp = new XMLHttpRequest();
+  				xhttp.onreadystatechange = function() {
+    				if (xhttp.readyState == 4 && xhttp.status == 200) {
+     					document.getElementById("demo").innerHTML = xhttp.responseText;
+    				}
+  				};
+			  xhttp.open("GET", "ajax_info.php", true);
+			  xhttp.send();
+			}
+			*/
+            // this function updates the profile of the candidate
+			function loadDoc() {
+  				var xhttp = new XMLHttpRequest();
+  				xhttp.onreadystatechange = function() {
+				    if (xhttp.readyState == 4 && xhttp.status == 200) {
+				    	document.getElementById("demo").innerHTML = xhttp.responseText;
+    				}
+  				};
+			  
+			  	xhttp.open("GET", "profile_edit.php", true);
+			  	xhttp.send();
+			}
+
              // this function is used in certificate 
       		function loadDoc2() 
       		{
@@ -341,9 +377,32 @@
   				xhttp.open("GET", "ceri.php", true);
   				xhttp.send();
 			}
+			function loadDoc3()
+      		{
+     			// Image upload button call
+     			var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (xhttp.readyState == 4 && xhttp.status == 200) {
+						document.getElementById("profi").innerHTML = xhttp.responseText;
+					}
+				};
+			
+				xhttp.open("GET", "profile.php", true);
+				xhttp.send();
+			}
+
 			// this function is used to return back to dashboard after click on cancel
 			function loadDoc5() 
 			{
+			 /* var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+			    if (xhttp.readyState == 4 && xhttp.status == 200) {
+			     document.getElementById("profi").innerHTML = xhttp.responseText;
+			    }
+			  };
+			  xhttp.open("GET", "profile_get.php", true);
+			  xhttp.send();*/
+			
 			  window.location.assign("dashboard.php")
 			}
 			$(document).ready(function(){
@@ -444,42 +503,15 @@
 			});	
             // it will delete the exam 
 			function cancel_exam(val1){
-<<<<<<< HEAD
-
-				//var d_id = (val1.id).split('_')[1];
-				//alert(d_id);
-
-        		//var del_id = "id="+ d_id;
-        		//alert(del_id);
 				var xhttp;
         		xhttp = new XMLHttpRequest();
         		xhttp.open("GET","delete_exam.php?id=" + (val1.id).split('_')[1], true);
-        		//xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-=======
-				var xhttp;
-        		xhttp = new XMLHttpRequest();
-        		xhttp.open("GET","delete_exam.php?id=" + (val1.id).split('_')[1], true);
->>>>>>> origin/master
        			xhttp.onreadystatechange = function() {
        				
             		if (xhttp.readyState == 4 && xhttp.status == 200) {
                 		
             		}
         		};
-<<<<<<< HEAD
-        		xhttp.send();
-				//alert('send called');
-                
-             
-			}	
-
-			function cancel_exam_front(val2){
-            
-
-             $(val2).parent().parent().hide();
-
-			}
-=======
         		xhttp.send();                
              
 			}	
@@ -488,62 +520,7 @@
 			function cancel_exam_front(val2){
             $(val2).parent().parent().hide();
             }
->>>>>>> origin/master
 </script> 
-
-<script type="text/javascript">
-	
-$(window).load(function(){
-
-	$('#cd-dropdown').change(function() {
-  var value = $( "#cd-dropdown option:selected").val();
-    console.log(value);
-    if(value !='Register For Exam'){
-        $('#myModal').modal('show');
-   }
-
-   $.ajax({
-          type : 'get',
-           url : 'exam_detail.php', // in here you should put your query 
-          data :  'q='+ value, // here you pass your id via ajax .
-                      
-       success : function(r)
-           {
-              // now you can show output in your modal 
-              $('#myModal').show();  // put your modal id 
-             $('.something').show().html(r);
-           }
-    });
-});
-
-
-
-	$('#edit_image').click(function() {
-  
-        $('#myModal2').modal(
-
-        {
-            show: true
-        });
-  
-
-   $.ajax({
-          type : 'get',
-           url : 'profile.php', // in here you should put your query 
-       success : function(r)
-           {
-              // now you can show output in your modal 
-              $('#myModal2').show();  // put your modal id 
-             $('.something2').show().html(r);
-           }
-    });
-});
-    
-});
-
-
-
-</script>
 <body style="background-color:#fff">
 	<div id="topbar1">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../images/common/logo_myskillindex.jpeg" width="170px" height="95px" style="margin-top:-15px"></a>
@@ -601,7 +578,7 @@ $(window).load(function(){
 						<div>
 							<h3 style="position:absolute;margin-left:300px;margin-top:-35px;font-weight:bold" >
 								Profile &nbsp; 
-								<img id="edit_image" src="../../images/candidate/edit.png" height="20" width="20" onclick="loadDoc3()"/>
+								<img src="../../images/candidate/edit.png" height="20" width="20" onclick="loadDoc3()"/>
 							</h3> 
 						</div><!-- Profile Update button code -->
 							<!-- Image load code START-->
@@ -649,28 +626,7 @@ $(window).load(function(){
 									</tbody>
 								</table>
 	                      	</div> <!-- /profi-->
-
-                            <div id="myModal2" class="modal fade" role="dialog">
-                               <div class="modal-dialog">
-
-                                  <!-- Modal content-->
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <center><h4 class="modal-title">Profile Information change</h4></center>
-                                    </div>
-                                    <div class="modal-body" id="content2">
-                                      
-                                      <div class="something2" style="display:none;">
-                    
-                                      </div>
-                                    </div>
-                                   
-                                  </div>
-                              
-                                </div>
-                              </div>
-			            </div><!-- /column 1-->
+						</div><!-- /column 1-->
 						<!-- </div> --><!-- /container -->
 						<div id="column2" class="hidden" >
                          
@@ -683,11 +639,7 @@ $(window).load(function(){
 									$sql = "SELECT * FROM t_exam_org_qp";
 									$result = mysqli_query($connection,$sql);
 									$log->debug("in CLass fleft - SQL Statement - ".$sql);
-<<<<<<< HEAD
-									echo "<select class='selectpicker' name='users' style='width:150px;'  id='cd-dropdown' class='cd-show' >
-=======
 									echo "<select class='selectpicker' name='users' style='width:150px;'  id='cd-dropdown' class='cd-select' >
->>>>>>> origin/master
 									<option value='' id='select-option'>Register For The Exam</option>";
 									while ($row = mysqli_fetch_assoc($result)) {
 										echo "<option value='" . $row['exam_name'] . "'>" . $row['exam_name'] . "</option>";
@@ -697,53 +649,6 @@ $(window).load(function(){
 
 								?>
 							</div><!-- / fleft-->
-<<<<<<< HEAD
-
-							<div id="myModal" class="modal fade" role="dialog">
-                               <div class="modal-dialog">
-
-                                  <!-- Modal content-->
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <center><h4 class="modal-title">Mason General</h4></center>
-                                    </div>
-                                    <div class="modal-body" id="content">
-                                      
-                                      <div class="something" style="display:none;">
-                    
-                                      </div>
-                                    </div>
-                                   
-                                  </div>
-                              
-                                </div>
-                              </div>
-			
-						
- 							<div id="txtHint"></div><!-- / txtHint-->
-							 	<hr>
-							 	<div id="txtHint2"> 
-                            	<h4>Upcoming Exams</h4>
-								<div style="display:overflow-y:scroll">
-									<table class="table" style="height:10px;display:overflow-y:scroll">
-										<thead >
-											<tr>
-												<th>Exam Name</th>
-												<th>Registered on</th>
-												<th>Duartion</th>
-												<th style="width:20%"></th>
-												<th></th>
-											</tr>
-										</thead>
-										<tbody style="height:10px;display:overflow-y:scroll" id="upcoming">
-											
-										</tbody>
-									</table>
-								<hr>
-								</div>
-							 </div>
-=======
 			              <span id="hidden_span"><font color="red">*** click on Register exam in the menu to see upcoming exam</font></span>
 						
  							<div id="txtHint"></div><!-- / txtHint-->
@@ -767,7 +672,6 @@ $(window).load(function(){
 									<hr>
 									</div> <!-- display:overflow-y:scroll -->
 							 </div> <!-- txthint2 -->
->>>>>>> origin/master
 						</div> <!-- /  column2 -->
 						<div id="column3" class="hidden">
 							<div id="demo3">
