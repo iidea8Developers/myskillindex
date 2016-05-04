@@ -1,8 +1,7 @@
 <!-- Candidate Site Login Screen-->
 
 <!-- 
-Modified on 30-03-2016
-Modified By : Jitendra Dayma
+Modified By : vivek singh
 Modification : Ajax code for forget password and log in tab 
 
 Definition: index.php is the landing page for myskillindex.com
@@ -25,13 +24,14 @@ Usage: Login , signup and forgot/retrieve password
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-		
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	
 	<!-- Latest compiled JavaScript -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.10.2/validator.min.js"></script>
  	<!-- Modernizr -->
 	<script src="js/modernizr.js"></script>
   	
@@ -39,45 +39,6 @@ Usage: Login , signup and forgot/retrieve password
 
 	<!-- Gem jQuery -->
 	<!--Script to validate entry of username / password on signin -->
-	<script>
-	
-
-		$('#form1').validate({   
-		   excluded: ':hidden', 
-		    	rules: 	{
-			        username: {
-			            minlength: 1,
-			            maxlength: 15,
-			            required: true
-			        },
-			        password: {
-			            minlength: 1,
-			            maxlength: 15,
-			            required: true
-			        }
-		    	},
-		    highlight: function(element) {
-		        var id_attr = "#" + $( element ).attr("id") + "1";
-		        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-		        $(id_attr).removeClass('glyphicon-ok').addClass('glyphicon-remove');         
-		    },
-		    unhighlight: function(element) {
-		        var id_attr = "#" + $( element ).attr("id") + "1";
-		        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-		        $(id_attr).removeClass('glyphicon-remove').addClass('glyphicon-ok');         
-		    },
-		    errorElement: 'span',
-		    errorClass: 'help-block',
-		    errorPlacement: function(error, element) {
-	            if(element.length) {
-	                error.insertAfter(element);
-	            } else {
-	            error.insertAfter(element);
-	            }
-		    } 
-	 	});
-
-	</script>
 	<!--*************************Observation*******************
 	26-03-2016: Should style not be in css file?
 	-->	
@@ -128,6 +89,11 @@ Usage: Login , signup and forgot/retrieve password
 	              height: 40%;
 	              position: center;
 				}
+
+				.remove{
+					color: #CD5C5C;
+				}
+
 	</style>
 	<!-- Script to show the tabs for signin, signup and forget password -->
 	<script>
@@ -159,8 +125,12 @@ $(document).ready(function(){
 		//last modified on 29/03/2016 by jitendra
 	$("#reset_btn").click(function(){
 		//$log->info(" reset button called ");
-		if($("#femail").val() == ""){
+
+
+		if($("#femail").val() == ""){                
              $("#error_message").html("Enter email address");
+             $("#femail").css('border','solid 1px #CD5C5C');
+             $("#i_reset").css('display','');
              return false;
 		}
 		else{
@@ -182,7 +152,9 @@ $(document).ready(function(){
 			// Access the onreadystatechange event for the XMLHttpRequest object
 			request.onreadystatechange = function() {
 				if((request.readyState == 4) && (request.status == 200)){
-					$("#error_message").html(request.responseText);
+					$("#error_message").html(request.responseText); 
+					$("#femail").css('border','solid 1px #CD5C5C');  
+					$("#i_reset").css('display','');
 				}
 			}
 			// Send the data to PHP now..
@@ -191,23 +163,73 @@ $(document).ready(function(){
 		}
 	});
 
-	//to clear error message and input value on focus
+
+	//this function clears all the css validation style and text on input focus
 	$('input').focus(function(){
 		this.value="";
 		$('#error_message').html("");
 		$("#password_error").html("");
+		$("#username").css('border','');
+        
+        $("#password").css('border','');
+        
+        $("#i_user").css('display','none');
+        $("#i_password").css('display','none');
+
+	});
+    
+    //this function clears all the css validation style and text on input focus
+	$('input').focus(function(){
+		this.value="";
+		$('#error_message').html("");
+		$("#password_error").html("");
+		$("#femail").css('border','');
+        
+        
+        
+        $("#i_reset").css('display','none');
+       
+
 	});
 
     //login form validation 
-    //written by jitendra on 29/03/2016
+    //written by jitendra on 29/03/2016 modified by vivek singh 
 
     $("#login_btn").click(function(){
     	//to check input fields are filled
-		if(($("#username").val() == "") || ($("#password").val() == "" )){
-             $("#password_error").html("Username or password is missing");
+            
+            //this function applies various styles depending upon the input to the login form   
+    	    if( ($("#username").val() == "") && ($("#password").val() == "" ) ) {
+              $("#username").css('border','solid 1px #CD5C5C');
+               
+               $("#i_user").css('display','');
+               $("#password").css('border','solid 1px #CD5C5C');
+              
+               $("#i_password").css('display','');
+             $("#password_error").html("Username and password is missing");
              return false;
-		}
-		else{
+             }
+
+             else if($("#username").val() == "")
+			 {
+              
+               $("#username").css('border','solid 1px #CD5C5C');
+              
+               $("#i_user").css('display','');
+               $("#password_error").html("Username is missing");
+               return false;
+             }
+
+             else if($("#password").val() == "")
+			 {
+              
+               $("#password").css('border','solid 1px #CD5C5C');
+              
+               $("#i_password").css('display','');
+               $("#password_error").html("Password is missing");
+               return false;
+             }
+		   else{
 			var request1;
 			// associated array is created that is passed using send()
 			// username and password are key of array that is fetched by login_check.php using post
@@ -239,7 +261,17 @@ $(document).ready(function(){
                    }
                    else{
                    	    //alert("log in failed");
+
+                   	    //this code aplies validation style on login form
                     	$("#password_error").html(response);
+                    	$("#username").css('border','solid 1px #CD5C5C');
+                    	$("remove").css('color','#CD5C5C');
+                    	$("#password").css('border','solid 1px #CD5C5C');
+                    	
+                    	$("#i_user").css('display','');
+                    	$("#i_password").css('display','');
+                    	
+
                    }
 				}
 			}
@@ -251,26 +283,8 @@ $(document).ready(function(){
 	});
 });
 	</script>
-	<!-- Script to validate if the pasword mathches with confirm password option-->
-	<!-- ********************Observation ***************
-	26-03-2016: function not used in code today. Signup page does not ask for password 2 times for confirmation.
-	-->
-	<script type="text/javascript">
-		var password = document.getElementById("password1");
-		var confirm_password = document.getElementById("Cpassword");
-		
-		function validatePassword()
-		{
-		  	if(password1.value != confirm_password.value) 
-		  	{
-		    confirm_password.setCustomValidity("Passwords Don't Match");
-		  	} else {
-		    		confirm_password.setCustomValidity('');
-		  			}
-		}
-		password1.onchange = validatePassword;
-		confirm_password.onkeyup = validatePassword;
-	</script>
+	
+	
 </head>
 
 <body>
@@ -327,15 +341,16 @@ $(document).ready(function(){
 						    		<form method="post" id="form1">
 										<div class="form-group" id="user1">
 									    	<div class="input-group">
-									      		<span class="input-group-addon glyphicon glyphicon-user"></span> 
-									      		<input type="text" class="form-control"  placeholder="Username" id="username" name="username" >
-									      		<span class="glyphicon form-control-feedback" id="fname1"></span>
+									      		<div class="input-group-addon"><i class="fa fa-user user"></i></div>
+									      		<input type="text" class="form-control"  placeholder="Username" id="username" name="username">
+									      		<span style="display:none" id="i_user" class="glyphicon glyphicon-remove remove form-control-feedback" style="color:#red"></span>
 									    	</div>
 									  	</div>
 									  	<div class="form-group" id="passw">
 									    	<div class="input-group">
-									      		<span class="input-group-addon glyphicon glyphicon-user"></span>
-									      		<input type="password" class="form-control" id="password"placeholder="Password" name="password" >
+									      		<div class="input-group-addon"><i class="fa fa-user user"></i></div>
+									      		<input type="password" class="form-control" id="password"placeholder="Password" name="password">
+									    	    <i style="display:none" id="i_password" class="glyphicon glyphicon-remove remove form-control-feedback" style="color:#red"></i>
 									    	</div>
 									    	<span class="help-block has-error" id="password_error"></span>
 									  	</div>
@@ -353,113 +368,126 @@ $(document).ready(function(){
 						    	    <span id="registration_fail" class="response_error" style="display: none;">Registration failed, please try again.</span>
 						    		<div class="clearfix"></div>
 						    		<center>
-						    			<form action="../../service/candidate/register.php" method="post" enctype="multipart/form-data">
-											<div class="form-group">
+
+						    		<!-- form structure reworked again to support validation,confirm password addedd,input icons are aligned properly with input boxes -->
+						    			<form action="../../service/candidate/register.php" method="post" enctype="multipart/form-data" data-toggle="validator" role="form">
+											<div class="form-group has-feedback">
 										    	<div class="col-md-4">
 											    	<div class="input-group" >
 											      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
-											      		<input type="text" name="fname" class="form-control" id="First Name" placeholder="First Name" required title="First Name required">
+											      		<input type="text" name="fname" class="form-control" id="First Name" placeholder="First Name" required>
+											    	    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 											    	</div>
-										    		<span class="help-block has-error" data-error='0' id="Name1-error"></span>
-		                                        </div>
+										    	</div>
+		                                       </div> 
+
+		                                       <div class="form-group">  
 		                                        <div class="col-md-4">
 											    	<div class="input-group" >
 											      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
 											      		<input type="text" name="mname" class="form-control" id="Name2" placeholder="Middle Name" >
 											    	</div>
-										    		<span class="help-block has-error" data-error='0' id="Name2-error"></span>
-										  	    </div>
+										    	</div>
+										    	</div>
+										  	   
+										  	   
+										  	   <div class="form-group has-feedback">
 										  	    <div class="col-md-4">
 											    	<div class="input-group" >
 											      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
-											      		<input type="text" class="form-control" name="lname" id="Name3" placeholder="Last Name" required title="Last name required">
+											      		<input type="text" class="form-control" name="lname" id="Name3" placeholder="Last Name" required>
+											    	    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 											    	</div>
-										    		<span class="help-block has-error" data-error='0' id="Name3-error"></span>
+										    		
 										  	    </div>
-										  	</div>
-										  	<div class="form-group">
+										  	    </div>
+										  	
+										  	  <div class="form-group">
 										    	<div class="input-group">
-										      		<span class="input-group-addon glyphicon glyphicon-home"></span>
+										      		<div class="input-group-addon"><i class="fa fa-home"></i></div>
 										      		<input type="text" name="home" class="form-control" id="Home" placeholder="Home" >
 										    	</div>
-										    	<span class="help-block has-error" data-error='0' id="Home-error"></span>
+										    </div>
+
+
 										    	<div class="form-group">
 										    		<div class="input-group">
-											      		<span class="input-group-addon glyphicon glyphicon-home"></span>
+											      		<div class="input-group-addon"><i class="fa fa-home"></i></div>
 											      		<input type="text" id="locality"  name="street" class="form-control" id="Street" placeholder="Street" >
 										    		</div>
-										    		<span class="help-block has-error" data-error='0' id="Street-error"></span>
-										  		</div>
-										  		<div class="form-group">
+										    		</div>
+										  		
+										  		 <div class="form-group has-feedback">
 											    	<div class="input-group">
-											      		<span class="input-group-addon glyphicon glyphicon-home"></span>
-											      		<input type="text" id="autocomplete"  name="city" class="form-control" id="City" placeholder="City" required title="City required">
+											      		<div class="input-group-addon"><i class="fa fa-home"></i></div>
+											      		<input type="text" id="autocomplete"  name="city" class="form-control" id="City" placeholder="City" required>
+											    	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 											    	</div>
-										    		<span class="help-block has-error" data-error='0' id="City-error"></span>
+										    		
 										  		</div>
-										  		<div class="form-group">
+										  		<div class="form-group has-feedback">
 											    	<div class="input-group">
-											      		<span class="input-group-addon glyphicon glyphicon-home"></span>
-											      		<input type="text" class="form-control"  name="state" id="State" placeholder="State" required title="State required">
+											      		<div class="input-group-addon"><i class="fa fa-home"></i></div>
+											      		<input type="text" class="form-control"  name="state" id="State" placeholder="State" required>
+											    	    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 											    	</div>
-											    	<span class="help-block has-error" data-error='0' id="State-error"></span>
+											    	
 										  		</div>
-										  		<div class="form-group">
+										  		<div class="form-group has-feedback">
 											    	<div class="input-group">
-											      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
-											      		<input type="text" class="form-control"  name="pincode" id="postal_code" placeholder="Postal code" required title="Postal code required" pattern="[0-9]{6}">
+											      		<div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+											      		<input type="text" class="form-control"  name="pincode" id="postal_code" placeholder="Postal code" required pattern="[0-9]{6}">
+											    	    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 											    	</div>
-											    	<span class="help-block has-error" data-error='0' id="postal_code-error"></span>
+											    	
 											  	</div>
-		                                  	</div>
-		                                  	<div class="form-group">
+		                                  
+		                                  	<div class="form-group has-feedback">
 										    	<div class="input-group">
 										      		<div class="input-group-addon"><i class="fa fa-user"></i></div>
-										      		<input type="tel" class="form-control" pattern="[0-9]{12}" name="aadhar" id="Adhar" placeholder="Adhar" pattern="[0-9]{12}" required title="Adhar # is a 12 digit number">
+										      		<input type="tel" class="form-control" pattern="[0-9]{12}" name="aadhar" id="Adhar" placeholder="Adhar" pattern="[0-9]{12}" required>
+										    	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 										    	</div>
-										    	<span class="help-block has-error" data-error='0' id="Adhar-error"></span>
+										    	
 										  	</div>
-		                                	<div class="form-group">
+		                                	<div class="form-group has-feedback">
 										    	<div class="input-group">
-										      		<span class="input-group-addon glyphicon glyphicon-envelope"></span>
-										      		<input type="Email" class="form-control" name="email" id="remail" placeholder="Email" required title="Email required">
+										      		<div class="input-group-addon"><i class="fa fa-at" aria-hidden="true"></i></div>
+										      		<input type="Email" class="form-control" name="email" id="remail" placeholder="Email" required>
+										    	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 										    	</div>
-										    	<span class="help-block has-error" data-error='0' id="remail-error"></span>
-										  	</div>  
+										    	</div>
+
 										  	<div class="form-group">
+                                         <label for="inputPassword" class="control-label"></label>
+                                             <div class="form-group col-sm-6">
+                                             <input type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
+                                            <div class="help-block">Minimum of 6 characters</div>
+                                             </div>
+                                           <div class="form-group col-sm-6">
+                                            <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Confirm" required>
+                                            <div class="help-block with-errors"></div>
+                                            </div>
+                                           </div>
+                                             
+	                                        <div class="form-group has-feedback">
 										    	<div class="input-group">
-										      		<div class="input-group-addon"><i class="fa fa-at"></i></div>
-										      		<input type="password" name="password" class="form-control" id="password1" placeholder="password" minlength="6" required title="password required">
+										      		<div class="input-group-addon"><i class="fa fa-phone-square" aria-hidden="true"></i></i></div>
+										      		<input type="tel" class="form-control" pattern="[0-9]{10}" name="contact" id="contact" placeholder="contact" required>
+										    	    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 										    	</div>
-										    	<span class="help-block has-error" data-error='0' id="password-error"></span>
-										  	</div>
-	                                        <div class="form-group">
-										    	<div class="input-group">
-										      		<span class="input-group-addon glyphicon glyphicon-phone-alt"></span>
-										      		<input type="tel" class="form-control" pattern="[0-9]{10}" name="contact" id="contact" placeholder="contact" required title="Contact required">
-										    	</div>
-										    	<span class="help-block has-error" data-error='0' id="remail-error"></span>
-										  	</div>                           
+										    	
+										  	</div>  
+										  	<div class="form-group has-feedback">                         
 		                          			<div class="checkbox">
 		                          				<label><input type="checkbox" value="" required/>By signing in you are agreeing to our Conditions of Use and Sale and our Privacy Notice</label>
+		                          			</div>
 		                          			</div>
 								  			<center>
 								  				<button type="submit" id="register_btn" class="btn btn-block bt-login" data-loading-text="Registering...." style="border:solid 1px #0074bf;width:200px;color:#0074bf;background:transparent;">Register</button>
 								  			</center>
 											<div class="clearfix"></div>
-											<!--<div class="login-modal-footer">
-								  					<div class="row">
-														<div class="col-xs-8 col-sm-8 col-md-8">
-															<i class="fa fa-lock"></i>
-															<a href="javascript:;" class="forgetpass-tab"> Forgot password? </a>
-														</div>
-													
-														<div class="col-xs-4 col-sm-4 col-md-4">
-															<i class="fa fa-check"></i>
-															<a href="javascript:;" class="signin-tab"> Sign In </a>
-														</div>
-													</div>
-								  				</div>-->
+											
 										</form>
 									</center>
 						    	</div>
@@ -471,8 +499,9 @@ $(document).ready(function(){
 							    		 <form  method="post" id="forget_login_form">
 											<div class="form-group">
 										    	<div class="input-group">
-										      		<span class="input-group-addon glyphicon glyphicon-envelope"></span>
+										      		<div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
 										      		<input type="text" class="form-control" name="email" id="femail" placeholder="Email" required title="Please enter a valid email id.">
+										    	    <span style="display:none" id="i_reset" class="glyphicon glyphicon-remove remove form-control-feedback" style="color:#red"></span>
 										    	</div>
 										    	<!--Id changed in span to error_message from femail_error-->
 										    	<span class="help-block has-error" data-error='0' id="error_message"></span>
