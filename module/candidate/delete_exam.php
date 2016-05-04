@@ -3,11 +3,11 @@
     // created by:  vivek kumar
     // created on:  05-04-2016
     // modified by: vivek kumar
-<<<<<<< HEAD
+
     // modified on: 08-04-2016
-=======
+
     // modified on: 12-04-2016
->>>>>>> origin/master
+
 
 	session_start();
 	include_once("../../service/common/db_connection.php");
