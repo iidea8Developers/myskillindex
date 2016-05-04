@@ -74,15 +74,6 @@
 					});
 				//});
 			});
-			//Javascript/jQuery function to submit form on two address
-			function submitForm(){
-				document.getElementById['select_form'].action='xsd_to_xml.php';
-				document.getElementById['select_form'].submit();
-
-				document.getElementById['select_form'].action='';
-				document.getElementById['select_form'].target='_self';
-				document.getElementById['select_form'].submit();
-			}
 
 			//ajax function to pull list of Pc dynamically on the page
 			
@@ -97,7 +88,7 @@
 							// code for IE7+, Firefox, Chrome, Opera, Safari
 							xmlhttp = new XMLHttpRequest();
 			            	xmlhttp2 = new XMLHttpRequest();
-							} else {
+							}else{
 								// code for IE6, IE5
 								xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 			            		xmlhttp2 = new ActiveXObject("Microsoft.XMLHTTP");
@@ -118,7 +109,18 @@
 						};
 						xmlhttp2.send();
 					}
-				}
+			}
+			//Javascript/jQuery function to submit form on two address
+			/*function submitForm(){
+				
+				document.getElementById('select_form').action="xsd_to_xml.php";
+				document.getElementById('select_form').target="_self";
+				document.getElementById('select_form').submit();
+
+				document.getElementById('select_form').action="createExamToAddQuestion.php";
+				document.getElementById('select_form').target="_self";
+				document.getElementById('select_form').submit();
+			}*/
 		</script>
 		<style>
 			body{
@@ -183,7 +185,7 @@
 						</div>
 					</table>
 				</div>
-				<form id="select_form" method="post" >
+				<form id="select_form" action="xsd_to_xml.php" method="post" >
 					<div class="container">
 						<div class="row">
 							<div class="col-md-3">
@@ -307,7 +309,7 @@
 											<td>
 												<div class="col-md-3" style="width:600px" >
 													<div id="pc_fetch">
-													<?php // PHP function or code to give Pc list?>
+													<!--code to show pcs -->
 													</div>
 												</div>
 											</td>
@@ -322,7 +324,7 @@
 						</button>
 					</div>
 					<div id="add_nos" align="right">
-						<button type="submit" onclick= "submitForm()" style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;">
+						<button type="submit" onclick="submitForm()" style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;">
 						Add NOS
 						</button>
 					</div>

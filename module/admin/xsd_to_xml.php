@@ -20,7 +20,7 @@
 		$exam_time = $_POST["time"];
 		$exam_level = $_POST["skill_level"];
 		$pass_percentage = $_POST["percent"];
-		$nos=$_POST["nos"];
+		$nos_code=$_POST["nos"];
 		$checked_pc=$_POST['checked'];
 	}else
 	{
@@ -38,7 +38,7 @@
 	//query to get nos name 
 	$nos_query ="SELECT nos_name
 				FROM t_nos
-				WHERE nos_code = '{$nos}'";
+				WHERE nos_code = '{$nos_code}'";
 	$result = mysqli_query($connection,$nos_query);
 	$row = mysqli_fetch_assoc($result);
 	$nos_name = $row["nos_name"] ;
@@ -89,7 +89,7 @@
 	$nosName = $xml->createElement("nosName",$nos_name);
 	$nosName = $nos->appendChild($nosName);
 
-	$nosCode = $xml->createElement("nosCode",$nos);
+	$nosCode = $xml->createElement("nosCode",$nos_code);
 	$nosCode = $nos->appendChild($nosCode);
 
 	$nosWeightage = $xml->createElement("nosWeightage");
@@ -100,15 +100,15 @@
 
 	if(!empty($checked_pc)){
 		$N = count($checked_pc);
-		for($i=0;$i<$N;$I++){
+		for($i=0;$i<$N;$i++){
 			$pc_name = $checked_pc[$i];
 
 			$pcName = $xml->createElement("pcName",$pc_name);
 	    	$pcName = $pc->appendChild($pcName);
 
 	    	$pc_query ="SELECT pc_id
-						FROM t_qp
-						WHERE qp_name = '{$pc_name}'";
+						FROM t_pc
+						WHERE pc_name = '{$pc_name}'";
 			$result = mysqli_query($connection,$pc_query);
 			$row = mysqli_fetch_assoc($result);
 			$pc_id = $row["pc_id"];
@@ -120,22 +120,18 @@
 			$pcWeightage = $pc->appendChild($pcWeightage);
 		}
 	}
-	//echo "<xmp>".$xml->saveXML()."</xmp>";
 	// file name should be like - userid_GUID_e.xml
 	$user_name = $_SESSION['user'];
 	$guid = com_create_guid();
 	$file_name = $user_name."_".$guid."_e.xml";
-	
+	$log->debug("****file_name:$file_name****");
+
 	// pass the file name to the process called finalXML.php
 	$_SESSION['Filename'] = $file_name;
 
 	// save thisxml in to a .xml file in the folder called tmp
 	$xml->save('../../tmp/'.$file_name);
-
-	/*this section will create xml file in location entered in save() function.
-	$doc->formatOutput=true;
-	$string_value = $doc->saveXML();
-	$doc->save("Exam.xml");*/
-	
 	$log->debug("****END-xsd_to_xml.php****");
+	header("Location:createExamToAddQuestion.php");
+
 ?>

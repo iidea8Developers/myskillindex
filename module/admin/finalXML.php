@@ -19,8 +19,10 @@
 
 	try{
 		// get the file name = userid_GUID_e.xml
+		$file_name=$_SESSION['filename'];
 
 		// substring the GUID from the file name
+		
 		// log file name and GUID
 		// load file in to an XML DOM object using 
 

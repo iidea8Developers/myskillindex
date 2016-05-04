@@ -11,15 +11,7 @@
 	$log->debug("****START - saveExamDB.php****");
 	session_start();
 	if (isset($_SESSION["user"])){
-		$organisation=$_POST["org"];
-		$sector=$_POST["sector"];
-		$qp=$_POST["qp"];
-		$exam_name=$_POST["name_of_exam"];
-		$exam_description=$_POST["desc"];
-		$exam_time = $_POST["time"];
-		$exam_level = $_POST["skill_level"];
-		$pass_percentage = $_POST["percent"];
-		$nos=$_POST["nos"];
+		
 	}else
 	{
 		header("Location: ../../service/common/error_page.php");
