@@ -1,0 +1,112 @@
+<svg width="354.33" height="246.61" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:html="http://www.w3.org/1999/xhtml" viewBox="0 0 354.33 246.61">
+ <metadata id="metadata4276">image/svg+xml</metadata>
+ <defs>
+  <style id="fonts" type="text/css">@font-face {
+        font-family: Neuton;
+        src: url('//www.onlinefreelogo.com/fonts/Neuton.otf');
+    }
+    @font-face {
+        font-family: 'Stag Medium';
+        src: url('//www.onlinefreelogo.com/fonts/STAG-MEDIUM_0.otf');
+    }
+    @font-face {
+        font-family: 'Stag Sans Medium';
+        src: url('//www.onlinefreelogo.com/fonts/STAGSANS-MEDIUM_0.otf');
+    }
+    @font-face {
+        font-family: 'Museo Slab 500';
+        src: url('//www.onlinefreelogo.com/fonts/Museo_Slab.otf');
+    }
+    @font-face {
+        font-family: 'Museo Sans 700';
+        src: url('//www.onlinefreelogo.com/fonts/MuseoSans.otf');
+    }
+    @font-face {
+        font-family: 'Zapf ChanceC';
+        src: url('//www.onlinefreelogo.com/fonts/Zapf.otf');
+    }
+    @font-face {
+        font-family: 'Gill Sans MT Ext Condensed Bold';
+        src: url('//www.onlinefreelogo.com/fonts/GLSNECB.otf');
+    }
+    @font-face {
+        font-family: 'HelveticaCnd-Normal';
+        src: url('//www.onlinefreelogo.com/fonts/HELVETIA.otf');
+    }
+    @font-face {
+        font-family: 'Comic Neue';
+        src: url('//www.onlinefreelogo.com/fonts/cursive.otf');
+    }
+    @font-face {
+        font-family: 'CG-OmegaC';
+        src: url('//www.onlinefreelogo.com/fonts/cgor45w.otf');
+    }
+    @font-face {
+        font-family: "Eurostile LT Bold";
+        src: url('//www.onlinefreelogo.com/fonts/STAGSANS-MEDIUM_0.otf');
+    } 
+    @font-face {
+      font-family: ArialMT; 
+      src: local('Arial');
+    } 
+    @font-face {
+        font-family: Adventure;
+        src: url('//www.onlinefreelogo.com/fonts/Adventure.otf');
+    }
+
+    @font-face {
+        font-family: ChopinScript;
+        src: url('//www.onlinefreelogo.com/fonts/ChopinScript.otf');
+    }
+
+    @font-face {
+        font-family: "Giddyup Std";
+        src: url('//www.onlinefreelogo.com/fonts/GiddyupStd.otf');
+    }
+
+    @font-face {
+        font-family: "Kleymissky";
+        src: url('//www.onlinefreelogo.com/fonts/Kleymissky_0283.otf');
+    }
+
+    @font-face {
+        font-family: "Orial_";
+        src: url('//www.onlinefreelogo.com/fonts/ORIAL_BOLD.otf');
+    }
+
+    @font-face {
+        font-family: "Rosewood Std Regular";
+        src: url('//www.onlinefreelogo.com/fonts/RosewoodStd-Regular.otf');
+    }
+
+    @font-face {
+        font-family: "Stencil Std";
+        src: url('//www.onlinefreelogo.com/fonts/StencilStd.otf');
+    }
+
+    @font-face {
+        font-family: "Scriptina Pro";
+        src: url('//www.onlinefreelogo.com/fonts/Scriptina-Pro.otf');
+    }</style>
+ </defs>
+ <g>
+  <title>Click to Edit</title>
+  <path fill="#c32026" id="path4248" d="m128.54843,44.01097c-1.46285,-1.91755 -2.57867,-4.1492 -3.22484,-6.63214c0.64317,2.48593 1.759,4.71759 3.22484,6.63214z"/>
+  <path fill="none" stroke="#c32026" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" id="path4250" d="m151.83722,19.61832c-0.39488,-0.20642 -0.80771,-0.3889 -1.21754,-0.56839"/>
+  <path opacity="0.46" fill="none" stroke="#f4f1ed" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" id="path4252" d="m151.90004,19.65422c-0.015,-0.01795 -0.0419,-0.02992 -0.0628,-0.0359"/>
+  <g style="cursor: move;" transform="matrix(2.9914955,0,0,2.9914955,-351.68233,-280.65902) " id="Color2">
+   <path fill="#f7941e" id="path4256" d="m197.74814,126.00472l-0.085,-0.996c0.11,1.049 -0.073,2.23 -0.585,3.527c-2.847,7.205 -14.774,15.188 -26.642,17.828c-7.445,1.658 -13.098,0.82 -15.575,-1.813c0.44,0.469 1.076,1.063 1.542,1.514c2.007,1.764 3.263,2.49 5.007,3.494c2.575,1.354 6.814,1.609 12.073,0.438c10.382,-2.311 20.813,-9.293 23.306,-15.598c0.147,-0.375 0.265,-0.742 0.352,-1.096c0.182,-0.852 0.367,-2.002 0.5,-2.865c0.181,-1.763 0.172,-2.013 0.107,-4.433z"/>
+   <path fill="#f7941e" id="path4258" d="m158.63414,134.46572c7.552,-13.342 19.23,-26.791 36.775,-31.799c0.012,-0.006 0.027,-0.014 0.027,-0.014c-0.565,0.143 -1.123,0.285 -1.674,0.428c-34.713,9.047 -44.356,22.455 -45.083,23.529c2.928,-1.895 5.14,-2.754 7.216,-3.281c0.723,-0.186 1.43,-0.332 2.143,-0.465c-1.418,3.092 -2.778,6.941 -4.043,11.072c1.335,0.352 2.893,0.534 4.639,0.53z"/>
+   <path fill="#f7941e" id="path4260" d="m160.34314,108.90872l0.004,0c0.853,-1.96 2.93,-5.596 7.374,-8.344c0.311,-0.192 0.632,-0.381 0.967,-0.564l-0.003,0c-0.173,-0.115 -0.352,-0.223 -0.536,-0.32c-0.005,-0.004 -0.014,-0.008 -0.021,-0.012c-0.175,-0.092 -0.356,-0.174 -0.54,-0.25c-0.017,-0.008 -0.034,-0.014 -0.052,-0.021c-0.172,-0.07 -0.35,-0.131 -0.53,-0.186c-0.027,-0.006 -0.056,-0.016 -0.083,-0.023c-0.168,-0.047 -0.34,-0.086 -0.514,-0.119c-0.039,-0.008 -0.079,-0.018 -0.119,-0.025c-0.16,-0.027 -0.324,-0.045 -0.487,-0.061c-0.053,-0.004 -0.104,-0.012 -0.156,-0.014c-0.155,-0.012 -0.313,-0.012 -0.469,-0.01c-0.06,0 -0.119,-0.002 -0.179,0c-0.158,0.006 -0.318,0.025 -0.475,0.043c-0.06,0.008 -0.117,0.01 -0.175,0.018c-0.216,0.033 -0.432,0.074 -0.647,0.131c-3.307,0.857 -5.295,4.234 -4.438,7.541c0.217,0.83 0.59,1.576 1.079,2.216z"/>
+  </g>
+  <path style="cursor: move;" fill="#1c2aed" id="path4264" d="m175.06062,172.98248c-8.6873,1.93251 -16.21391,2.26157 -22.11014,1.2325c1.55558,0.27522 3.63766,0.5265 5.18725,0.74189c3.6945,0.35 4.23596,0.35 9.38731,0.3859c2.86585,-0.0688 3.14705,-0.09872 7.7749,-0.58932c2.37226,-0.31112 2.44704,-0.32607 6.68898,-1.17566c2.03422,-0.44274 2.1808,-0.48462 5.84239,-1.54959c1.83379,-0.56539 1.83379,-0.56539 5.17529,-1.80985c1.90259,-0.77181 1.90259,-0.77181 4.79836,-2.09704c1.73208,-0.82266 1.73208,-0.82266 4.64579,-2.40815c1.51669,-0.87053 1.62737,-0.93634 4.6428,-2.87483c1.66925,-1.12181 1.66925,-1.12181 4.79836,-3.50005c1.85174,-1.46583 1.85174,-1.46583 5.11845,-4.45135c2.16285,-2.07311 2.2855,-2.21371 5.58512,-5.94709c2.63551,-3.19492 2.89876,-3.5868 6.07573,-8.3373l0.83463,-1.35515c-8.46294,14.10191 -31.50942,28.62263 -54.44522,33.73509z"/>
+  <path style="cursor: move;" fill="#1c2aed" id="path4266" d="m147.88844,50.66107c9.89288,-2.56371 15.83698,-12.67197 13.27626,-22.56485c-1.18463,-4.57998 -4.00561,-8.29542 -7.65225,-10.73349c-0.99916,0.54744 -1.96242,1.11284 -2.89278,1.6872c-13.29421,8.22362 -19.50754,19.09771 -22.05929,24.96104c4.38254,5.71376 11.91513,8.56764 19.32805,6.65009z"/>
+  <path style="cursor: move;" fill="#1c2aed" id="path4268" d="m166.57931,111.00552c-1.29233,-16.86306 -1.44788,-26.25037 -1.24745,-32.12866c22.95973,-31.78464 66.483,-52.75502 68.11934,-53.5358c-52.48579,14.98141 -87.42346,55.21403 -110.01225,95.12657c6.26419,-0.02393 13.30916,-0.81668 21.01825,-2.53679c7.45182,-1.66028 14.90662,-4.02655 22.12211,-6.92531z"/>
+  <path fill="#1c2aed" id="path4270" d="m255.34296,35.68565c-14.18866,7.83473 -20.13276,11.74461 -29.14315,19.08275c3.24577,0.26923 8.03217,0.58334 11.28691,0.82864c-11.15828,25.66703 -39.49073,46.20365 -49.63489,52.21655c-6.6471,3.93083 -13.82968,7.47874 -21.27252,10.46425c-7.21549,2.89278 -14.67029,5.25307 -22.1251,6.91933c-7.70908,1.71114 -14.75705,2.51286 -21.01825,2.53081c-5.22315,0.01795 -9.88689,-0.5265 -13.87755,-1.57652c-0.08675,-0.02991 -0.18846,-0.04786 -0.2812,-0.0688c-9.1091,-2.48294 -14.72115,-7.64327 -15.5827,-14.90363l0.52949,3.6227c1.45387,8.02917 3.30261,12.56727 5.65393,18.30496l0.92736,1.9684c0.96027,1.93849 2.43807,3.70945 4.31972,5.28896c0.08675,0.0688 0.15855,0.14658 0.2453,0.21539c2.34234,1.90558 5.34281,3.48808 8.86081,4.70861c3.40432,1.18463 7.30224,2.02225 11.59504,2.44106c7.7749,0.77181 16.8152,0.18248 26.55551,-2.109c0.63719,-0.15257 1.26241,-0.27522 1.90259,-0.43676c5.04964,-1.29831 9.78817,-2.75218 14.29636,-4.32271c56.88927,-19.75584 72.03521,-59.32734 79.89387,-71.89461c1.28933,2.66542 2.38123,7.91251 3.65561,10.5869c2.59961,-12.56727 6.94625,-28.21579 3.21287,-43.86729z"/>
+  <text font-style="normal" font-weight="normal" font-family="Arial" text-anchor="middle" fill="#f7941e" id="Tagline" font-size="20px" x="179.62727" y="226.6596">
+  </text>
+  <text style="cursor: move;" font-style="normal" font-weight="normal" font-family="Stag Sans Medium" text-anchor="middle" fill="#1576ed" id="Company_Name" font-size="26px" x="111.03682" y="202.40272">My</text>
+  <text style="cursor: move;" id="svg_1" font-style="normal" font-weight="normal" font-family="Stag Sans Medium" text-anchor="middle" fill="#1576ed" font-size="26px" x="215.13928" y="202.70089">Index</text>
+  <text style="cursor: move;" id="svg_2" font-style="normal" font-weight="normal" font-family="Stag Sans Medium" text-anchor="middle" fill="#f7941e" font-size="26px" x="155.84303" y="202.82334">Skill</text>
+ </g>
+</svg>
