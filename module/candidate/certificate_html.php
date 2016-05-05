@@ -14,6 +14,12 @@ session_start();
 
 $html = ob_get_clean();
 $html=utf8_encode($html);
+$fname=$_GET['fname'];
+$lname=$_GET['lname'];
+$exam_end_time=$_GET['end_date'];
+$mscored=$_GET['mscored'];
+$examdesc=$_GET['examdesc'];
+
 $html .= '
 <!DOCTYPE html>
 <html>
@@ -34,13 +40,13 @@ $html .= '
        <br><br>
        <span style="font-size:25px"><i>This is to certify that</i></span>
        <br><br>
-       <span style="font-size:30px"><b>$student.getFullName()</b></span><br/><br/>
+       <span style="font-size:30px"><b>'.$fname.'&nbsp;&nbsp;&nbsp;'.$lname.'</b></span><br/><br/>
        <span style="font-size:25px"><i>has completed the course</i></span> <br/><br/>
-       <span style="font-size:30px">$course.getName()</span> <br/><br/>
-       <span style="font-size:20px">with score of <b>$grade.getPoints()%</b></span> <br/><br/><br/><br/>
+       <span style="font-size:30px">'.$examdesc.'</span> <br/><br/>
+       <span style="font-size:20px">with score of <b>'.$mscored.'</b></span> <br/><br/><br/><br/>
        <span style="font-size:25px"><i>dated</i></span><br>
-      #set ($dt = $DateFormatter.getFormattedDate($grade.getAwardDate(), "MMMM dd, yyyy"))
-      <span style="font-size:30px">$dt</span>
+      
+      <span style="font-size:30px">'.$exam_end_time.'</span>
       <div>
       <img src="../../images/common/logo_myskillindex_cert.svg" height="130px" style="margin-left:10px" />
       </div>
