@@ -12,6 +12,16 @@
 	$log->debug("****START - cteateExamToAddQuestion.php****");
 	session_start();
 	if (isset($_SESSION["user"])){
+		$_SESSION["organisation"]=$_POST["org"];
+		$_SESSION["sector"]=$_POST["sector"];
+		$_SESSION["qp"]=$_POST["qp"];
+		$_SESSION["exam_name"]=$_POST["name_of_exam"];
+		$_SESSION["exam_description"]=$_POST["desc"];
+		$_SESSION["exam_time"] = $_POST["time"];
+		$_SESSION["exam_level"] = $_POST["skill_level"];
+		$_SESSION["pass_percentage"] = $_POST["percent"];
+		$_SESSION["nos_code"]=$_POST["nos"];
+		$_SESSION["checked_pc"]=$_POST['checked'];
 	}else
 	{
 		header("Location: ../../service/common/error_page.php");
@@ -89,7 +99,7 @@
 				</div>
 			
 		
-			 <form id="select_form" role="form" action="exam_save.php" method="post" >
+			 <form id="select_form" role="form" action="createExamXML.php" method="post" >
 
 			<div class="container">
 				<div class="row">
@@ -157,7 +167,7 @@
 															<div>
 																
 																<div style="width:150px"  class="col-md-3">
-																	<?php echo $_POST["nos"];?>		
+																	<?php echo $_SESSION['nos_code'];?>		
 																</div></div>
 														</td>
 														<td>
@@ -167,23 +177,12 @@
 																	
 																	<div id="nos_desc2">
 																	<?php 
-																	//query used to fetch pc details on the page
-		$query= " select * from t_pc where pc_id in (select pc_id from t_exam_nos_pc where exam_id='{$_SESSION["exam_id"]}')" ;
-		$result = mysqli_query($connection,$query);
-		$pc_name=array();
-		$i=0;
-		while ($row= mysqli_fetch_assoc($result))
-		{
-			//$pc_name[$i] = $row['pc_name'];	
-			$pc_name=$row['pc_name'];	
-			$pc_id=$row['pc_id'];	
-			
-			echo $pc_name;
-			echo'<br>';
-			echo'<br>';
-			      $cast[] = $row['pc_id'];
-	}
-	?>
+																	$checked_pc=$_SESSION['checked_pc'];
+																	foreach ($checked_pc as $pc_name) {
+																			echo $pc_name;
+																			echo'<br>';
+																	}
+																	?>
 																	</div>
 																	<br>
 																</div></div>	
@@ -193,22 +192,34 @@
 
 																			<?php  
 																			//query to get questions from db
-																			$query2= " select * from t_qbank where qid in (select qid from r_pc_q where pc_id in ('".implode("', '", $cast)."'))"; 
+																			$pc_query ="SELECT pc_id
+																						FROM t_pc
+																						WHERE pc_name IN'{$checked_pc}'";
+																			$result = mysqli_query($connection,$pc_query);
+																			$pc_id=[];
+																			while($row = mysqli_fetch_assoc($result)){
+																				$pc_id[] = $row["pc_id"];
+																			}													
+																			$query="SELECT t_qbank.q_description,t_qbank.qid
+																					FROM t_qbank
+																					INNER JOIN r_pc_q
+																					ON  t_qbank.qid = r_pc_q.qid
+																					WHERE pc_id IN $pc_id "; 
 
-			$result3 = mysqli_query($connection,$query2);
-			while ($row3= mysqli_fetch_assoc($result3))
+			$result = mysqli_query($connection,$query);
+			while ($row= mysqli_fetch_assoc($result))
 		{
-	     $que = $row3['q_description'];
+	     $questions = $row['q_description'];
 		
 		
 		 echo '
 	<input type="checkbox" style="width:20px;height:20px;
-	" id="green" name="checked[]" value="' . $row3['qid'] . '" id="' . $row['qid'] . '"  />
+	" id="green" name="question[]" value="' . $row['qid'] . '" id="' . $row['qid'] . '"  />
 
 	';
 		 echo '&nbsp;';
 		echo '&nbsp;';echo '&nbsp;&nbsp;';
-		 echo $que;
+		 echo $questions;
 		 	echo '&nbsp;';
 		
 		 echo'<br>';

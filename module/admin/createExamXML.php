@@ -12,16 +12,17 @@
 	$log->debug("****START -xsd_to_xml.php****");
 	session_start();
 	if (isset($_SESSION["user"])){
-		$organisation=$_POST["org"];
-		$sector=$_POST["sector"];
-		$qp=$_POST["qp"];
-		$exam_name=$_POST["name_of_exam"];
-		$exam_description=$_POST["desc"];
-		$exam_time = $_POST["time"];
-		$exam_level = $_POST["skill_level"];
-		$pass_percentage = $_POST["percent"];
-		$nos_code=$_POST["nos"];
-		$checked_pc=$_POST['checked'];
+		$organisation=$_SESSION['organisation'];
+		$sector=$_SESSION["sector"];
+		$qp=$_SESSION["qp"];
+		$exam_name=$_SESSION["exam_name"];
+		$exam_description=$_SESSION["exam_description"];
+		$exam_time = $_SESSION["exam_name"];
+		$exam_level = $_SESSION["exam_name"];
+		$pass_percentage = $_SESSION["pass_percentage"];
+		$nos_code=$_SESSION["nos_code"];
+		$checked_pc=$_SESSION['checked_pc'];
+		$selected_q =$_POST["question"];
 	}else
 	{
 		header("Location: ../../service/common/error_page.php");
@@ -118,6 +119,19 @@
 
 			$pcWeightage = $xml->createElement("pcWeightage");
 			$pcWeightage = $pc->appendChild($pcWeightage);
+
+			$question = $xml->createElement("questions");
+			$question = $pc->appendChild($question);
+
+			$q_query = "SELECT qid
+						FROM r_pc_q
+						WHERE pc_id='{$pc_id}' AND qid IN $selected_q ";
+			$result = mysqli_query($connection,$q_query);
+			while($row = mysqli_fetch_assoc($result)){
+
+				$questionId = $xml->createElement("questionId", $row["qid"]);
+				$questionId = $question->appendChild($questionId);
+			}
 		}
 	}
 	// file name should be like - userid_GUID_e.xml
@@ -126,12 +140,11 @@
 	$file_name = $user_name."_".$guid."_e.xml";
 	$log->debug("****file_name:$file_name****");
 
-	// pass the file name to the process called finalXML.php
+	// pass the file name to the process called saveExamDB.php
 	$_SESSION['Filename'] = $file_name;
 
 	// save thisxml in to a .xml file in the folder called tmp
 	$xml->save('../../tmp/'.$file_name);
 	$log->debug("****END-xsd_to_xml.php****");
-	header("Location:createExamToAddQuestion.php");
 
 ?>

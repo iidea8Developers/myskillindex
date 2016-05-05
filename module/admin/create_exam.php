@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php 
 	// this page is to create Assesment 
 	// page created by vivek kumar and prakash shukla
@@ -19,6 +18,7 @@
 		header("Location: ../../service/common/error_page.php");
 	}
 ?>
+<!DOCTYPE html>
 <html lang="eng" >
 	<head>		
 		<title>Create Exam</title>
@@ -185,7 +185,7 @@
 						</div>
 					</table>
 				</div>
-				<form id="select_form" action="xsd_to_xml.php" method="post" >
+				<form id="select_form" action="createExamToAddQuestion.php" method="post" >
 					<div class="container">
 						<div class="row">
 							<div class="col-md-3">
@@ -324,8 +324,8 @@
 						</button>
 					</div>
 					<div id="add_nos" align="right">
-						<button type="submit" onclick="submitForm()" style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;">
-						Add NOS
+						<button type="submit" style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;">
+						Add Questions
 						</button>
 					</div>
 				</form>
