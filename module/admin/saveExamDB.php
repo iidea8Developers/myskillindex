@@ -5,12 +5,14 @@
 	// modified on: 29-04-2016
 	
 	//function for db conn and session check
+	include_once('../../service/common/db_connection.php');
 	include_once('../../lib/log4php/Logger.php');
 	Logger::configure('../../config/log_config.xml');
 	$log = Logger::getLogger('saveExamDB.php');
 	$log->debug("****START - saveExamDB.php****");
 	session_start();
 	if (isset($_SESSION["user"])){
+		$Filename = ($_SESSION['Filename']);
 		
 	}else
 	{
@@ -55,16 +57,13 @@ INSERT INTO `r_exam_que` (`exam_id`, `qid`, `created_by`, `modified_by`, `create
 
 INSERT INTO `t_exam_survey` (`survey_link`, `survey_id`, `exam_id`, `created_by`, `modified_by`, `created_time`, `modified_time`) VALUES('http://52.39.26.22/limesurvey/index.php/275875?lang=en', 275875, 001, 'root', 'root', now(), now());
 
- ************************ END Exam creation in MSI ********************************************* */ 
-    } */
-
-?> 
-
-
+ ************************ END Exam creation in MSI ********************************************* }
+ */ 
+   }
+	catch(exception $e){
 
 	}
-	catch {}
-
+	header('Location: thank.php');
 
 	$log->debug("****END- saveExamDB.php****");
 ?>

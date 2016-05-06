@@ -148,6 +148,7 @@
 
 	// save thisxml in to a .xml file in the folder called tmp
 	$xml->save('../../tmp/'.$file_name);
+	header('Location:saveExamDB.php');
 	$log->debug("****END-xsd_to_xml.php****");
 
 ?>

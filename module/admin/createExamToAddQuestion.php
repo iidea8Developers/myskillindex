@@ -2,7 +2,7 @@
 	//page created by vivek kumar and prakash shukla
 	//this page is to add question in create exam 
 	//modified by: Jitendra Dayma
-	//modified on: 04-05-2016
+	//last modified on: o6-05-2016
 	
 	//function for db conn ,logging and session check
 	include_once('../../service/common/db_connection.php');
@@ -227,7 +227,7 @@
 								</div>
 								<div id="buttons" align="right">
 									<button  type="submit" value="save" name="save" style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;">Save</button>
-									<button type="submit" name="publish" value="publish" type="button" style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;">Publish Now</button>
+									<!--<button type="submit" name="publish" value="publish" type="button" style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;">Publish Now</button>-->
 								
 									</form>
 								</div>
