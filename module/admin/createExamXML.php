@@ -99,6 +99,8 @@
 	$pc = $xml->createElement("pc");
 	$pc = $nos->appendChild($pc);
 
+	$questionvalues = implode("','",$selected_q);
+
 	if(!empty($checked_pc)){
 		$N = count($checked_pc);
 		for($i=0;$i<$N;$i++){
@@ -125,7 +127,8 @@
 
 			$q_query = "SELECT qid
 						FROM r_pc_q
-						WHERE pc_id='{$pc_id}' AND qid IN $selected_q ";
+						WHERE pc_id = '{$pc_id}' 
+						AND qid IN ('".$questionvalues."')";
 			$result = mysqli_query($connection,$q_query);
 			while($row = mysqli_fetch_assoc($result)){
 

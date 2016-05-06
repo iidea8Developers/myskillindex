@@ -81,7 +81,7 @@
 				<nav class="navbar navbar-default">
 					<div class="container-fluid">
 						<div class="navbar-header">
-							<a class="navbar-brand" class="pull-left"><img src="image/title.png" style="margin-top:-15px;margin-left:-14px;" height="50" width="200"></a>
+							<a class="navbar-brand" class="pull-left"><img src="../../images/common/logo_myskillindex.jpeg" style="margin-top:-15px;margin-left:-14px;" height="50" width="200"></a>
 						</div>
 						<div>
 							
@@ -93,7 +93,7 @@
 			<div class="table-responsive" style="margin-top:-20px;">
 					<table class="table table-bordered table-stripped">
 						<div class="row">
-							<th  bgcolor="#3b5998" class="col-md-12"><font color="#FFFFFF">Dashboard > Search Exams > Author Exam</font></th>						
+							<th  bgcolor="#3b5998" class="col-md-12"><font color="#FFFFFF">Dashboard > Search Exams > Add questions</font></th>						
 						</div>
 					</table>
 				</div>
@@ -108,7 +108,7 @@
 						<div><b><font color="#3b5998"> <label style="text-decoration: underline;" >Organisation</font><b>
 							<br>
 							<div class="ui-widget">
-								<div class="ui-widget"><?php echo $_SESSION["org"];
+								<div class="ui-widget"><?php echo $_SESSION["organisation"];
 								?>
 								</div>
 							</div>
@@ -132,11 +132,11 @@
 										//echo "Plumber";?>
 								</div></div></div> 
 								
-								<div class="col-md-3"><div><b><font color="#3b5998"> <label style="text-decoration: underline;" >Name Of Exam</font><b><br><div class="ui-widget"><?php echo $_SESSION["exam"];?></div></div></div>
-									<div class="col-md-3"><div><b><font color="#3b5998"> <label style="text-decoration: underline;" >Exam Description</font></b><br><div class="ui-widget"><?php echo $_SESSION["desc"];?></div></div></div>
-									<div class="col-md-3"><div><b><font color="#3b5998"> <label style="text-decoration: underline;" >Exam Time (Min)</font></b><br><div class="ui-widget"><?php echo $_SESSION["time"];
+								<div class="col-md-3"><div><b><font color="#3b5998"> <label style="text-decoration: underline;" >Name Of Exam</font><b><br><div class="ui-widget"><?php echo $_SESSION["exam_name"];?></div></div></div>
+									<div class="col-md-3"><div><b><font color="#3b5998"> <label style="text-decoration: underline;" >Exam Description</font></b><br><div class="ui-widget"><?php echo $_SESSION["exam_description"];?></div></div></div>
+									<div class="col-md-3"><div><b><font color="#3b5998"> <label style="text-decoration: underline;" >Exam Time (Max)</font></b><br><div class="ui-widget"><?php echo $_SESSION["exam_time"];
 										?></div></div></div>
-									<div class="col-md-3"><div><b><font color="#3b5998"> <label style="text-decoration: underline;" >Exam Skill Level</font></b><br><div class="ui-widget"><?php echo $_SESSION["skill"];?></div></div></div>
+									<div class="col-md-3"><div><b><font color="#3b5998"> <label style="text-decoration: underline;" >Exam Skill Level</font></b><br><div class="ui-widget"><?php echo $_SESSION["exam_level"];?></div></div></div>
 								</div>
 								<br>
 								<hr>
@@ -162,13 +162,12 @@
 												
 												<tbody >
 													<tr id="rowToClone">
-														
 														<td>
 															<div>
-																
 																<div style="width:150px"  class="col-md-3">
 																	<?php echo $_SESSION['nos_code'];?>		
-																</div></div>
+																</div>
+															</div>
 														</td>
 														<td>
 															<div class="col-md-3">
@@ -190,41 +189,30 @@
 														<td>
 															<div class="col-md-3" style="width:400px" >
 
-																			<?php  
-																			//query to get questions from db
-																			$pc_query ="SELECT pc_id
+																<?php  
+																//query to get questions from db
+																$pcvalues = implode("','", $checked_pc);
+																$query = "SELECT t_qbank.q_description, t_qbank.qid
+																        FROM t_qbank
+																        INNER JOIN r_pc_q
+																		ON  t_qbank.qid = r_pc_q.qid
+																		WHERE r_pc_q.pc_id IN (SELECT pc_id
 																						FROM t_pc
-																						WHERE pc_name IN'{$checked_pc}'";
-																			$result = mysqli_query($connection,$pc_query);
-																			$pc_id=[];
-																			while($row = mysqli_fetch_assoc($result)){
-																				$pc_id[] = $row["pc_id"];
-																			}													
-																			$query="SELECT t_qbank.q_description,t_qbank.qid
-																					FROM t_qbank
-																					INNER JOIN r_pc_q
-																					ON  t_qbank.qid = r_pc_q.qid
-																					WHERE pc_id IN $pc_id "; 
-
-			$result = mysqli_query($connection,$query);
-			while ($row= mysqli_fetch_assoc($result))
-		{
-	     $questions = $row['q_description'];
-		
-		
-		 echo '
-	<input type="checkbox" style="width:20px;height:20px;
-	" id="green" name="question[]" value="' . $row['qid'] . '" id="' . $row['qid'] . '"  />
-
-	';
-		 echo '&nbsp;';
-		echo '&nbsp;';echo '&nbsp;&nbsp;';
-		 echo $questions;
-		 	echo '&nbsp;';
-		
-		 echo'<br>';
-			echo'<br>';
-		}?>
+																						WHERE pc_name IN('".$pcvalues."'))";
+																$log->debug($query);		
+																$result = mysqli_query($connection,$query);
+																while ($row= mysqli_fetch_assoc($result))
+																	{
+																		echo '<input type="checkbox" style="width:20px;height:20px;" id="green" name="question[]" value="' . $row['qid'] . '" id="' . $row['qid'] . '"  />';
+																		echo '&nbsp;';
+																		echo '&nbsp;';
+																		echo '&nbsp;&nbsp;';
+																		echo $row['q_description'];
+																		echo '&nbsp;';
+																		echo'<br>';
+																		echo'<br>';
+																	}
+																?>
 																
 															</div>
 														</td>
