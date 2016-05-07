@@ -61,7 +61,6 @@
 		$_SESSION['email']    = $row['candidate_email'];
 		$_SESSION['contact']  = $row['candidate_contact'];
 		$_SESSION['address']  = $row['candidate_address_home']." ".$row['candidate_address_street']." ".$row['candidate_address_city']." ".$row['candidate_address_postalcode'];
-		$_SESSION['aadhar']   = $row['candidate_aadhar'];
 		$_SESSION['id']       = $row['candidate_id'];
 	  	$_SESSION['image']    = $row['candidate_image'];
 
@@ -91,12 +90,17 @@
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
 		
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.min.css">
+
+
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<!-- Latest compiled JavaScript -->
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.min.js"></script>
    		
 		<!-- (Optional) Latest compiled and minified JavaScript translation files 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>-->
@@ -196,6 +200,28 @@
 				border-right: dashed 1px #03A9F4;
 				background-image: url('../../candidate/images/blue.svg');
 			}
+
+			.error {
+    width:200px;
+    height:20px;
+    height:auto;
+    position:absolute;
+    left:50%;
+    margin-left:-100px;
+    bottom:10px;
+    background-color: #383838;
+    color: #F0F0F0;
+    font-family: Calibri;
+    font-size: 20px;
+    padding:10px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+}
+
+
 			#img1{
 				height: 140px;
 	      		margin-right: -1px;
@@ -267,7 +293,7 @@
 							}
 						};
 					
-						xmlhttp.open("GET","register_exam.php?q="+str,true);
+						xmlhttp.open("GET","register_exam_check.php?q="+str,true);
 						xmlhttp.send(null);
             //windows.location.reload(true);                                               
 						}
@@ -438,8 +464,11 @@ $(window).load(function(){
 	$('#cd-dropdown').change(function() {
   var value = $( "#cd-dropdown option:selected").val();
     console.log(value);
-    if(value !='Register For Exam'){
+    if(value){
         $('#myModal').modal('show');
+   }
+   if(!value){
+        $('#myModal').modal('false');
    }
 
    $.ajax({
@@ -484,6 +513,12 @@ $(window).load(function(){
 
 
 </script>
+<script type="text/javascript">
+	
+$('.error').fadeIn(400).delay(3000).fadeOut(400);
+
+	
+</script>
 <body style="background-color:#fff">
 	<div id="topbar1">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../images/common/logo_myskillindex.jpeg" width="170px" height="95px" style="margin-top:-15px"></a>
@@ -497,15 +532,6 @@ $(window).load(function(){
 			<div id="content1" class="col-md-3">
 				<div class="sidebar-nav">
 					<div class="navbar navbar-default" role="navigation">
-						<!--<div class="navbar-header">
-								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"><img src="images/profile_blue.png" width="" height=""></span>
-								<span class="icon-bar"><img src="images/profile_blue.png" width="" height=""></span>
-								<span class="icon-bar"><img src="images/profile_blue.png" width="" height=""></span>
-								</button>
-								<span class="visible-xs navbar-brand">Sidebar menu</span>
-							</div> navbar-header ends -->
 							<!-- Code to make nav bar verticle (default is horizontal)-->							
 							<div id="list" class="navbar-collapse collapse sidebar-navbar-collapse">
 								<ul class="nav navbar-nav" id="mynav" >
@@ -584,7 +610,7 @@ $(window).load(function(){
 										<tr> <td style="width:50%"><h4 style="text-align:right;font-weight:bold">Email:</h4></td><td><?php echo '<h5>'.$_SESSION['email'].'</h5>' ?></td></tr>
 										<tr> <td style="width:50%"><h4 style="text-align:right;font-weight:bold">Contact:</h4></td><td><?php echo '<h5>'.$_SESSION['contact'].'</h5>' ?></td></tr>
 										<tr> <td style="width:30%"><h4 style="text-align:right;font-weight:bold">Address:</h4></td><td><?php echo '<h5>'.$_SESSION['address'].'</h5>' ?></td></tr>
-										<tr> <td style="width:50%"><h4 style="text-align:right;font-weight:bold">Aadhar Card Number:</h4></td><td><?php echo '<h5>'.$_SESSION['aadhar'].'</h5>' ?></td></tr>
+								
 										<tr> <td style="width:50%"><h4 style="text-align:right;font-weight:bold">Candidate Id:</h4></td><td><?php echo '<h5>'.$_SESSION['id'].'</h5>' ?> </td></tr>
 									</tbody>
 								</table>
@@ -632,6 +658,9 @@ $(window).load(function(){
 									echo "</select>";
 
 								?>
+
+								<div class='error' style='display:none'>Event Created</div>
+							
 							</div><!-- / fleft-->
 
 							<div id="myModal" class="modal fade" role="dialog">
