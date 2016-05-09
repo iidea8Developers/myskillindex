@@ -12,58 +12,122 @@
 	$log->debug("****START - saveExamDB.php****");
 	session_start();
 	if (isset($_SESSION["user"])){
+		// get the file name = userid_GUID_e.xml
 		$Filename = ($_SESSION['Filename']);
 		
 	}else
 	{
 		header("Location: ../../service/common/error_page.php");
 	}
+	 
 
 	try{
-		// get the file name = userid_GUID_e.xml
 		// substring the GUID from the file name
 		// log file name and GUID
+
 		// load file in to an XML DOM object using 
+		// begin transaction
+    		mysqli_begin_transaction($connection);
+    	
+    		// stop autocommit
+    		mysqli_autocommit($connection, FALSE);
 
-		/*<?php 
-
-    /*** create a SimpleXML object **
-    if( ! $xml = simplexml_load_file('userid_GUID_e.xml') ) 
-    { 
+		//create a SimpleXML object 
+    	if( ! $xml = simplexml_load_file($Filename) ) 
+    	{ 
         echo "Unable to load XML file"; 
-    } 
-    else 
-    { 
-        echo $xml->Myskillindex[1]->org;
-        echo $xml->Myskillindex[1]->exam_name; 
-        echo $xml->Myskillindex[1]->sector;
+   		} 
+    	else 
+    	{   
+    		$user = $_SESSION["user"];
+    		$org_code = $xml->org;
+	        $sector = $xml->sector;
+	        $exam_name = $xml->examName;
+	        $exam_desc = $xml->examDesc;
+	        $exam_time = $xml->examDuration;
+	        $exam_skill = $xml->examSkillLevel;
+	        $exam_pass_percentage = $xml->examPassPercentage;
+	        $qp_code = $xml->QP->qpCode;
+	        $nos_code = $xml->QP->nos->nosCode;
+	        foreach($xml->QP->nos->pc->pcId as $pc_id){
+	        	$query = "INSERT INTO t_exam_org_qp 
+										(exam_id,
+										exam_desc,
+										org_code,
+										qp_code,
+										Exam_skill_level,
+										exam_time,
+										created_by,
+										modified_by,
+										created_time,
+										modified_time,
+										exam_name,
+										exam_pass_percentage) 
+								VALUES('$exam_desc', '$org_code', '$qp_code', '$exam_skill', '$exam_time', '$user', '$user', now(), now(), '$exam_name', '$exam_pass_percentage')";
+				$result =mysqli_query($connection,$query);
+				if($result == FALSE)
+					{
+						throw new Exception($result);
+					}
+				$log->debug($query);
+				$exam_id = mysqli_insert_id($connection);
+				$query = "INSERT INTO t_exam_nos_pc 
+										(exam_id,
+										nos_code,
+										nos_weightage,
+										pc_id,
+										pc_weightage,
+										created_by,
+										modified_by,
+										created_time,
+										modified_time) 
+							VALUES('$exam_id', '$nos_code', 0, '$pc_id', 0, '$user', '$user', now(), now())";
+				$result = mysqli_query($connection,$query);
+				if($result == FALSE)
+					{
+						throw new Exception($result);
+					}
+				$log->debug($query);
+
+	        	foreach($xml->QP->nos->pc->questions->questionId as $questionId){
+	        		$query = "INSERT INTO r_exam_que 
+	        								(exam_id,
+	        								qid,
+	        								created_by,
+	        								modified_by,
+	        								created_time,
+	        								modified_time) 
+	        					VALUES($exam_id, '$questionId' , '$user', '$user', now(), now())";
+					$result =mysqli_query($connection,$query);
+					if($result == FALSE)
+									{
+										throw new Exception($result);
+									}
+					$log->debug($query);
+				}
+			}
+		}
 
         // insert in DB exam
-        //
         /* 
 Create Exam
 
-INSERT INTO `t_exam_org_qp` 
-(`exam_id`, `exam_desc`, `org_code`, `qp_code`, `Exam_skill_level`, `exam_time`, `created_by`, `modified_by`, `created_time`, `modified_time`, `exam_name`, `exam_pass_percentile`) 
-VALUES(001, 'General Awareness 001', '1', 'MSI / QG 0001', 'level 2', 30, 'root', 'root', now(), now(), 'General Awareness 001', 60);
-
-INSERT INTO `t_exam_nos_pc` 
-(`exam_id`, `nos_code`, `nos_weightage`, `pc_id`, `pc_weightage`, `created_by`, `modified_by`, `created_time`, `modified_time`) 
-VALUES(001, 'MSI/ G 0001', 0, 56, 0, 'root', 'root', now(), now());
-
-INSERT INTO `r_exam_que` (`exam_id`, `qid`, `created_by`, `modified_by`, `created_time`, `modified_time`) VALUES(001, 406 , 'root', 'root', now(), now());
-INSERT INTO `r_exam_que` (`exam_id`, `qid`, `created_by`, `modified_by`, `created_time`, `modified_time`) VALUES(001, 407 , 'root', 'root', now(), now());
-INSERT INTO `r_exam_que` (`exam_id`, `qid`, `created_by`, `modified_by`, `created_time`, `modified_time`) VALUES(001, 408 , 'root', 'root', now(), now());
-
-INSERT INTO `t_exam_survey` (`survey_link`, `survey_id`, `exam_id`, `created_by`, `modified_by`, `created_time`, `modified_time`) VALUES('http://52.39.26.22/limesurvey/index.php/275875?lang=en', 275875, 001, 'root', 'root', now(), now());
+INSERT INTO t_exam_survey (survey_link, survey_id, exam_id, created_by, modified_by, created_time, modified_time) VALUES('http://52.39.26.22/limesurvey/index.php/275875?lang=en', 275875, 001, 'root', 'root', now(), now());
 
  ************************ END Exam creation in MSI ********************************************* }
- */ 
+ */
+		mysqli_commit($connection);
+		$log->debug("**** commit called ****");
+
    }
-	catch(exception $e){
+	catch(exception $result){
+		mysqli_rollback($connection);
+		$log->debug($result);
+		$log->debug("****rollback called****");
 
 	}
 	header('Location: thank.php');
+	
 
 	$log->debug("****END- saveExamDB.php****");
 ?>

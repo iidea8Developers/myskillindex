@@ -143,7 +143,7 @@
 		$log->debug("****commit called****");
 
 	}
-	catch(Exception $e){
+	catch(Exception $result){
 		mysqli_rollback($connection);
 		$log->debug("****rollback called****");
 	}

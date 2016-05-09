@@ -80,7 +80,7 @@
 							
 							<button  
 							style="background-color:#3b5998;color:#ffffff;height:33px;border-radius:0px;"
-							name="publish" value="publish" type="button" >Close</button>
+							name="publish" value="publish" type="button" ><a href="admin_dashboard.php" style="color: #fff; text-decoration: none;">Close</a></button>
 							</div>
 							
 							</div>

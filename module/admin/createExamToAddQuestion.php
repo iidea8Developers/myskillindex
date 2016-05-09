@@ -198,8 +198,7 @@
 																		ON  t_qbank.qid = r_pc_q.qid
 																		WHERE r_pc_q.pc_id IN (SELECT pc_id
 																						FROM t_pc
-																						WHERE pc_name IN('".$pcvalues."'))";
-																$log->debug($query);		
+																						WHERE pc_name IN('".$pcvalues."'))";		
 																$result = mysqli_query($connection,$query);
 																while ($row= mysqli_fetch_assoc($result))
 																	{

@@ -2,14 +2,14 @@
 	// this page is to generate xml for the first page of create exam
 	// page created by Jitendra Dayma
 	// modified by: Jitendra dayma
-	// modified on: 18-04-2016
+	// modified on: 09-05-2016
 	
 	//function for db conn and session check
     include_once('../../service/common/db_connection.php');
 	include_once('../../lib/log4php/Logger.php');
 	Logger::configure('../../config/log_config.xml');
-	$log = Logger::getLogger('xsd_to_xml.php');
-	$log->debug("****START -xsd_to_xml.php****");
+	$log = Logger::getLogger('createExamXML.php');
+	$log->debug("****START -createExamXML.php****");
 	session_start();
 	if (isset($_SESSION["user"])){
 		$organisation=$_SESSION['organisation'];
@@ -17,8 +17,8 @@
 		$qp=$_SESSION["qp"];
 		$exam_name=$_SESSION["exam_name"];
 		$exam_description=$_SESSION["exam_description"];
-		$exam_time = $_SESSION["exam_name"];
-		$exam_level = $_SESSION["exam_name"];
+		$exam_time = $_SESSION["exam_time"];
+		$exam_level = $_SESSION["exam_level"];
 		$pass_percentage = $_SESSION["pass_percentage"];
 		$nos_code=$_SESSION["nos_code"];
 		$checked_pc=$_SESSION['checked_pc'];
@@ -44,6 +44,14 @@
 	$row = mysqli_fetch_assoc($result);
 	$nos_name = $row["nos_name"] ;
 
+	//query to get org code
+	$org_query ="SELECT org_code
+				FROM t_org
+				WHERE org_name = '{$organisation}'";
+	$result = mysqli_query($connection,$org_query);
+	$row = mysqli_fetch_assoc($result);
+	$org_code = $row["org_code"] ;
+
 
 	$xml = new DOMDocument("1.0","UTF-8");
 	$xml->formatOutput=true;
@@ -51,14 +59,11 @@
 	$myskillindex = $xml->createElement("myskillindex");
 	$myskillindex = $xml->appendChild($myskillindex);
 
-	$org = $xml->createElement("org",$organisation);
+	$org = $xml->createElement("org",$org_code);
 	$org = $myskillindex->appendChild($org);
 
 	$sector = $xml->createElement("sector",$sector);
 	$sector = $myskillindex->appendChild($sector);
-
-	$examId = $xml->createElement("examId");
-	$examId = $myskillindex->appendChild($examId);
 
 	$examName = $xml->createElement("examName",$exam_name);
 	$examName = $myskillindex->appendChild($examName);
@@ -148,7 +153,6 @@
 
 	// save thisxml in to a .xml file in the folder called tmp
 	$xml->save('../../tmp/'.$file_name);
+	$log->debug("****END-createExamXML.php****");
 	header('Location:saveExamDB.php');
-	$log->debug("****END-xsd_to_xml.php****");
-
 ?>
