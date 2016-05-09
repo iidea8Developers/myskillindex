@@ -33,12 +33,7 @@
     		mysqli_autocommit($connection, FALSE);
 
 		//create a SimpleXML object 
-    	if( ! $xml = simplexml_load_file($Filename) ) 
-    	{ 
-        echo "Unable to load XML file"; 
-   		} 
-    	else 
-    	{   
+    	  	$xml = simplexml_load_file($Filename)
     		$user = $_SESSION["user"];
     		$org_code = $xml->org;
 	        $sector = $xml->sector;
@@ -106,7 +101,7 @@
 					$log->debug($query);
 				}
 			}
-		}
+		
 
         // insert in DB exam
         /* 
@@ -120,7 +115,7 @@ INSERT INTO t_exam_survey (survey_link, survey_id, exam_id, created_by, modified
 		$log->debug("**** commit called ****");
 
    }
-	catch(exception $result){
+	catch(exception $e){
 		mysqli_rollback($connection);
 		$log->debug($result);
 		$log->debug("****rollback called****");
