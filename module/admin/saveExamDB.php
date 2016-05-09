@@ -2,7 +2,7 @@
 	// this page is to save exam in DB
 	// page created by Jitendra Dayma
 	// modified by: Jitendra dayma
-	// modified on: 29-04-2016
+	// modified on: 09-05-2016
 	
 	//function for db conn and session check
 	include_once('../../service/common/db_connection.php');
@@ -23,7 +23,11 @@
 
 	try{
 		// substring the GUID from the file name
+		$file_name=explode("_", $Filename);
+		$GUID = $file_name[1];
 		// log file name and GUID
+
+		$log->INFO('filename:'.$Filename.'  GUID:'.$GUID);
 
 		// load file in to an XML DOM object using 
 		// begin transaction
@@ -117,7 +121,7 @@ INSERT INTO t_exam_survey (survey_link, survey_id, exam_id, created_by, modified
    }
 	catch(exception $e){
 		mysqli_rollback($connection);
-		$log->debug($result);
+		$log->debug($e->getMessage());
 		$log->debug("****rollback called****");
 
 	}
