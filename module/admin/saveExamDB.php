@@ -37,7 +37,11 @@
     		mysqli_autocommit($connection, FALSE);
 
 		//create a SimpleXML object 
-    	  	$xml = simplexml_load_file('../../tmp/'.$Filename);
+	  	$xml = simplexml_load_file('../../tmp/'.$Filename);
+	  		        if(!$xml){
+        	$log->debug("Unable to load XML file ".$Filename." . Please contact system admin.");
+        }else
+        { 
     		$user = $_SESSION["user"];
     		$org_code = $xml->org;
 	        $sector = $xml->sector;
@@ -47,13 +51,9 @@
 	        $exam_skill = $xml->examSkillLevel;
 	        $exam_pass_percentage = $xml->examPassPercentage;
 	        $qp_code = $xml->QP->qpCode;
-	        $nos_code = $xml->QP->nos->nosCode;
-	        if(!$xml){
-	        	$log->debug("Unable to XML file");
-	        }else
-	        { 
-		        foreach($xml->QP->nos->pc->pcId as $pc_id){
-		        	$query = "INSERT INTO t_exam_org_qp 
+
+	        	// Insert exam realtion with QP. This will give the exam id for the new exam
+				$query = "INSERT INTO t_exam_org_qp 
 											(exam_desc,
 											org_code,
 											qp_code,
@@ -65,14 +65,19 @@
 											modified_time,
 											exam_name,
 											exam_pass_percentage) 
-									VALUES('$exam_desc', '$org_code', '$qp_code', '$exam_skill', '$exam_time', '$user', '$user', now(), now(), '$exam_name', '$exam_pass_percentage')";
-					$log->debug($query);
+							VALUES('$exam_desc', '$org_code', '$qp_code', '$exam_skill', '$exam_time', '$user', '$user', now(), now(), '$exam_name', '$exam_pass_percentage')";
+					//$log->debug($query);
 					$result =mysqli_query($connection,$query);
 					if($result == FALSE)
 						{
 							throw new Exception($result);
 						}
-					$exam_id = mysqli_insert_id($connection);
+					$exam_id = mysqli_insert_id($connection);// Gets the last exam_id
+
+			// Exam can have more than one Nos. Below code needs update to accomodate more than one NOS
+	        $nos_code = $xml->QP->nos->nosCode;
+		    foreach($xml->QP->nos->pc->pcId as $pc_id){
+		        	
 					$query = "INSERT INTO t_exam_nos_pc 
 											(exam_id,
 											nos_code,
@@ -83,15 +88,13 @@
 											modified_by,
 											created_time,
 											modified_time) 
-								VALUES('$exam_id', '$nos_code', 0, '$pc_id', 0, '$user', '$user', now(), now())";
+								VALUES('$exam_id', '$nos_code', 1, '$pc_id', 1, '$user', '$user', now(), now())";
 					$result = mysqli_query($connection,$query);
 					if($result == FALSE)
 						{
 							throw new Exception($e);
 						}
-					$log->debug($query);
-
-		        	foreach($xml->QP->nos->pc->questions->questionId as $questionId){
+					foreach($xml->QP->nos->pc->questions->questionId as $questionId){
 		        		$query = "INSERT INTO r_exam_que 
 		        								(exam_id,
 		        								qid,
@@ -105,28 +108,20 @@
 										{
 											throw new Exception($result);
 										}
-						$log->debug($query);
-					}
-				}
-			
-
-	        // insert in DB exam
-	        /* 
-		INSERT INTO t_exam_survey (survey_link, survey_id, exam_id, created_by, modified_by, created_time, modified_time) VALUES('http://52.39.26.22/limesurvey/index.php/275875?lang=en', 275875, 001, 'root', 'root', now(), now());
-	 */
+						}// close for each question
+				} // close for each PC
 				mysqli_commit($connection);
-				$log->debug("**** commit called ****");
-			}
+				
+			} // end of else for xml is ok
 
    }
 	catch(exception $e){
 		mysqli_rollback($connection);
 		$log->debug($e->getMessage());
-		$log->debug("****rollback called****");
+		//$log->debug("****rollback called****");
 
 	}
-	header('Location: thank.php');
 	
-
 	$log->debug("****END- saveExamDB.php****");
+	header('Location: thank.php');
 ?>
