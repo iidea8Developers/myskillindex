@@ -61,7 +61,6 @@
 		$_SESSION['email']    = $row['candidate_email'];
 		$_SESSION['contact']  = $row['candidate_contact'];
 		$_SESSION['address']  = $row['candidate_address_home']." ".$row['candidate_address_street']." ".$row['candidate_address_city']." ".$row['candidate_address_postalcode'];
-		$_SESSION['aadhar']   = $row['candidate_aadhar'];
 		$_SESSION['id']       = $row['candidate_id'];
 	  	$_SESSION['image']    = $row['candidate_image'];
 
@@ -91,12 +90,17 @@
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
 		
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/css/bootstrap-formhelpers.min.css">
+
+
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<!-- Latest compiled JavaScript -->
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/js/bootstrap-formhelpers.min.js"></script>
    		
 		<!-- (Optional) Latest compiled and minified JavaScript translation files 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>-->
@@ -196,6 +200,28 @@
 				border-right: dashed 1px #03A9F4;
 				background-image: url('../../candidate/images/blue.svg');
 			}
+
+			.error {
+    width:200px;
+    height:20px;
+    height:auto;
+    position:absolute;
+    left:50%;
+    margin-left:-100px;
+    bottom:10px;
+    background-color: #383838;
+    color: #F0F0F0;
+    font-family: Calibri;
+    font-size: 20px;
+    padding:10px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+}
+
+
 			#img1{
 				height: 140px;
 	      		margin-right: -1px;
@@ -243,49 +269,7 @@
 			}
 		</style>
     	<!--Java Script functions to display information on the screen-->
-<script type="text/javascript">
-    $(document).ready(function(){
-    $("#hidden_span").hide();
-    $("#cd-dropdown").change(function(){
 
-		if (this.value == "") {
-			
-			$("#txtHint").hide();
-			$("#txtHint2").show();
-			$("#hidden_span").hide();
-
-		} else { 
-			   
-			   $("#txtHint").show();
-			   $("#txtHint2").hide();
-			   $("#hidden_span").show();
-				if (window.XMLHttpRequest) {
-					// code for IE7+, Firefox, Chrome, Opera, Safari
-					xmlhttp = new XMLHttpRequest();
-				} else 
-					{
-						// code for IE6, IE5
-						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-					}
-				xmlhttp.onreadystatechange = function() 
-				   {
-				 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
-						{
-							document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-						}
-					}
-					var url = 'exam_detail.php';
-				xmlhttp.open("GET","exam_detail.php?q="+this.value,true);
-			
-				xmlhttp.send();
-			}
-
-});
-
-
-
-});
-</script>
 <script type="text/javascript">
 	
 
@@ -309,62 +293,13 @@
 							}
 						};
 					
-						xmlhttp.open("GET","register_exam.php?q="+str,true);
+						xmlhttp.open("GET","register_exam_check.php?q="+str,true);
 						xmlhttp.send(null);
             //windows.location.reload(true);                                               
 						}
 			}  
 			// showUser5 calls profile_get.php
-			function showUser5(str) 
-			{
-				if (str == "") 
-				{
-					document.getElementById("profi").innerHTML = "";
-					return;
-				} else { 
-						if (window.XMLHttpRequest) 
-							{
-								// code for IE7+, Firefox, Chrome, Opera, Safari
-								xmlhttp = new XMLHttpRequest();
-							} else {
-									// code for IE6, IE5
-									xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-									}
-						xmlhttp.onreadystatechange = function() 
-							{
-								if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {document.getElementById("profi").innerHTML = xmlhttp.responseText;}
-							};
-					
-						xmlhttp.open("POST","profile_get.php",true);
-						xmlhttp.send();
-					}
-			}
-     		 /*  ******************OBSERVATION there are 2 loadDoc functions in the scripts here *****WHY??*******
-		    function loadDoc() {
-  				var xhttp = new XMLHttpRequest();
-  				xhttp.onreadystatechange = function() {
-    				if (xhttp.readyState == 4 && xhttp.status == 200) {
-     					document.getElementById("demo").innerHTML = xhttp.responseText;
-    				}
-  				};
-			  xhttp.open("GET", "ajax_info.php", true);
-			  xhttp.send();
-			}
-			*/
-            // this function updates the profile of the candidate
-			function loadDoc() {
-  				var xhttp = new XMLHttpRequest();
-  				xhttp.onreadystatechange = function() {
-				    if (xhttp.readyState == 4 && xhttp.status == 200) {
-				    	document.getElementById("demo").innerHTML = xhttp.responseText;
-    				}
-  				};
-			  
-			  	xhttp.open("GET", "profile_edit.php", true);
-			  	xhttp.send();
-			}
-
-             // this function is used in certificate 
+			
       		function loadDoc2() 
       		{
   				var xhttp = new XMLHttpRequest();
@@ -521,6 +456,69 @@
             $(val2).parent().parent().hide();
             }
 </script> 
+
+<script type="text/javascript">
+	
+$(window).load(function(){
+
+	$('#cd-dropdown').change(function() {
+  var value = $( "#cd-dropdown option:selected").val();
+    console.log(value);
+    if(value){
+        $('#myModal').modal('show');
+   }
+   if(!value){
+        $('#myModal').modal('false');
+   }
+
+   $.ajax({
+          type : 'get',
+           url : 'exam_detail.php', // in here you should put your query 
+          data :  'q='+ value, // here you pass your id via ajax .
+                      
+       success : function(r)
+           {
+              // now you can show output in your modal 
+              $('#myModal').show();  // put your modal id 
+             $('.something').show().html(r);
+           }
+    });
+});
+
+
+
+	$('#edit_image').click(function() {
+  
+        $('#myModal2').modal(
+
+        {
+            show: true
+        });
+  
+
+   $.ajax({
+          type : 'get',
+           url : 'profile.php', // in here you should put your query 
+       success : function(r)
+           {
+              // now you can show output in your modal 
+              $('#myModal2').show();  // put your modal id 
+             $('.something2').show().html(r);
+           }
+    });
+});
+    
+});
+
+
+
+</script>
+<script type="text/javascript">
+	
+$('.error').fadeIn(400).delay(3000).fadeOut(400);
+
+	
+</script>
 <body style="background-color:#fff">
 	<div id="topbar1">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../images/common/logo_myskillindex.jpeg" width="170px" height="95px" style="margin-top:-15px"></a>
@@ -534,15 +532,6 @@
 			<div id="content1" class="col-md-3">
 				<div class="sidebar-nav">
 					<div class="navbar navbar-default" role="navigation">
-						<!--<div class="navbar-header">
-								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"><img src="images/profile_blue.png" width="" height=""></span>
-								<span class="icon-bar"><img src="images/profile_blue.png" width="" height=""></span>
-								<span class="icon-bar"><img src="images/profile_blue.png" width="" height=""></span>
-								</button>
-								<span class="visible-xs navbar-brand">Sidebar menu</span>
-							</div> navbar-header ends -->
 							<!-- Code to make nav bar verticle (default is horizontal)-->							
 							<div id="list" class="navbar-collapse collapse sidebar-navbar-collapse">
 								<ul class="nav navbar-nav" id="mynav" >
@@ -578,7 +567,7 @@
 						<div>
 							<h3 style="position:absolute;margin-left:300px;margin-top:-35px;font-weight:bold" >
 								Profile &nbsp; 
-								<img src="../../images/candidate/edit.png" height="20" width="20" onclick="loadDoc3()"/>
+								<img src="../../images/candidate/edit.png" height="20" width="20" id="edit_image" "/>
 							</h3> 
 						</div><!-- Profile Update button code -->
 							<!-- Image load code START-->
@@ -621,11 +610,32 @@
 										<tr> <td style="width:50%"><h4 style="text-align:right;font-weight:bold">Email:</h4></td><td><?php echo '<h5>'.$_SESSION['email'].'</h5>' ?></td></tr>
 										<tr> <td style="width:50%"><h4 style="text-align:right;font-weight:bold">Contact:</h4></td><td><?php echo '<h5>'.$_SESSION['contact'].'</h5>' ?></td></tr>
 										<tr> <td style="width:30%"><h4 style="text-align:right;font-weight:bold">Address:</h4></td><td><?php echo '<h5>'.$_SESSION['address'].'</h5>' ?></td></tr>
-										<tr> <td style="width:50%"><h4 style="text-align:right;font-weight:bold">Aadhar Card Number:</h4></td><td><?php echo '<h5>'.$_SESSION['aadhar'].'</h5>' ?></td></tr>
+								
 										<tr> <td style="width:50%"><h4 style="text-align:right;font-weight:bold">Candidate Id:</h4></td><td><?php echo '<h5>'.$_SESSION['id'].'</h5>' ?> </td></tr>
 									</tbody>
 								</table>
 	                      	</div> <!-- /profi-->
+
+	                      	<div id="myModal2" class="modal fade" role="dialog">
+                               <div class="modal-dialog">
+
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <center><h4 class="modal-title">Profile Information change</h4></center>
+                                    </div>
+                                    <div class="modal-body" id="content2">
+                                      
+                                      <div class="something2" style="display:none;">
+                    
+                                      </div>
+                                    </div>
+                                   
+                                  </div>
+                              
+                                </div>
+                              </div>
 						</div><!-- /column 1-->
 						<!-- </div> --><!-- /container -->
 						<div id="column2" class="hidden" >
@@ -648,8 +658,33 @@
 									echo "</select>";
 
 								?>
+
+								<div class='error' style='display:none'>Event Created</div>
+							
 							</div><!-- / fleft-->
-			              <span id="hidden_span"><font color="red">*** click on Register exam in the menu to see upcoming exam</font></span>
+
+							<div id="myModal" class="modal fade" role="dialog">
+                               <div class="modal-dialog">
+
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <center><h4 class="modal-title">Mason General</h4></center>
+                                    </div>
+                                    <div class="modal-body" id="content">
+                                      
+                                      <div class="something" style="display:none;">
+                    
+                                      </div>
+                                    </div>
+                                   
+                                  </div>
+                              
+                                </div>
+                              </div>
+
+			             
 						
  							<div id="txtHint"></div><!-- / txtHint-->
 							 	<hr>
@@ -688,72 +723,47 @@
                                          </tr>
 									</thead>
                                 <tbody>
-              					<?php 
-                                     //code for percentile ****
- 									$query = "select MAX(marks_scored) from t_candidate_result where exam_id  = '{$_SESSION['exam_id']}' " ;
- 									$result = mysqli_query($connection , $query);
- 									$row = mysqli_fetch_assoc($result);
- 									//	echo "*****************maximum marks*********************";
- 									//	echo $max= $row['MAX(marks_scored)'];
- 									//echo "**************************************";
- 									//Your percentile score = { (No, of people who got less than you/ equal to you) / (no. of people appearing in the exam) } x 100
- 		
- 									$query = " SELECT COUNT(candidate_id) 
- 												FROM t_candidate_result 
- 												WHERE exam_id  = '{$_SESSION['exam_id']}'  
- 												AND marks_scored <= '{$marks}'";
- 									$result = mysqli_query($connection , $query);
- 									$row = mysqli_fetch_assoc($result);
- 									//	echo "********num of people equal or less than u *********************";
- 	    							$num_people = $row['COUNT(candidate_id)'];
- 									$query = " SELECT COUNT(candidate_id) 
- 												FROM t_candidate_result 
- 												WHERE exam_id = '{$_SESSION['exam_id']}'  ";
- 									$result = mysqli_query($connection , $query);
- 									$row = mysqli_fetch_assoc($result);
- 								    $num_people_app = $row['COUNT(candidate_id)'];
- 									$percentile = ($num_people/$num_people_app)*100 ;
-								 	echo '	<body style="background-color:lightgrey;"> ';
-								 	echo '</body>';
+              					<?php
+                     
+              				/*	$sql = "SELECT marks_scored FROM t_candidate_result WHERE candidate_id='{$_SESSION['id']}'";
+									$result = mysqli_query($connection,$sql);
+									while ($row = mysqli_fetch_assoc($result)) {
+										$sql1="SELECT exam_id,exam_end_time,candidate_id FROM t_candidate_exam";
+										$result1 = mysqli_query($connection,$sql1);
+                                         while ($row1 = mysqli_fetch_assoc($result1)){ */
 
-						         	$id=$_SESSION['id'];
-              						$query = "SELECT * 
-              								  FROM t_candidate_result 
-              								  WHERE candidate_id = '{$_SESSION['id']}' " ;
-               						$log->debug($query);
-               						$result = mysqli_query($connection,$query);
-               						while($row = mysqli_fetch_assoc($result))
-               						{
-               						$marksS = $row['marks_scored'];
-                  					$exam_id = $row['exam_id'];
-                   					$query2 = "SELECT * 
-                   								FROM t_exam_org_qp 
-                   								WHERE exam_id = '{$exam_id}' " ;
-               						$result2 = mysqli_query($connection,$query2);
-               						while($row2 = mysqli_fetch_assoc($result2))
-               							{
-                 							$examN = $row2['exam_name'];
-                    						$query3 = "SELECT * 
-                    									FROM t_candidate_exam 
-                    									WHERE exam_id = '{$exam_id}' 
-                    									AND candidate_id= '{$id}' 
-                    									AND fail = '1' ";
-							               $result3 = mysqli_query($connection,$query3);
-							               while($row3 = mysqli_fetch_assoc($result3))
-							               {
-                  							$examD = $row3['exam_date'];
-                   							echo '	<tr>
-													<td><center><strong>'.$examN.'</center></td>
-													<td><center><strong>'.$examD.'</center></td>
-													<td><center><strong>'.$marksS.'</center></td>
-                                                    <td><center><strong>'.$percentile.'</center></td>
-                                                    <td><center><a href="certificate.php?id='. $exam_id.'">  <img height="20" width="20" src="../../images/candidate/pdf_thumbnail.png" /></a></center></td>
-													</tr>';
-               					            } 
-               					        } 
-               					    }
-             
-             					?>
+
+                                         $sql ="	SELECT 	
+                                                 	tc1.candidate_fname,
+                                                 	tc1.candidate_lname,
+                                                 	tce.exam_id,
+                                                 	te.exam_desc,
+                                                 	tce.exam_end_time,
+                                                 	tcr.marks_scored
+                                                 	
+                                                 FROM t_candidate_exam tce,
+                                                 	 t_candidate_1 tc1,
+                                                 	 t_exam_org_qp te,
+                                                 	 t_candidate_result tcr
+                                                 	
+                                                 WHERE tc1.candidate_id = '{$_SESSION['id']}'
+                                                 AND   tc1.candidate_id = tce.candidate_id
+                                                 AND   tce.exam_id = te.exam_id 
+                                                 AND   tce.exam_id = tcr.exam_id";
+                                                 $result = mysqli_query($connection,$sql);
+                                                 while($row = mysqli_fetch_assoc($result)){
+									echo '	<tr>
+													<td><center><strong>'.$row['exam_desc'].'</center></td>
+													<td><center><strong>'.$row['exam_end_time'].'</center></td>
+													<td><center><strong>'.$row['marks_scored'].'</center></td>
+                                                    <td><center><strong>'.$row['marks_scored'].'</center></td>
+                                                    <td><center><a href="certificate_html.php?end_date='.$row['exam_end_time'].'&fname='.$row['candidate_fname'].'&lname='.$row['candidate_lname'].'&mscored='.$row['marks_scored'].'&examdesc='.$row['exam_desc'].'"   target="_blank">  <img height="20" width="20" src="../../images/candidate/pdf_thumbnail.png" /></a></center></td>
+											 </tr>';
+                                      }
+								//	}
+								// }
+                   					
+                   					?>
 								</tbody>
 								</table>
                   			</div><!-- / demo3-->

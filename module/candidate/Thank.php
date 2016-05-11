@@ -1,32 +1,19 @@
  <?php
  	session_start();
- 	include('../../service/common/db_connection.php');
-  
-   
- 
-  	echo $candidate_id  = $_SESSION['id'];
-   echo $email = $_SESSION['email'];
- //	echo $candidate_id;
- 	//echo "<br>";
-   echo  $exam_id = 	$_SESSION['exam_id'] ;
- 	
- 
-
-  
-  
-  
-  
-  
- 	$query2 = "select * from t_exam_survey where exam_id = '{$_SESSION['exam_id']}' " ;
+ 	include_once('../../service/common/db_connection.php');
+   $candidate_id  = $_SESSION['id'];
+   $email = $_SESSION['email'];
+   $exam_id = 	$_SESSION['exam_id'] ;
+ 	  
+ 	$query2 = "select survey_id from t_exam_survey where exam_id = '{$_SESSION['exam_id']}' " ;
  	$result2=mysqli_query($connection,$query2);
  	while ($row2=mysqli_fetch_assoc($result2))
- 	
  	
  	{ 
  		$survey_id = $row2['survey_id'];
  		
  		
- 		$query3 = " select * from t_exam_org_qp where exam_id  = '{$_SESSION['exam_id']}' " ;
+ 		$query3 = " SELECT exam_name, exam_pass_percentile FROM t_exam_org_qp WHERE exam_id  = '{$_SESSION['exam_id']}' " ;
  		$result3=mysqli_query($connection,$query3);
  		while ($row3=mysqli_fetch_assoc($result3))
  		
@@ -37,57 +24,31 @@
  			$Query = "Select * from r_exam_que where exam_id =  '{$_SESSION['exam_id']}' " ;
  			$result4=mysqli_query($connection,$Query);
  			$num_rows = mysqli_num_rows($result4);
- 			
- 		//	echo "<br>";
- 		//	echo $num_rows;
- 		//	echo "<br>";
+
  			while ($row4=mysqli_fetch_assoc($result4))				
  			{
- 			//	echo $row4['qid']." ";
- 				//  echo "<br>";
  				
  				$Query2 = "Select distinct a_iscorrect  from t_ansbank where qid = '{$row4['qid']}' " ;
  				$result5=mysqli_query($connection,$Query2);
  				while ($row5=mysqli_fetch_assoc($result5))
  				{
  				echo	 $string2[]= "A".$row5['a_iscorrect'];
- 					//echo "&nbsp;&nbsp;";
- 				//	echo "<br>";
- 					//LIME
- 					
  				}
  				
  			}
- 			
- 			//echo  $row3['exam_name']; 
- 			//echo "<br>";
- 		//	echo $survey_id; 
- 		//	echo "<br>";
- 		//	echo "----------------";
- 			//echo "<br>";
- 			
  			$lime = "Select * from lime_survey_".$survey_id." where token = '{$candidate_id}' ";
  			$result6=mysqli_query($connection2,$lime);
  			while ($limerow=mysqli_fetch_assoc($result6))
  			
  			{
  				foreach($limerow as $key => $value) {
- 					// echo "$key = $value <br />";
- 			$string[]=$value;
+ 	 			$string[]=$value;
  				}
  				
  			}
  			
  			
  		}}
- 		
- 		//print_r($string);
- 	//	echo "<br>";
- 	//	echo "<br>";
- 	//	print_r($string2);
- 	//	echo "<br>";
- 	//	echo "<br>";
- 		
  		
  		$num=5;
  		$num2=0;
@@ -97,8 +58,7 @@
  			
  			if( $string[$num] != $string2[$num2])
  			{
- 				//echo "not equal";
- 			//	Echo '<br>';
+
       echo "  ************start************ ";
       echo $string[$num];
       echo '<br>';
@@ -107,8 +67,7 @@
      
  			}else
  			{
- 				//echo "equal";
- 			//	Echo '<br>';
+
  				$marks=$marks+4;
  				
  			}
@@ -159,16 +118,11 @@
  
  
  
-    echo '</body>';
+ echo '</body>';
  echo '<h1>'.round($percentile).' Percentile <h1>';
  echo '<h1>'.  $marks .' Marks Scored <h1>';
- 
- 
- 
- 	
  	
  	echo $num_rows;
-  echo "space";
   $four = 4;
   $num_of_q = $num_rows;
   $total_marks = ($num_of_q * $four );
@@ -182,10 +136,10 @@
  if ($exam_percentile < $eligible){
  $date = date("Y/m/d");
  echo "pass";
- $sql = "UPDATE t_candidate_exam SET  fail = '1' , exam_date = '$date' where (candidate_id = '{$_SESSION['id']}' and exam_id = '{$exam_id}' ) " ;
+ $sql = "UPDATE t_candidate_exam SET  fail = '1' , exam_date = '$date' WHERE (candidate_id = '{$_SESSION['id']}' AND exam_id = '{$exam_id}' ) " ;
  
   if (mysqli_query($connection, $sql)) {
-     echo "pass dal gya";
+
  } else {
      echo "Error updating record: " . mysqli_error($connection);
  }
@@ -194,8 +148,8 @@
 	$query4 = " select * from t_candidate_exam where (candidate_id = '{$_SESSION['id']}' and exam_id = '{$exam_id}' ) " ;
  		$result4 = mysqli_query($connection , $query4);
  		$row4 = mysqli_fetch_assoc($result4);
- 	//	echo "***************total people of 92 exAM***********************";
- 	    $exam_date = $row4['exam_date'];
+//	echo "***************total people of 92 exAM***********************";
+ 	  $exam_date = $row4['exam_date'];
 
 $msg = "Dear ".$_SESSION['name'].",
 
@@ -216,9 +170,6 @@ Regards
 My Skill Index Team
 www.MyskillIndex.com";
 
-// use wordwrap() if lines are longer than 70 characters
-
-
 // send email
 mail($email,"MyskillIndex",$msg);
 
@@ -236,8 +187,6 @@ mail($email,"MyskillIndex",$msg);
  } else {
      echo "Error updating record: " . mysqli_error($connection);
  }
- 
- //mail 
  
 $msg = "Dear ".$_SESSION['name'].",
 
@@ -260,12 +209,9 @@ www.MyskillIndex.com";
 mail($email,"MyskillIndex",$msg);
  
  }
- 
- 
+
 header('Location: dashboard.php');
 
-echo "*************UNDER TESTING NOW*************";
- 
- ?>
+?>
  
 

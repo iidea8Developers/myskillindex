@@ -1,6 +1,5 @@
-
-
 <?php
+    //gives description of nos
 	// db conn and session check
 	include_once('../../lib/log4php/Logger.php');
 	Logger::configure('../../config/log_config.xml');
