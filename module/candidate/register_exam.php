@@ -61,7 +61,7 @@ include ("../../lib/jsonrpcphp/src/org/jsonrpcphp/JsonRPCClient.php");
 include  ("../../../limesurvey/third_party/kcfinder/core/autoload.php");		
 
 //Get Session parameters
-    $myJSONRPCClient = new \org\jsonrpcphp\JsonRPCClient( '../../../limesurvey/index.php/admin/remotecontrol' );
+ $myJSONRPCClient = new \org\jsonrpcphp\JsonRPCClient( '../../../limesurvey/index.php/admin/remotecontrol' );
 	$sessionKey= $myJSONRPCClient->get_session_key( LS_USER, LS_PASSWORD );
 
    	$name = $_SESSION['name'];
@@ -104,11 +104,11 @@ include  ("../../../limesurvey/third_party/kcfinder/core/autoload.php");
 	        ) 
           ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ";
 	
-	      if ($connection2->query($sql) === TRUE) 
+	      if ($connection->mysqli_query($sql) === TRUE) 
           {
 	         "Table token created successfully";
 		      } else {
-	 	                "Error creating table: " . $connection2->error;
+	 	                "Error creating table: " . $connection->error;
                   }
 //********** INSERT Token in Lime Survey Tables - Using Connection2 ********************************  
 
@@ -136,7 +136,7 @@ include  ("../../../limesurvey/third_party/kcfinder/core/autoload.php");
              {
 	             "Token Inserted Successfully - File:upcoming.php ";
               } else {
-	                     "File: Upcoming.php : Error creating table: " . $connection2->error;
+	                     "File: Upcoming.php : Error creating table: " . $connection->error;
 	                    }
       	$myJSONRPCClient->release_session_key($sessionKey );
          $survey_id;
