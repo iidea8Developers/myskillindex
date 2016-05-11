@@ -30,10 +30,26 @@
 			$log->INFO('filename:'.$Filename.'  GUID:'.$GUID);
 
 		
-        /* Logic
-			1. fetch from DB msi_tools the data for exam (from table r_exam_org_qp)
-			2. create a subxml for exam
-							<surveys>
+        //Logic
+			//1. fetch from DB msi_tools the data for exam (from table t_exam_org_qp)
+			/*$xml = simplexml_load_file('../../../tmp/'.$Filename);
+			if(!$xml){
+				$log->debug("unable to load XML file");
+			}else{
+				$org_code = $xml->org;
+				$qp_code = $xml->QP->qpCode;
+				WHERE org_code = '{$org_code}' AND qp_code = '{$qp_code}'*/
+			$Query = "SELECT exam_id
+					  FROM t_exam_org_qp
+					  ORDER BY exam_id DESC 
+					  LIMIT 1";
+			$result = mysql_query($connection, $Query);
+			$row = mysqli_fetch_assoc($result);
+			$exam_id = $row["exam_id"];
+			
+			//2. create a subxml for exam
+			?>
+				<surveys>
 				  <fields>
 				   <fieldname>sid</fieldname>
 				   <fieldname>admin</fieldname>
@@ -138,6 +154,7 @@
 				   </row>
 				  </rows>
 				 </surveys>
+
 				 3. select question for the exam from table r_exam_que
 				 4. for each question create an xml row
 					<questions>
