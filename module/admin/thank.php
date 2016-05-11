@@ -1,21 +1,27 @@
 <?php
 	//this is page is to say thank to admin and ask him to publish exam  
 	//session check and db conn
-	session_start();
+	
 	include_once('../../service/common/db_connection.php');
+	include_once('../../lib/log4php/Logger.php');
+	Logger::configure('../../config/log_config.xml');
+	$log = Logger::getLogger('thank.php');
+	$log->debug("**** START - thank.php ****");
+	session_start();
 	if ((isset($_SESSION["user"]))){
 	}else
 	{
 		header("Location: error_page.php");
 	}
-	$query="select * from t_exam_survey where exam_id ='{$_SESSION["exam_id"]}' ";
+	$query="SELECT survey_link 
+			FROM t_exam_survey 
+			WHERE exam_id ='{$_SESSION["exam_id"]}' ";
 	$result=mysqli_query($connection,$query);
 	$row=mysqli_fetch_assoc($result);
 	$exam_link=$row['survey_link'];
-	$exam_name=$_SESSION["exam"];
+	$exam_name=$_SESSION["exam_name"];
 	
-	
-	
+	$log->debug("*******END - thank.php *******")
 	?>
 <!DOCTYPE html>
 <html lang="eng" ng-app="myApp">
