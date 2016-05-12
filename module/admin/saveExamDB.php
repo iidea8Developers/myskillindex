@@ -123,5 +123,5 @@
 	}
 	
 	$log->debug("****END- saveExamDB.php****");
-	header('Location: thank.php');
+	header('Location: ls_invoke/createlss.php');
 ?>
