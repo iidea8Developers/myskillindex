@@ -691,13 +691,15 @@
 			$surveyls_numberformat->appendChild($xml->createCDATASection(0));
 
 			// save xml in tmp folder
-			$xmlfile=$exam_id.'_'.$exam_name.'_e.xml';
+			$file=$exam_id.'_'.$exam_name.;
+			$log->debug(echo '<xmp>'. $xml->saveXML().'</xmp>');
+			$file=$file.',lss';
 
-			$xml->save('../../../tmp/'.$xmlfile);
+			$xml->save('../../../tmp/'.$file);
 			
 			//create RPC session with LS
 			// without composer this line can be used
-			require_once '../../../lib/src/org/jsonrpcphp/JsonRPCClient.php';
+			include_once('../../../lib/jsonrpcphp/JsonRPCClient.php');
 			// with composer support just add the autoloader
 			// include_once 'vendor/autoload.php';
 
@@ -705,44 +707,36 @@
 			$survey_id=$exam_id;
 
 			// instanciate a new client
-			$myJSONRPCClient = new\src\org\jsonrpcphp\JsonRPCClient( LS_BASEURL );
+			$myJSONRPCClient = new JsonRPCClient( LS_BASEURL );
 
 			// receive session key
 			$sessionKey= $myJSONRPCClient->get_session_key( LS_USER, LS_PASSWORD );
 
-			// receive all ids and info of groups belonging to a given survey
-			//$groups = $myJSONRPCClient->list_groups( $sessionKey, $survey_id );
-			//print_r($groups, null );
+			//import survey to limesurvey
+			$file_string=base64_encode(file_get_contents('../../../tmp/'.$file));
+			$format = 'lss';
+			$sNewSurveyName = 'A new title';
+			$new_survey_id = $myJSONRPCClient->import_survey($sessionkey,$file_string,$format,$sNewSurveyName);
+
+			//insert data in exam_survey table
+			$query = "INSERT INTO t_exam_survey(survey_link,
+												survey_id,
+												exam_id,
+												created_by,
+												modified_by,
+												created_time,
+												modified_time)
+						values(,$new_survey_id,$exam_id,$_SESSION["user"],$_SESSION["user"],NOW(),NOW())";
+			$result = mysqli_query($connection,$query);
 
 			// release the session key
 			$myJSONRPCClient->release_session_key( $sessionKey );
-
-/*11.Create a session key
-In order to use every function in the API, user must have a session key. This session key is created by the get_session_key function, which actually performs the user authentication and creates a session for the user.
-
-$sessionkey = $client->call(‘get_session_key’, array(‘<username>’,'<password>’));
-Result: string(32) "tgv7xrudi8u4jjxjhq8bspmey2z4ea87"
-
-12.Release session key
-The session key is the basic authentication token for every function in the API. After the end of the usage, user can or should release this session key. In any case this session key is only valid for a limited period of time, defined by the session_lifetime parameter in the applications config.
-
-$result = $client->call(‘release_session_key’, $sessionkey);
-Result: string(2) "OK" The most basic usage of the Api involves the creation of a survey. There are two ways of creating a survey, either by importing the individual groups or questions, or by importing the whole structure. The first scenario will do a complete import of a survey and the following will use individual imports.
-13.Import survey
-The native format for the surveys is the lss. Optionaly users can use csv, or zip files.
-
-The file used for import is sample_survey.lss
-
-$file_string=base64_encode(file_get_contents('sample_survey.lss'));
-$format = 'lss';
-$sNewSurveyName = 'A new title';
-$iNewID = $client->call('import_survey', array($sessionkey,$file_string,$format,$sNewSurveyName));
-Result: string(6) "685351"
-
-14: update exam_survey table with survey link
-
-		*/	
 	
-	$log->debug("****END- createlss.php****");
-	header('Location: ../thank.php');
+	
+			$log->debug("****END- createlss.php****");
+			header('Location: ../thank.php');
+	}
+	catch(exception $e){
+
+	}
 ?>
