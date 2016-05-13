@@ -9,19 +9,17 @@
 	$log->debug("**** START - thank.php ****");
 	session_start();
 	if ((isset($_SESSION["user"]))){
-		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-		$log->debug($_SESSION["user"]);
-		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+		
 	}else
 	{
 		header("Location: error_page.php");
 	}
-	$query="SELECT survey_link 
+	/*$query="SELECT survey_link 
 			FROM t_exam_survey 
 			WHERE exam_id ='{$_SESSION["exam_id"]}' ";
 	$result=mysqli_query($connection,$query);
-	$row=mysqli_fetch_assoc($result);
-	$exam_link=$row['survey_link'];
+	$row=mysqli_fetch_assoc($result);*/
+	$exam_link=$_SESSION['survey_link'];
 	$exam_name=$_SESSION["exam_name"];
 	
 	$log->debug("*******END - thank.php *******")

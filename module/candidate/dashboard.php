@@ -63,15 +63,6 @@
 		$_SESSION['address']  = $row['candidate_address_home']." ".$row['candidate_address_street']." ".$row['candidate_address_city']." ".$row['candidate_address_postalcode'];
 		$_SESSION['id']       = $row['candidate_id'];
 	  	$_SESSION['image']    = $row['candidate_image'];
-
-	  	/*$log->debug("Candidate Name - ".$_SESSION['name']);
-	  	$log->debug("Candidate pwd - ".$_SESSION['password']);
-	  	$log->debug("Candidate email - ".$_SESSION['email']);
-	  	$log->debug("Candidate contact - ".$_SESSION['contact']);
-	  	$log->debug("Candidate address - ".$_SESSION['address']);
-	  	$log->debug("Candidate aadhar - ".$_SESSION['aadhar']);
-	  	$log->debug("Candidate id - ".$_SESSION['id']);
-	  	$log->debug("Candidate image - ".$_SESSION['image']);*/
 	  	
   	}catch(exception $e)
 				{
@@ -646,14 +637,15 @@ $('.error').fadeIn(400).delay(3000).fadeOut(400);
                             <div class="fleft" style="border:dashed 1px #4CAF50;width:223px;display:inline">
 								<?php
 									//query used to get list of nos from db
-									$sql = "SELECT * FROM t_exam_org_qp";
+									$sql = "SELECT exam_name
+										    FROM t_exam_org_qp";
 									$result = mysqli_query($connection,$sql);
-									$log->debug("in CLass fleft - SQL Statement - ".$sql);
+									//$log->debug("in CLass fleft - SQL Statement - ".$sql);
 									echo "<select class='selectpicker' name='users' style='width:150px;'  id='cd-dropdown' class='cd-select' >
 									<option value='' id='select-option'>Register For The Exam</option>";
 									while ($row = mysqli_fetch_assoc($result)) {
 										echo "<option value='" . $row['exam_name'] . "'>" . $row['exam_name'] . "</option>";
-										$log->debug("in CLass fleft / result rows - ".$row['exam_name']);
+										//$log->debug("in CLass fleft / result rows - ".$row['exam_name']);
 									}
 									echo "</select>";
 
@@ -670,7 +662,7 @@ $('.error').fadeIn(400).delay(3000).fadeOut(400);
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <center><h4 class="modal-title">Mason General</h4></center>
+                                      <center><h4 class="modal-title">Exam Details</h4></center>
                                     </div>
                                     <div class="modal-body" id="content">
                                       

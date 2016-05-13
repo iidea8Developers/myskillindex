@@ -12,9 +12,6 @@
 	$log->debug("**** START - createlss.php ****");
 	session_start();
 	if (isset($_SESSION["user"])){
-		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-		$log->debug($_SESSION["user"]);
-		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
 		// get the file name = userid_GUID_e.xml
 		$Filename = ($_SESSION['Filename']);
 		
@@ -170,7 +167,7 @@
 						
 				$gid=$xml->createElement("gid");
 				$row->appendChild($gid);
-				$gid->appendChild($xml->createCDATASection($g_id)); 
+				$gid->appendChild($xml->createCDATASection(1)); 
 						
 				$sid=$xml->createElement("sid");
 				$row->appendChild($sid); 
@@ -282,7 +279,7 @@ $log->debug("###################################################################
 				$sid->appendChild($xml->createCDATASection($exam_id));
 				$gid=$xml->createElement("gid");
 				$row->appendChild($gid);
-				$gid->appendChild($xml->createCDATASection($g_id));
+				$gid->appendChild($xml->createCDATASection(1));
 				$type=$xml->createElement("type");
 				$row->appendChild($type);
 				$type->appendChild($xml->createCDATASection($qd_row['q_type_code']));		   
@@ -715,25 +712,26 @@ $log->debug("###################################################################
 
 			// the survey to process
 			$survey_id=$exam_id;
-			$log->debug($survey_id);
+			//$log->debug($survey_id);
 
 			// instanciate a new client
-			$myJSONRPCClient = new JsonRPCClient( LS_BASEURL );
-			$log->debug($myJSONRPCClient);
+			$myJSONRPCClient = new JsonRPCClient( LS_BASEURL , TRUE );
+			//$log->debug($myJSONRPCClient);
 
 			// receive session key
 			$sessionKey= $myJSONRPCClient->__call('get_session_key',array( LS_USER, LS_PASSWORD ));
-			$log->debug($sessionkey);
+			//$log->debug($sessionKey);
 
 			//import survey to limesurvey
 			$file_string=base64_encode(file_get_contents('../../tmp/'.$file));
 			$format = 'lss';
 			$sNewSurveyName = 'A new title';
-			$new_survey_id = $myJSONRPCClient->__call('import_survey',array($sessionkey,$file_string,$format,$sNewSurveyName));
-			$log->debug($new_survey_id);
+			$new_survey_id = $myJSONRPCClient->__call('import_survey',array($sessionKey,$file_string,$format,$sNewSurveyName));
+			//$log->debug($new_survey_id);
 			//to form a survey link
 			$survey_link="http://52.39.26.22/limesurvey/index.php/" ;
 		    $survey_link .= $new_survey_id."?lang=en";
+		    $_SESSION['survey_link'] = $survey_link;
 
 			//insert data in exam_survey table
 			$query = "INSERT INTO t_exam_survey(survey_link,
@@ -744,8 +742,8 @@ $log->debug("###################################################################
 												created_time,
 												modified_time)
 						values('{$survey_link}','{$new_survey_id}','{$exam_id}','{$file_name[0]}','{$file_name[0]}',NOW(),NOW())";
-			$log->debug($query);
-			//$result = mysqli_query($connection,$query);
+			//$log->debug($query);
+			$result = mysqli_query($connection,$query);
 
 			//
 			$active = $myJSONRPCClient->activate_survey($sessionKey,$new_survey_id);

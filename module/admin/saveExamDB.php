@@ -12,9 +12,7 @@
 	$log->debug("**** START - saveExamDB.php ****");
 	session_start();
 	if (isset($_SESSION["user"])){
-		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-		$log->debug($_SESSION["user"]);
-		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+		
 		// get the file name = userid_GUID_e.xml
 		$Filename = ($_SESSION['Filename']);
 		

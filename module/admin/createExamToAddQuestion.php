@@ -12,9 +12,7 @@
 	$log->debug("****START - cteateExamToAddQuestion.php****");
 	session_start();
 	if (isset($_SESSION["user"])){
-		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-		$log->debug($_SESSION["user"]);
-		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+		
 		$_SESSION["organisation"]=$_POST["org"];
 		$_SESSION["sector"]=$_POST["sector"];
 		$_SESSION["qp"]=$_POST["qp"];
