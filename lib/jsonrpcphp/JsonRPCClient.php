@@ -136,7 +136,7 @@ class JsonRPCClient
         );
         $request = json_encode($request);
         if ($this->debug) {
-            echo '***** Request *****' . "\n" . $request . "\n";
+           // echo '***** Request *****' . "\n" . $request . "\n";
         }
 
         // performs the HTTP POST

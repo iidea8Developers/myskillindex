@@ -14,7 +14,6 @@ include_once('../../service/common/common_error.php');
 
 
  $q = $_GET['q'];
-//  $q = "Banksman";
   $query = "SELECT exam_id,exam_name,exam_desc,org_code,qp_code,exam_time 
   			FROM t_exam_org_qp 
   			WHERE exam_name = '{$q}' ";
