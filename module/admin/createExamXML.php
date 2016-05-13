@@ -12,6 +12,9 @@
 	$log->debug("****START -createExamXML.php****");
 	session_start();
 	if (isset($_SESSION["user"])){
+		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+		$log->debug($_SESSION["user"]);
+		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
 		$organisation=$_SESSION['organisation'];
 		$sector=$_SESSION["sector"];
 		$qp=$_SESSION["qp"];

@@ -10,15 +10,15 @@
 	define("dbpass21","shukla");
 	define("dbname21","tool"); 
 
-	define( 'LS_USER', 'root' );
+	define( 'LS_USER', 'jitendradayma' );
 	define( 'LS_PASSWORD', 'dayma@2016' );
 	
 	define('admin_email', 'hello@iidea8.com');
 	define('admin_pwd', 'Nimble2015');
 
- 	// change these as per requrement
+ 
  	define('LS_DBversion',257);
- 	define( 'LS_BASEURL', 'localhost/limesurvey/index.php?r=admin/remotecontrol');
+ 	define('LS_BASEURL', 'http://localhost/limesurvey/index.php/admin/remotecontrol');
  	define('admin', 'Jitendra Dayma');
  	define('adminMail','jitendradayma@gmail.com');
 ?>

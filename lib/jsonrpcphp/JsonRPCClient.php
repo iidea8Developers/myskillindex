@@ -28,7 +28,7 @@
  * @author sergio <jsonrpcphp@inservibile.org>
  * @author Johannes Weberhofer <jweberhofer@weberhofer.at>
  */
-namespace org\jsonrpcphp;
+//namespace org\jsonrpcphp;
 
 class JsonRPCClient
 {
