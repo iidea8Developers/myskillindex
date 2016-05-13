@@ -9,6 +9,9 @@
 	$log->debug("**** START - thank.php ****");
 	session_start();
 	if ((isset($_SESSION["user"]))){
+		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+		$log->debug($_SESSION["user"]);
+		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
 	}else
 	{
 		header("Location: error_page.php");

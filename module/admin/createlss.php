@@ -5,19 +5,22 @@
 	// modified on: 11-05-2016
 	
 	//function for db conn and session check
-	include_once('../../../service/common/db_connection.php');
-	include_once('../../../lib/log4php/Logger.php');
-	Logger::configure('../../../config/log_config.xml');
+	include_once('../../service/common/db_connection.php');
+	include_once('../../lib/log4php/Logger.php');
+	Logger::configure('../../config/log_config.xml');
 	$log = Logger::getLogger('createlss.php');
 	$log->debug("**** START - createlss.php ****");
 	session_start();
 	if (isset($_SESSION["user"])){
+		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+		$log->debug($_SESSION["user"]);
+		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
 		// get the file name = userid_GUID_e.xml
 		$Filename = ($_SESSION['Filename']);
 		
 	}else
 	{
-		header("Location: ../../../service/common/error_page.php");
+		header("Location: ../../service/common/error_page.php");
 	}
 	 
 
@@ -36,7 +39,7 @@
 					  FROM t_exam_org_qp
 					  ORDER BY exam_id DESC 
 					  LIMIT 1";
-			$result = mysql_query($connection, $query);
+			$result = mysqli_query($connection, $query);
 			$row = mysqli_fetch_assoc($result);
 			$exam_id = $row["exam_id"];
 			$exam_name = $row["exam_name"];
@@ -82,7 +85,7 @@
 			$query = "SELECT qid
 					  FROM r_exam_que
 					  WHERE exam_id ='{$exam_id}'";
-			$result = mysql_query($connection, $query);
+			$result = mysqli_query($connection, $query);
 			while($q_row = mysqli_fetch_assoc($result)){
 				$q_id = $q_row["qid"];
 				$a_query = "SELECT a_desc,
@@ -91,7 +94,7 @@
 				                   a_lang_code
 				            FROM t_ansbank
 				            WHERE qid = '{$q_id}'";
-				$a_result = mysql_query($connection, $a_query);
+				$a_result = mysqli_query($connection, $a_query);
 				while($a_row = mysqli_fetch_assoc($a_result)){
 					$row=$xml->createElement("row");
 					$rows->appendChild($row);
@@ -248,8 +251,15 @@
 
 			//question's data 
 			$num = 0;
-			while($q_row = mysqli_fetch_assoc($result)){
-				$q_id = $q_row["qid"];
+			$query = "SELECT qid
+					  FROM r_exam_que
+					  WHERE exam_id ='{$exam_id}'";
+			$result = mysqli_query($connection, $query);
+			while($q_row1=mysqli_fetch_assoc($result)){
+$log->debug("###########################################################################");
+				$log->debug($q_row1);
+				$log->debug("###########################################################################");
+				$q_id = $q_row1["qid"];
 				//qd = question's detail
 				$qd_query = "SELECT q_type_code,
 									q_description,
@@ -691,32 +701,39 @@
 			$surveyls_numberformat->appendChild($xml->createCDATASection(0));
 
 			// save xml in tmp folder
-			$file=$exam_id.'_'.$exam_name.;
-			$log->debug(echo '<xmp>'. $xml->saveXML().'</xmp>');
-			$file=$file.',lss';
+			$file=$exam_id.'_'.$exam_name;
+			//$log->debug('<xmp>'. $xml->saveXML().'</xmp>');
+			$file=$file.'.lss';
 
-			$xml->save('../../../tmp/'.$file);
+			$xml->save('../../tmp/'.$file);
 			
 			//create RPC session with LS
 			// without composer this line can be used
-			include_once('../../../lib/jsonrpcphp/JsonRPCClient.php');
+			include_once('../../lib/jsonrpcphp/JsonRPCClient.php');
 			// with composer support just add the autoloader
 			// include_once 'vendor/autoload.php';
 
 			// the survey to process
 			$survey_id=$exam_id;
+			$log->debug($survey_id);
 
 			// instanciate a new client
 			$myJSONRPCClient = new JsonRPCClient( LS_BASEURL );
+			$log->debug($myJSONRPCClient);
 
 			// receive session key
-			$sessionKey= $myJSONRPCClient->get_session_key( LS_USER, LS_PASSWORD );
+			$sessionKey= $myJSONRPCClient->__call('get_session_key',array( LS_USER, LS_PASSWORD ));
+			$log->debug($sessionkey);
 
 			//import survey to limesurvey
-			$file_string=base64_encode(file_get_contents('../../../tmp/'.$file));
+			$file_string=base64_encode(file_get_contents('../../tmp/'.$file));
 			$format = 'lss';
 			$sNewSurveyName = 'A new title';
-			$new_survey_id = $myJSONRPCClient->import_survey($sessionkey,$file_string,$format,$sNewSurveyName);
+			$new_survey_id = $myJSONRPCClient->__call('import_survey',array($sessionkey,$file_string,$format,$sNewSurveyName));
+			$log->debug($new_survey_id);
+			//to form a survey link
+			$survey_link="http://52.39.26.22/limesurvey/index.php/" ;
+		    $survey_link .= $new_survey_id."?lang=en";
 
 			//insert data in exam_survey table
 			$query = "INSERT INTO t_exam_survey(survey_link,
@@ -726,17 +743,21 @@
 												modified_by,
 												created_time,
 												modified_time)
-						values(,$new_survey_id,$exam_id,$_SESSION["user"],$_SESSION["user"],NOW(),NOW())";
-			$result = mysqli_query($connection,$query);
+						values('{$survey_link}','{$new_survey_id}','{$exam_id}','{$file_name[0]}','{$file_name[0]}',NOW(),NOW())";
+			$log->debug($query);
+			//$result = mysqli_query($connection,$query);
 
+			//
+			$active = $myJSONRPCClient->activate_survey($sessionKey,$new_survey_id);
 			// release the session key
 			$myJSONRPCClient->release_session_key( $sessionKey );
 	
 	
-			$log->debug("****END- createlss.php****");
-			header('Location: ../thank.php');
+			
 	}
 	catch(exception $e){
-
+		$log->error("****Error- createlss.php :". $e->getmessage()."****");
 	}
+	$log->debug("****END- createlss.php****");
+			header('Location: thank.php');
 ?>

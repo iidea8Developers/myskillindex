@@ -13,6 +13,9 @@
 	$log->debug("****START -create_exam.php****");
 	session_start();
 	if (isset($_SESSION["user"])){
+		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+		$log->debug($_SESSION["user"]);
+		$log->debug('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
 	}else
 	{
 		header("Location: ../../service/common/error_page.php");
