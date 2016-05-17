@@ -264,7 +264,7 @@
 <script type="text/javascript">
 	
 
-			// showUser3 calls upcoming.php
+			// showUser3 calls exam_register_check.php
 			 function showUser3(str) 
 	     	{
          		if (str == "") {
@@ -278,13 +278,12 @@
 								// code for IE6, IE5
 	                   			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 								}
+						xmlhttp.open("GET","exam_register_check.php?q="+str,true);		
  						xmlhttp.onreadystatechange = function() {
 							if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 								document.getElementById("txtHint2").innerHTML = xmlhttp.responseText;
 							}
 						};
-					
-						xmlhttp.open("GET","register_exam.php?q="+str,true);
 						xmlhttp.send(null);
             //windows.location.reload(true);                                               
 						}
@@ -478,7 +477,7 @@ $(window).load(function(){
 
 
 
-	$('.glyphicon-pencil').click(function() {
+	$('#edit_image').click(function() {
   
         $('#myModal2').modal(
 
@@ -558,7 +557,7 @@ $('.error').fadeIn(400).delay(3000).fadeOut(400);
 						<div>
 							<h3 style="position:absolute;margin-left:300px;margin-top:-35px;font-weight:bold" >
 								Profile &nbsp; 
-								<span class="glyphicon glyphicon-pencil"></span>
+								<img src="../../images/candidate/edit.png" height="20" width="20" id="edit_image" "/>
 							</h3> 
 						</div><!-- Profile Update button code -->
 							<!-- Image load code START-->
@@ -588,9 +587,9 @@ $('.error').fadeIn(400).delay(3000).fadeOut(400);
 								}
 	 echo '<img "height="130" width="150" src="../../images/candidate/' . $row["candidate_image"]. '" >';
 							?>
-		<form  method="post" action="image_update.php" enctype="multipart/form-data">
+		<form id="form2" method="post" action="image_update.php" enctype="multipart/form-data">
 								<span class="select-wrapper">
-									<input type="file" name="pic" id="file"  onchange="this.form.submit()">
+									<input type="file" name="image" id="file"  onchange="this.form.submit()">
 								</span>
 							</form>
 							</div> <!-- /userphoto -->
@@ -640,12 +639,12 @@ $('.error').fadeIn(400).delay(3000).fadeOut(400);
 									$sql = "SELECT exam_name
 										    FROM t_exam_org_qp";
 									$result = mysqli_query($connection,$sql);
-									$log->debug("in CLass fleft - SQL Statement - ".$sql);
+									//$log->debug("in CLass fleft - SQL Statement - ".$sql);
 									echo "<select class='selectpicker' name='users' style='width:150px;'  id='cd-dropdown' class='cd-select' >
 									<option value='' id='select-option'>Register For The Exam</option>";
 									while ($row = mysqli_fetch_assoc($result)) {
 										echo "<option value='" . $row['exam_name'] . "'>" . $row['exam_name'] . "</option>";
-										$log->debug("in CLass fleft / result rows - ".$row['exam_name']);
+										//$log->debug("in CLass fleft / result rows - ".$row['exam_name']);
 									}
 									echo "</select>";
 
