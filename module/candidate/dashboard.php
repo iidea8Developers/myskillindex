@@ -264,7 +264,7 @@
 <script type="text/javascript">
 	
 
-			// showUser3 calls upcoming.php
+			// showUser3 calls exam_register_check.php
 			 function showUser3(str) 
 	     	{
          		if (str == "") {
@@ -278,13 +278,12 @@
 								// code for IE6, IE5
 	                   			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 								}
+						xmlhttp.open("GET","exam_register_check.php?q="+str,true);		
  						xmlhttp.onreadystatechange = function() {
 							if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 								document.getElementById("txtHint2").innerHTML = xmlhttp.responseText;
 							}
 						};
-					
-						xmlhttp.open("GET","register_exam_check.php?q="+str,true);
 						xmlhttp.send(null);
             //windows.location.reload(true);                                               
 						}

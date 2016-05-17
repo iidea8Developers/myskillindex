@@ -1,6 +1,6 @@
 
 <?php
-/* Usage: Code to display exam details while registering for an exam
+/* Usage: Code to display exam details while registering for an exam and call dashbord.php function showuser3
 Updated By PP on 29/04/2016
 */
 session_start();
@@ -47,7 +47,9 @@ include_once('../../service/common/common_error.php');
 	}	
 	//get qp code
 	try{
-		$query= " SELECT qp_name FROM t_qp WHERE qp_code='{$qp_code}' " ;
+		$query= " SELECT qp_name 
+				  FROM t_qp 
+				  WHERE qp_code='{$qp_code}' " ;
 		$result = mysqli_query($connection,$query);
 		if(!$result){
 			throw new exception($connection->error);
@@ -59,7 +61,7 @@ include_once('../../service/common/common_error.php');
 			
 		}}catch(Exception $e){
 		//header("Location: ../../service/common/error_page.php");
-		echo "Exception caught ";
+		$log->error("Exception caught : " . $e->getmessage() );
 	}	
 
 	

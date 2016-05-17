@@ -9,7 +9,8 @@ $log = Logger::getLogger('upcoming_controller.php');
 
 $log->debug("***** START upcoming_controller.php");
        try {
-			$query = "SELECT * 
+			$query = "SELECT registration_date,
+							 exam_id 
 					  FROM t_candidate_exam 
 					  WHERE candidate_id = '{$_SESSION['id']}'
 					  AND exam_date is null " ;
@@ -17,14 +18,15 @@ $log->debug("***** START upcoming_controller.php");
 			while ($row=mysqli_fetch_assoc($result))
 				{   $regon = $row['registration_date'];
 			        $exam_id= $row['exam_id'];
-					$query2 = "SELECT * 
+					$query2 = "SELECT survey_link
 					           FROM t_exam_survey 
 							   WHERE exam_id = '{$exam_id}'" ;
 							   $result2=mysqli_query($connection,$query2);
 								while ($row2=mysqli_fetch_assoc($result2))
 								{
 			               			$survey_link= $row2['survey_link'];
-									$query3 = "SELECT * 
+									$query3 = "SELECT exam_name,
+														exam_date 
 												FROM t_exam_org_qp 
 												WHERE exam_id = '{$exam_id}' " ;
 										$result3=mysqli_query($connection,$query3);
@@ -35,12 +37,12 @@ $log->debug("***** START upcoming_controller.php");
 											//else if($i%4 == 0 ){$class="success";}
 											//else if($i%5 == 0 ){$class="active";}
 											//else {$class="danger";}
-											echo '<tr id="qbank_'.$row3['exam_id'].'">
+											echo '<tr id="qbank_'.$exam_id.'">
 												<td>' .$row3['exam_name'].'</td>
 												<td>'.$regon.'</td>
 												<td>'.$row3['exam_time'].'</td>';
 												echo '<td ><a href="end_date.php?link='.$survey_link.'"><font>Take now</font></a></td>
-												<td><span class="glyphicon glyphicon-remove" id="del_'.$row3["exam_id"].'" onclick="cancel_exam(this);cancel_exam_front(this)"></span></td>
+												<td><span class="glyphicon glyphicon-remove" id="del_'.$exam_id.'" onclick="cancel_exam(this);cancel_exam_front(this)"></span></td>
 											</tr>';
 											//++$i;
 											}
