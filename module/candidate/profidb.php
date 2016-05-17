@@ -13,34 +13,32 @@
   $log = Logger::getLogger('Login_check.php');
   $log->debug("****START - profiledb.php****");
 
- echo $fname= strtoupper(trim($_POST['fname']));
- echo "***************************"; 
- echo  $mname = strtoupper(trim($_POST['mname']));
-  echo "***************************"; 
- echo  $lname = strtoupper(trim($_POST['lname']));
-  echo "***************************"; 
- echo  $email = $_POST['email'];
-  echo "***************************"; 
- echo $contact = strtoupper(trim($_POST['contact']));
-  echo "***************************"; 
- echo $street  = strtoupper(trim($_POST['street']));
-  echo "***************************"; 
- echo $home  = strtoupper(trim($_POST['home']));
-  echo "***************************"; 
- echo  $pincode =  strtoupper(trim($_POST['pincode']));
-  echo "***************************"; 
- echo $city = strtoupper(trim($_POST['city']));
-  echo "***************************"; 
- echo $state = strtoupper(trim($_POST['state']));
-  echo "***************************"; 
- echo $aadhar = strtoupper(trim($_POST['aadhar']));
-  echo "***************************"; 
- echo $image = $_SESSION['image'];
-  echo "***************************"; 
- echo $id = $_SESSION['id'];
-  echo "***************************"; 
- echo $pass = $_POST['pass'];
-  echo "***************************"; 
+$fname= strtoupper(trim($_POST['fname']));
+
+$mname = strtoupper(trim($_POST['mname']));
+ 
+ $lname = strtoupper(trim($_POST['lname']));
+ 
+ $email = $_POST['email'];
+ 
+$contact = strtoupper(trim($_POST['contact']));
+ 
+$street  = strtoupper(trim($_POST['street']));
+ 
+$home  = strtoupper(trim($_POST['home']));
+ 
+ $pincode =  strtoupper(trim($_POST['pincode']));
+ 
+$city = strtoupper(trim($_POST['city']));
+ 
+$state = strtoupper(trim($_POST['state']));
+ 
+$image = $_SESSION['image'];
+ 
+$id = $_SESSION['id'];
+ 
+$pass = $_POST['pass'];
+ 
  
  
   
@@ -55,15 +53,14 @@
                candidate_address_city = '{$city}' ,
                candidate_address_state = '{$state}' ,
                candidate_address_postalcode  = '{$pincode}' ,
-               candidate_aadhar  = '{$aadhar}' ,
                candidate_contact = '{$contact}' ,
                image = '{$image}'  ,
                candidate_password = '{$pass}'
             WHERE candidate_id = '{$_SESSION['id']}' " ;
   if ($connection->query($sql) === TRUE) {
-      echo "Record updated successfully";
+     "Record updated successfully";
   } else {
-      echo "Error updating record: " . $conn->error;
+     "Error updating record: " . $conn->error;
   }
 
 header('Location: dashboard.php');
