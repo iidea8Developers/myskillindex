@@ -538,7 +538,8 @@ $log->debug("###################################################################
 			$showxquestions->appendChild($xml->createCDATASection("Y")); 
 			$showgroupinfo=$xml->createElement("showgroupinfo");
 			$row->appendChild($showgroupinfo);
-			$showgroupinfo->appendChild($xml->createCDATASection("B"));  
+			$showgroupinfo->appendChild($xml->createCDATASection("N"));  
+			// if this doesn't work then chage groupinfo value to null
 			$shownoanswer=$xml->createElement("shownoanswer");
 			$row->appendChild($shownoanswer);
 			$shownoanswer->appendChild($xml->createCDATASection("Y"));  
