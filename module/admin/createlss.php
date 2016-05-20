@@ -651,9 +651,11 @@ $log->debug("###################################################################
 		 	$surveyls_endtext->appendChild($xml->createCDATASection("Thank you. You Have completed the exam".$exam_name."  Click The Link Below To Submit Your Result"));
 		 	$surveyls_url=$xml->createElement("surveyls_url");
 			$row->appendChild($surveyls_url);
-			//$surveyls_url->appendChild($xml->createCDATASection("http://52.39.26.22/myskillindex/module/candidate/Thank.php"));
+			//this is a link where user will come at the end of survey and we have to add code to export the result here to matchand show the number of correct reponse
+			$surveyls_url->appendChild($xml->createCDATASection("http://52.39.26.22/myskillindex/module/candidate/Thank.php"));
 			$surveyls_urldescription=$xml->createElement("surveyls_urldescription");
 			$row->appendChild($surveyls_urldescription);
+			$surveyls_urldescription->appendChild($xml->createCDATASection("To see your result, Click on link above it"));
 			//below is the email survey format
 			$surveyls_email_invite_subj=$xml->createElement("surveyls_email_invite_subj");
 			$row->appendChild($surveyls_email_invite_subj);
@@ -746,7 +748,7 @@ $log->debug("###################################################################
 			//$log->debug($query);
 			$result = mysqli_query($connection,$query);
 
-			//
+			//activate survey
 			$active = $myJSONRPCClient->activate_survey($sessionKey,$new_survey_id);
 			// release the session key
 			$myJSONRPCClient->release_session_key( $sessionKey );

@@ -5,7 +5,9 @@
    $email = $_SESSION['email'];
    $exam_id = 	$_SESSION['exam_id'] ;
  	  
- 	$query2 = "select survey_id from t_exam_survey where exam_id = '{$_SESSION['exam_id']}' " ;
+ 	$query2 = "SELECT survey_id 
+             FROM t_exam_survey 
+             WHERE exam_id = '{$exam_id}' " ;
  	$result2=mysqli_query($connection,$query2);
  	while ($row2=mysqli_fetch_assoc($result2))
  	
@@ -13,7 +15,10 @@
  		$survey_id = $row2['survey_id'];
  		
  		
- 		$query3 = " SELECT exam_name, exam_pass_percentile FROM t_exam_org_qp WHERE exam_id  = '{$_SESSION['exam_id']}' " ;
+ 		$query3 = " SELECT exam_name, 
+                       exam_pass_percentile 
+                FROM t_exam_org_qp 
+                WHERE exam_id  = '{$exam_id}' " ;
  		$result3=mysqli_query($connection,$query3);
  		while ($row3=mysqli_fetch_assoc($result3))
  		
@@ -21,14 +26,18 @@
     $exam_name = $row3['exam_name'];
     $exam_percentile = $row3['exam_pass_percentile'];
  			
- 			$Query = "Select * from r_exam_que where exam_id =  '{$_SESSION['exam_id']}' " ;
+ 			$Query = "SELECT * 
+                FROM r_exam_que 
+                WHERE exam_id =  '{$exam_id}' " ;
  			$result4=mysqli_query($connection,$Query);
  			$num_rows = mysqli_num_rows($result4);
 
  			while ($row4=mysqli_fetch_assoc($result4))				
  			{
  				
- 				$Query2 = "Select distinct a_iscorrect  from t_ansbank where qid = '{$row4['qid']}' " ;
+ 				$Query2 = "SELECT DISTINCT a_iscorrect  
+                   FROM t_ansbank 
+                   WHERE qid = '{$row4['qid']}' " ;
  				$result5=mysqli_query($connection,$Query2);
  				while ($row5=mysqli_fetch_assoc($result5))
  				{
@@ -36,8 +45,11 @@
  				}
  				
  			}
- 			$lime = "Select * from lime_survey_".$survey_id." where token = '{$candidate_id}' ";
- 			$result6=mysqli_query($connection2,$lime);
+      // " are replaced from survey id
+ 			$lime = "SELECT * 
+               FROM lime_survey_.$survey_id. 
+               WHERE token = '{$candidate_id}' ";
+ 			$result6=mysqli_query($connection,$lime);
  			while ($limerow=mysqli_fetch_assoc($result6))
  			
  			{
@@ -48,12 +60,13 @@
  			}
  			
  			
- 		}}
+ 		}
+  }
  		
  		$num=5;
  		$num2=0;
  		$marks=0;
-    echo '<br>';
+   // echo '<br>';
  		for ($x = 0; $x <= $num_rows-1; $x++) {
  			
  			if( $string[$num] != $string2[$num2])
@@ -78,8 +91,10 @@
  		}
  		echo $marks;
  		
- 		$sql = "INSERT INTO t_candidate_result (exam_id, candidate_id, marks_scored)
- 		VALUES ({$_SESSION['exam_id']}, '{$candidate_id}', '{$marks}') " ;
+ 		$sql = "INSERT INTO t_candidate_result (exam_id, 
+                                            candidate_id, 
+                                            marks_scored)
+ 		         VALUES ('{$exam_id}', '{$candidate_id}', '{$marks}') " ;
  		
  		if ($connection->query($sql) === TRUE) {
  			//echo "New record created successfully";
@@ -88,7 +103,9 @@
  		}
  		
  		
- 		$query = "select MAX(marks_scored) from t_candidate_result where exam_id  = '{$_SESSION['exam_id']}' " ;
+ 		$query = "SELECT MAX(marks_scored) 
+              FROM t_candidate_result 
+              WHERE exam_id  = '{$exam_id}' " ;
  		$result = mysqli_query($connection , $query);
  		$row = mysqli_fetch_assoc($result);
  	//	echo "*****************maximum marks*********************";
@@ -96,14 +113,18 @@
  		//echo "**************************************";
  		//Your percentile score = { (No, of people who got less than you/ equal to you) / (no. of people appearing in the exam) } x 100
  		
- 		$query = " select COUNT(candidate_id) from t_candidate_result where exam_id  = '{$_SESSION['exam_id']}'  and marks_scored <= '{$marks}' ";
+ 		$query = " SELECT COUNT(candidate_id) 
+               FROM t_candidate_result 
+               WHERE exam_id  = '{$exam_id}'  and marks_scored <= '{$marks}' ";
  		$result = mysqli_query($connection , $query);
  		$row = mysqli_fetch_assoc($result);
  	//	echo "*****************num of people equal or less than u *********************";
  	    $num_people = $row['COUNT(candidate_id)'];
  	//	echo "**************************************";
  		
- 		$query = " select COUNT(candidate_id) from t_candidate_result where exam_id = '{$_SESSION['exam_id']}'  ";
+ 		$query = " SELECT COUNT(candidate_id) 
+               FROM t_candidate_result 
+               WHERE exam_id = '{$exam_id}'  ";
  		$result = mysqli_query($connection , $query);
  		$row = mysqli_fetch_assoc($result);
  	//	echo "***************total people of 92 exAM***********************";
@@ -180,7 +201,9 @@ mail($email,"MyskillIndex",$msg);
  
  $date = date("Y/m/d");
  echo "fail";
- $sql = "UPDATE t_candidate_exam SET  fail = '0' , exam_date = '$date' where (candidate_id = '{$_SESSION['id']}' and exam_id = '{$exam_id}' ) " ;
+ $sql = "UPDATE t_candidate_exam 
+         SET  fail = '0' , exam_date = '$date' 
+         WHERE (candidate_id = '{$_SESSION['id']}' AND exam_id = '{$exam_id}' ) " ;
  
   if (mysqli_query($connection, $sql)) {
      echo "fail ho gya";
