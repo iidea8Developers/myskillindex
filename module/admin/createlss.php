@@ -750,6 +750,8 @@ $log->debug("###################################################################
 
 			//activate survey
 			$active = $myJSONRPCClient->activate_survey($sessionKey,$new_survey_id);
+			//activate tokens
+			$active_tokens=$myJSONRPCClient->activate_tokens($sessionKey, $new_survey_id);
 			// release the session key
 			$myJSONRPCClient->release_session_key( $sessionKey );
 	

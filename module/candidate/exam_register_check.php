@@ -24,7 +24,7 @@
 		   WHERE exam_id =$exam_id"; 
 	$result1=mysqli_query($connection,$sql1);
 	if(mysqli_num_rows($result1)===0){
-		header('Location: register_exam.php');
+		header('Location: register_exam.php/?exam_name='.$_GET['q']);
 	}
 	else
 	{
