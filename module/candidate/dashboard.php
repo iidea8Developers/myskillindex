@@ -266,7 +266,8 @@
 
 			// showUser3 calls exam_register_check.php
 			 function showUser3(str) 
-	     	{
+	     	{   
+	     		$('#myModal').modal('hide');
          		if (str == "") {
 					document.getElementById("txtHint").innerHTML = "";
          			return;
@@ -457,6 +458,7 @@ $(window).load(function(){
     if(value){
         $('#myModal').modal('show');
    }
+
    if(!value){
         $('#myModal').modal('false');
    }
