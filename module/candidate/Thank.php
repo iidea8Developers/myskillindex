@@ -1,22 +1,42 @@
  <?php
- 	session_start();
- 	include_once('../../service/common/db_connection.php');
+    include_once('../../service/common/db_connection.php');
+    include_once('../../lib/log4php/Logger.php');
+    Logger::configure('../../config/log_config.xml');
+    $log = Logger::getLogger('Thank.php');
+    $log->debug("**** START - Thank.php ****");
+    session_start();
+    $log->debug($survey_id = $_GET['survey_id']);
+    $log->debug($token = $_GET['token']);
+    if(isset($_GET['survey_id']) && isset($_GET['token'])){
+        $survey_id = $_GET['survey_id'];
+        $token = $_GET['token'];
+        // without composer this line can be used
+          include_once("../../lib/jsonrpcphp/JsonRPCClient.php");
+
+        //Get Session parameters
+        $myJSONRPCClient = new JsonRPCClient( LS_BASEURL );
+        $sessionKey= $myJSONRPCClient->get_session_key( LS_USER, LS_PASSWORD );
+
+    
+        $log->debug($added_user);
+        $myJSONRPCClient->release_session_key($sessionKey );
+    }
    $candidate_id  = $_SESSION['id'];
    $email = $_SESSION['email'];
    $exam_id = 	$_SESSION['exam_id'] ;
  	  
  	$query2 = "SELECT survey_id 
-             FROM t_exam_survey 
-             WHERE exam_id = '{$exam_id}' " ;
+               FROM t_exam_survey 
+               WHERE exam_id = '{$exam_id}' " ;
  	$result2=mysqli_query($connection,$query2);
  	while ($row2=mysqli_fetch_assoc($result2))
  	
  	{ 
- 		$survey_id = $row2['survey_id'];
+ 		//$survey_id = $row2['survey_id'];
  		
  		
  		$query3 = " SELECT exam_name, 
-                       exam_pass_percentile 
+                       exam_pass_percentage 
                 FROM t_exam_org_qp 
                 WHERE exam_id  = '{$exam_id}' " ;
  		$result3=mysqli_query($connection,$query3);
@@ -24,7 +44,7 @@
  		
  		{
     $exam_name = $row3['exam_name'];
-    $exam_percentile = $row3['exam_pass_percentile'];
+    $exam_percentile = $row3['exam_pass_percentage'];
  			
  			$Query = "SELECT * 
                 FROM r_exam_que 
@@ -48,7 +68,7 @@
       // " are replaced from survey id
  			$lime = "SELECT * 
                FROM lime_survey_.$survey_id. 
-               WHERE token = '{$candidate_id}' ";
+               WHERE token = '{$token}' ";
  			$result6=mysqli_query($connection,$lime);
  			while ($limerow=mysqli_fetch_assoc($result6))
  			

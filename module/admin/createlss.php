@@ -649,7 +649,7 @@
 		 	$surveyls_url=$xml->createElement("surveyls_url");
 			$row->appendChild($surveyls_url);
 			//this is a link where user will come at the end of survey and we have to add code to export the result here to matchand show the number of correct reponse
-			$surveyls_url->appendChild($xml->createCDATASection("http://52.39.26.22/myskillindex/module/candidate/Thank.php"));
+			$surveyls_url->appendChild($xml->createCDATASection("http://52.39.26.22/myskillindex/module/candidate/Thank.php/?token={TOKEN}&survey_id={SID}&saveID={SAVEID}"));
 			$surveyls_urldescription=$xml->createElement("surveyls_urldescription");
 			$row->appendChild($surveyls_urldescription);
 			$surveyls_urldescription->appendChild($xml->createCDATASection("To see your result, Click on link above it"));
