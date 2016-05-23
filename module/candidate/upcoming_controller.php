@@ -12,7 +12,13 @@ $log->debug("***** START upcoming_controller.php");
        {
 			
 				
-						$query = "SELECT tc.registration_date,tc.exam_id,tes.survey_link, te.exam_name,te.exam_time
+						$query = "SELECT tc.registration_date,
+										 tc.exam_id,
+										 tc.exam_token,
+										 tes.survey_id, 
+										 tes.survey_link, 
+										 te.exam_name,
+										 te.exam_time
 				           		   FROM t_exam_survey tes,
 				           		   		t_exam_org_qp te,
 				           		   		t_candidate_exam tc 
@@ -30,6 +36,8 @@ $log->debug("***** START upcoming_controller.php");
 			
 						while ($row=mysqli_fetch_assoc($result))
 							{		
+									$token = $row['exam_token'];
+									$survey_id = $row['survey_id'];
 									$regon = $row['registration_date'];
 			       					$exam_id= $row['exam_id'];
 			              			$survey_link= $row['survey_link'];
@@ -38,7 +46,6 @@ $log->debug("***** START upcoming_controller.php");
 												<td>'.$regon.'</td>
 												<td>'.$row['exam_time'].'</td>';
 												echo '<td ><a href="end_date.php?link='.$survey_link.'"><font>Take now</font></a></td>
-												<td><span class="glyphicon glyphicon-remove" id="del_'.$exam_id.'" onclick="cancel_exam(this);cancel_exam_front(this)"></span></td>
 											</tr>';
 							}//end of while loop
 					
