@@ -83,42 +83,9 @@ if(isset($_GET['exam_name']))
 
 
             $myJSONRPCClient->release_session_key($sessionKey );
-
-   	        $email= $_SESSION['email'];
-	       $id= $_SESSION['id'];
-           $name= $_SESSION['name'];
- 	
-/********** INSERT Token in Lime Survey Tables - Using Connection2 ********************************  
-
-            $sql2 = " INSERT INTO limesurvey.lime_tokens_".$survey_id." 
-                              (tid,
-                               participant_id,
-                               firstname,
-                               lastname,
-                               email,
-                               emailstatus, 
-                               token, 
-                               language, 
-                               blacklisted, 
-                               sent, 
-                               remindersent,
-                               remindercount,
-                               completed, 
-                               usesleft, 
-                               validfrom, 
-                               validuntil, 
-                               mpid) 
-                  VALUES ('', '{$id}', '{$name}', '', '{$email}', 'OK', '{$id}', 'en', NULL, 'N', 'N', 0, 'N', 1, NULL, NULL, NULL)";
-	
- 	      if ($connection->query($sql2) === TRUE) 
-             {
-	             $log->debug("Token Inserted Successfully - File:register_exam.php ");
-              } else {
-	                     $log->error("File: register_exam.php : Error creating table: " . $connection->error);
-	                    }*/
-      	
-        
-    }
+        mysqli_close($connection);
+        $log->info("****END resister_exam.php****");    
+ 	}
  ?>
 
  

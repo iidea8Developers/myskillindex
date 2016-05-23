@@ -266,7 +266,8 @@
 
 			// showUser3 calls exam_register_check.php
 			 function showUser3(str) 
-	     	{
+	     	{   
+	     		$('#myModal').modal('hide');
          		if (str == "") {
 					document.getElementById("txtHint").innerHTML = "";
          			return;
@@ -285,8 +286,8 @@
 							}
 						};
 						xmlhttp.send(null);
-            //windows.location.reload(true);                                               
-						}
+            			//windows.location.reload(true);                                               
+					}
 			}  
 			// showUser5 calls profile_get.php
 			
@@ -319,17 +320,43 @@
 			// this function is used to return back to dashboard after click on cancel
 			function loadDoc5() 
 			{
-			 /* var xhttp = new XMLHttpRequest();
-			  xhttp.onreadystatechange = function() {
-			    if (xhttp.readyState == 4 && xhttp.status == 200) {
-			     document.getElementById("profi").innerHTML = xhttp.responseText;
-			    }
-			  };
-			  xhttp.open("GET", "profile_get.php", true);
-			  xhttp.send();*/
-			
-			  window.location.assign("dashboard.php")
+			   window.location.assign("dashboard.php")
 			}
+
+			// it will delete the exam 
+			function cancel_exam(val1){
+				var xhttp;
+				var fe1 = "exam_id=" + (val1.id).split('.')[1] + "&token=" + (val1.id).split('.')[2] + "&survey_id=" + (val1.id).split('.')[3];
+		    	// create XMLHttpRequest object 
+				if(window.XMLHttpRequest){
+					xhttp = new XMLHttpRequest();
+				}
+				else{
+					xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				//request made to server
+            	xhttp.open("POST","delete_exam.php",true);
+            
+            	// Set content type header information for sending url encoded variables in the request
+            	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+       			xhttp.onreadystatechange = function() {
+       				 //alert("readyState = " + xhttp.readyState + "\nstatus=" + xhttp.status);
+       				if (xhttp.readyState == 4 && xhttp.status == 200) {
+            			var response = xhttp.responseText.trim();
+            			//alert(response);
+            			//to check whether exam  is deleted from both database or not
+            			if(response.indexOf('success') >= 0){
+            				// this function is used to hide deleted exam on the front end side
+            				$(val1).parent().parent().hide();
+            			}
+            			else{
+            				$(val1).parent().parent().innerHTML('Exam is not deleted due to some technical fault in system.Please contact to admin to cancel the exam' );
+            			}
+            		}
+        		};
+        		xhttp.send(fe1);  
+        	}	
+
 			$(document).ready(function(){
 				$("#img1").click(function(){
 					$("#column2").addClass('hidden');
@@ -424,91 +451,54 @@
 					$("#img22").attr('src','../../images/candidate/register_green.png');
 					$("#img11").attr('src','../../images/candidate/profile_blue.png');
 					$("#img33").attr('src','../../images/candidate/certificate_black.png');
-				});  
+				}); 
+
+				// 
+				$('#cd-dropdown').change(function() {
+ 					var value = $( "#cd-dropdown option:selected").val();
+    				console.log(value);
+    				if(value){
+        				$('#myModal').modal('show');
+   					}
+					if(!value){
+        				$('#myModal').modal('false');
+   					}
+
+   					$.ajax({
+          				type : 'get',
+           				url : 'exam_detail.php', // in here you should put your query 
+          				data :  'q='+ value, // here you pass your id via ajax .
+                      	success : function(r){
+              				// now you can show output in your modal 
+              				$('#myModal').show();  // put your modal id 
+             				$('.something').show().html(r);
+           				}
+    				});
+				});
+
+				//
+				$('#edit_image').click(function() {
+  					$('#myModal2').modal({
+            			show: true
+        			});
+  				
+  					$.ajax({
+          				type : 'get',
+           				url : 'profile.php', // in here you should put your query 
+       					success : function(r){
+              				// now you can show output in your modal 
+              				$('#myModal2').show();  // put your modal id 
+             				$('.something2').show().html(r);
+           				}
+    				});
+				});
+
+				//
+				$('.error').fadeIn(400).delay(3000).fadeOut(400);
 			});	
-            // it will delete the exam 
-			function cancel_exam(val1){
-				var xhttp;
-        		xhttp = new XMLHttpRequest();
-        		xhttp.open("GET","delete_exam.php?id=" + (val1.id).split('_')[1], true);
-       			xhttp.onreadystatechange = function() {
-       				
-            		if (xhttp.readyState == 4 && xhttp.status == 200) {
-                		
-            		}
-        		};
-        		xhttp.send();                
-             
-			}	
             
-            // this function is used to hide deleted exam on the front end side
-			function cancel_exam_front(val2){
-            $(val2).parent().parent().hide();
-            }
 </script> 
 
-<script type="text/javascript">
-	
-$(window).load(function(){
-
-	$('#cd-dropdown').change(function() {
-  var value = $( "#cd-dropdown option:selected").val();
-    console.log(value);
-    if(value){
-        $('#myModal').modal('show');
-   }
-   if(!value){
-        $('#myModal').modal('false');
-   }
-
-   $.ajax({
-          type : 'get',
-           url : 'exam_detail.php', // in here you should put your query 
-          data :  'q='+ value, // here you pass your id via ajax .
-                      
-       success : function(r)
-           {
-              // now you can show output in your modal 
-              $('#myModal').show();  // put your modal id 
-             $('.something').show().html(r);
-           }
-    });
-});
-
-
-
-	$('#edit_image').click(function() {
-  
-        $('#myModal2').modal(
-
-        {
-            show: true
-        });
-  
-
-   $.ajax({
-          type : 'get',
-           url : 'profile.php', // in here you should put your query 
-       success : function(r)
-           {
-              // now you can show output in your modal 
-              $('#myModal2').show();  // put your modal id 
-             $('.something2').show().html(r);
-           }
-    });
-});
-    
-});
-
-
-
-</script>
-<script type="text/javascript">
-	
-$('.error').fadeIn(400).delay(3000).fadeOut(400);
-
-	
-</script>
 <body style="background-color:#fff">
 	<div id="topbar1">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../images/common/logo_myskillindex.jpeg" width="170px" height="95px" style="margin-top:-15px"></a>

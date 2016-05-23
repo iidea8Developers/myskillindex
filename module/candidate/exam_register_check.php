@@ -28,6 +28,7 @@
 	}
 	else
 	{
+		//echo "registered";
 		echo "<div class='error' style='display:none'>Exam already registered</div>";  
 	}
 	$log->info("****END exam_register_check.php****");
