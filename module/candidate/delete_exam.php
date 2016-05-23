@@ -22,8 +22,22 @@
   	$id=$_GET["id"];
 
 	//$id = mysql_escape_string($id);
-	if(isset($_GET["id"])) {
-		$query="DELETE FROM t_candidate_exam WHERE exam_id = $id ";
+	if(isset($_GET["token"])) {
+		$aTokenIDs=array($_GET['token']);
+		$iSurveyID=$_GET['survey_id'];
+		$exam_id=$_GET['exam_id'];
+		// without composer this line can be used
+	    include_once("../../lib/jsonrpcphp/JsonRPCClient.php");
+
+        //Get Session parameters
+ 	    $myJSONRPCClient = new JsonRPCClient( LS_BASEURL );
+	    $sessionKey= $myJSONRPCClient->get_session_key( LS_USER, LS_PASSWORD );
+	    $deleted_user = $myJSONRPCClient->delete_participants($sessionKey,$iSurveyID, $aTokenIDs);
+        $log->debug($deleted_user);
+
+		$myJSONRPCClient->release_session_key($sessionKey );
+
+		$query="DELETE FROM t_candidate_exam WHERE exam_id = $exam_id AND exam_token = $_GET['token'] ";
     	mysqli_query($connection,$query);
     	$log->info("****END delete_exam.php****");
 	}

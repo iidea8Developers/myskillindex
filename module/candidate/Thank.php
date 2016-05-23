@@ -203,7 +203,7 @@ mail($email,"MyskillIndex",$msg);
  echo "fail";
  $sql = "UPDATE t_candidate_exam 
          SET  fail = '0' , exam_date = '$date' 
-         WHERE (candidate_id = '{$_SESSION['id']}' AND exam_id = '{$exam_id}' ) " ;
+         WHERE (candidate_id = '{$candidate_id}' AND exam_id = '{$exam_id}' ) " ;
  
   if (mysqli_query($connection, $sql)) {
      echo "fail ho gya";
