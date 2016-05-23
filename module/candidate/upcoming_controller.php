@@ -46,6 +46,7 @@ $log->debug("***** START upcoming_controller.php");
 												<td>'.$regon.'</td>
 												<td>'.$row['exam_time'].'</td>';
 												echo '<td ><a href="end_date.php?link='.$survey_link.'"><font>Take now</font></a></td>
+												<td><span class="glyphicon glyphicon-remove" id="del.'.$exam_id.'.'.$token.'.'.$survey_id.'" onclick="cancel_exam(this)"></span></td>
 											</tr>';
 							}//end of while loop
 					
