@@ -253,9 +253,6 @@
 					  WHERE exam_id ='{$exam_id}'";
 			$result = mysqli_query($connection, $query);
 			while($q_row1=mysqli_fetch_assoc($result)){
-$log->debug("###########################################################################");
-				$log->debug($q_row1);
-				$log->debug("###########################################################################");
 				$q_id = $q_row1["qid"];
 				//qd = question's detail
 				$qd_query = "SELECT q_type_code,
@@ -728,7 +725,7 @@ $log->debug("###################################################################
 			//import survey to limesurvey
 			$file_string=base64_encode(file_get_contents('../../tmp/'.$file));
 			$format = 'lss';
-			$sNewSurveyName = 'A new title';
+			$sNewSurveyName = $exam_name;
 			$new_survey_id = $myJSONRPCClient->__call('import_survey',array($sessionKey,$file_string,$format,$sNewSurveyName));
 			//$log->debug($new_survey_id);
 			//to form a survey link
@@ -750,8 +747,16 @@ $log->debug("###################################################################
 
 			//activate survey
 			$active = $myJSONRPCClient->activate_survey($sessionKey,$new_survey_id);
+
 			//activate tokens
 			$active_tokens=$myJSONRPCClient->activate_tokens($sessionKey, $new_survey_id);
+			if(($result === TRUE) && ($active['status']=='OK')){
+				unlink('../../tmp/'.$file);
+				unlink('../../tmp/'.$Filename);
+			}else{
+				throw new Exception("Error Processing Request", 1);
+				
+			}
 			// release the session key
 			$myJSONRPCClient->release_session_key( $sessionKey );
 	
