@@ -56,6 +56,8 @@
 		$log->debug("Fetching Candidate Details - SQL Statement - ".$query);
 		$result=mysqli_query($connection,$query);
 		$row=mysqli_fetch_assoc($result);
+		$_SESSION['f_name'] = $row['candidate_fname'];
+		$_SESSION['l_name'] = $row['candidate_lname'];
 		$_SESSION['name']     = $row['candidate_fname']." ".$row['candidate_mname']. " ".$row['candidate_lname'];
 	  	$_SESSION['password'] = $row['candidate_password'];
 		$_SESSION['email']    = $row['candidate_email'];
