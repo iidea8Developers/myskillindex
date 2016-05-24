@@ -66,7 +66,7 @@
         $num_rows = mysqli_num_rows($result);
         while ($row=mysqli_fetch_assoc($result)){
             $exam_name = $row['exam_name'];
-            $exam_percentile = $row['exam_pass_percentage'];
+            $exam_percentage = $row['exam_pass_percentage'];
             echo     $string1[]= "A".$row['a_sortorder'];
         }	
  		
@@ -109,13 +109,13 @@
  			}
         }  */  		
  
- 		//don't know this one write now
  		$num=9;
  		$num1=0;
  		$marks=0;
+    //calculate marks
  		for ($x = 0; $x <= $num_rows-1; $x++) {
  			
- 			if( $string[$num] != $string1[$num2])
+ 			if( $string[$num] != $string1[$num1])
  			{
 
       echo "  ************start************ ";
@@ -126,42 +126,44 @@
      
  			}else
  			{
-
+        //should come from  question weightage from t_question bank and add this q_weightage in select query used in starting
  				$marks=$marks+4;
  				
  			}
  			
  			
  			$num =$num+1;
- 			$num2 =$num2+1;
+ 			$num1 =$num1+1;
  		}
  		echo $marks;
- 		
+
+    //insert marks in database 		
  		$sql = "INSERT INTO t_candidate_result (exam_id, 
                                             candidate_id, 
                                             marks_scored)
  		         VALUES ('{$exam_id}', '{$candidate_id}', '{$marks}') " ;
  		
  		if ($connection->query($sql) === TRUE) {
- 			//echo "New record created successfully";
+      $log->error("exam record is added successfully to t_candidate_result table");
  			} else {
- 			//echo "Error: " . $sql . "<br>" . $connection->error;
+ 			$log->error("Error: " . $sql . "<br>" . $connection->error);
  		}
  		
- 		
+ 		//it shows maximum marks scored in that exam 
  		$query = "SELECT MAX(marks_scored) 
               FROM t_candidate_result 
               WHERE exam_id  = '{$exam_id}' " ;
  		$result = mysqli_query($connection , $query);
  		$row = mysqli_fetch_assoc($result);
  	//	echo "*****************maximum marks*********************";
- 	//	echo $max= $row['MAX(marks_scored)'];
+ 	  echo $max= $row['marks_scored'];
  		//echo "**************************************";
  		//Your percentile score = { (No, of people who got less than you/ equal to you) / (no. of people appearing in the exam) } x 100
  		
  		$query = " SELECT COUNT(candidate_id) 
                FROM t_candidate_result 
-               WHERE exam_id  = '{$exam_id}'  and marks_scored <= '{$marks}' ";
+               WHERE exam_id  = '{$exam_id}'  
+               AND marks_scored <= '{$marks}' ";
  		$result = mysqli_query($connection , $query);
  		$row = mysqli_fetch_assoc($result);
  	//	echo "*****************num of people equal or less than u *********************";
@@ -189,40 +191,44 @@
  echo '<h1>'.round($percentile).' Percentile <h1>';
  echo '<h1>'.  $marks .' Marks Scored <h1>';
  	
- 	echo $num_rows;
-  $four = 4;
-  $num_of_q = $num_rows;
-  $total_marks = ($num_of_q * $four );
+ 	
+  $total_marks = ($num_rows * 4 );
   echo $total_marks;
  
  
- echo "percent". $exam_percentile;
+ echo "percent". $exam_percentage;
  $eligible = (($marks)/($total_marks))*100;
  echo "eligible".$eligible;
  
- if ($exam_percentile < $eligible){
- $date = date("Y/m/d");
+//check whether candidate is fail or pass
+  $date = date("Y/m/d");
+ if ($exam_percentage < $eligible){
  echo "pass";
- $sql = "UPDATE t_candidate_exam SET  fail = '1' , exam_date = '$date' WHERE (candidate_id = '{$_SESSION['id']}' AND exam_id = '{$exam_id}' ) " ;
+ $sql = "UPDATE t_candidate_exam 
+         SET fail = '1' , 
+             exam_date = '$date' 
+         WHERE (candidate_id = '{$candidate_id}' 
+         AND exam_id = '{$exam_id}' ) " ;
  
-  if (mysqli_query($connection, $sql)) {
+  if (!mysqli_query($connection, $sql)) {
+    $log->error("Error updating record: " . mysqli_error($connection));
+    echo "Error updating record: " . mysqli_error($connection);
+  }else{
+    /*$query = "SELECT exam_date 
+              FROM t_candidate_exam 
+              WHERE (candidate_id = '{$candidate_id}' 
+              AND exam_id = '{$exam_id}' ) " ;
+    $result = mysqli_query($connection , $query);
+    $row = mysqli_fetch_assoc($result);
 
- } else {
-     echo "Error updating record: " . mysqli_error($connection);
- }
-//mail on pass
+    $exam_date = $row['exam_date'];*/
 
-	$query4 = " select * from t_candidate_exam where (candidate_id = '{$_SESSION['id']}' and exam_id = '{$exam_id}' ) " ;
- 		$result4 = mysqli_query($connection , $query4);
- 		$row4 = mysqli_fetch_assoc($result4);
-//	echo "***************total people of 92 exAM***********************";
- 	  $exam_date = $row4['exam_date'];
-
-$msg = "Dear ".$_SESSION['name'].",
+    $subject = "Result of ".$exam_name." on MyskillIndex";
+    $msg = "Dear ".$_SESSION['name'].",
 
 Congratulations !!
 
-We are please to inform you that you have succesfully passed the exam ".$exam_name."  on ". $exam_date.".
+We are please to inform you that you have succesfully passed the exam ".$exam_name." on ".$date." with ".$eligible." percentage.
 
 Exam result
 score: ".$marks." 
@@ -238,26 +244,22 @@ My Skill Index Team
 www.MyskillIndex.com";
 
 // send email
-mail($email,"MyskillIndex",$msg);
+mail($email,$subject,$msg);
 
- 
- }else
+  }
+}//end of pass if condiction
+else
  {
- 
- 
- $date = date("Y/m/d");
  echo "fail";
  $sql = "UPDATE t_candidate_exam 
          SET  fail = '0' , exam_date = '$date' 
-         WHERE (candidate_id = '{$candidate_id}' AND exam_id = '{$exam_id}' ) " ;
+         WHERE (candidate_id = '{$candidate_id}' 
+         AND exam_id = '{$exam_id}' ) " ;
  
   if (mysqli_query($connection, $sql)) {
      echo "fail ho gya";
- } else {
-     echo "Error updating record: " . mysqli_error($connection);
- }
- 
-$msg = "Dear ".$_SESSION['name'].",
+     $subject = "Result of ".$exam_name." on MyskillIndex";
+     $msg = "Dear ".$_SESSION['name'].",
 
 We regret to inform you that you have not passed the exam ".$exam_name."  on ".$date.".
 
@@ -275,9 +277,12 @@ Regards
 My Skill Index Team
 www.MyskillIndex.com";
 
-mail($email,"MyskillIndex",$msg);
- 
+mail($email,$subject,$msg);
+ } else {
+     echo "Error updating record: " . mysqli_error($connection);
  }
+ 
+}//end of pass fail else
 
 header('Location: dashboard.php');
 
