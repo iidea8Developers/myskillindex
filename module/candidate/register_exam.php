@@ -45,9 +45,9 @@ if(isset($_GET['exam_name']))
 	    $sessionKey= $myJSONRPCClient->get_session_key( LS_USER, LS_PASSWORD );
 
         $aParticipantData = array(
-            'user'=>array('firstname'=>'Christopher',
-                    'lastname'=>'hitchens',
-                    'email'=>'christopher@example.com',
+            'user'=>array('firstname'=>$_SESSION['f_name'],
+                    'lastname'=> $_SESSION['l_name'] ,
+                    'email'=>$_SESSION['email'],
                     'language'=>'en',
                     'emailstatus'=>'ok'),
             );

@@ -10,41 +10,83 @@
     if(isset($_GET['survey_id']) && isset($_GET['token'])){
         $survey_id = $_GET['survey_id'];
         $token = $_GET['token'];
+        $lang = $_GET['lang']
+        $sDocumentType = 'json';
+        $sCompletionStatus='all';
+        $sHeadingType='full';
+        $sResponseType='long';
         // without composer this line can be used
-          include_once("../../lib/jsonrpcphp/JsonRPCClient.php");
+        include_once("../../lib/jsonrpcphp/JsonRPCClient.php");
 
         //Get Session parameters
         $myJSONRPCClient = new JsonRPCClient( LS_BASEURL );
-        $sessionKey= $myJSONRPCClient->get_session_key( LS_USER, LS_PASSWORD );
+        $sessionKey = $myJSONRPCClient->get_session_key( LS_USER, LS_PASSWORD );
+        //export response using token key
+        $JSON_file = $myJSONRPCCLient->export_responses_by_token($sessionKey, $survey_id, $sDocumentType, $token, $lang, $sCompletionStatus, $sHeadingType, $sResponseType);
+        //to iterator over the json file
+        $jsonIterator = new RecursiveIteratorIterator(
+    new RecursiveArrayIterator(json_decode(base64_decode(file_get_contents($JSON_file)),TRUE)),
+    RecursiveIteratorIterator::SELF_FIRST);
+        $JSON_file = base64_decode(file_get_contents($JSON_file));
 
-    
-        $log->debug($added_user);
+        echo $JSON_file;
+        foreach ($jsonIterator as $key => $val) {
+            if(is_array($val)) {
+                echo "$key:\n";
+            } else {
+                echo "$key => $val\n";
+            }
+        }
+
+        print_r($JSON_file);
         $myJSONRPCClient->release_session_key($sessionKey );
-    }
-   $candidate_id  = $_SESSION['id'];
-   $email = $_SESSION['email'];
-   $exam_id = 	$_SESSION['exam_id'] ;
- 	  
- 	$query2 = "SELECT survey_id 
-               FROM t_exam_survey 
-               WHERE exam_id = '{$exam_id}' " ;
- 	$result2=mysqli_query($connection,$query2);
- 	while ($row2=mysqli_fetch_assoc($result2))
- 	
- 	{ 
- 		//$survey_id = $row2['survey_id'];
+    
+   
+
+//it is second method to export result and show the user
+        //this data should be fetched from table using survey id and token
+        $candidate_id  = $_SESSION['id'];
+        $email = $_SESSION['email'];
+        $exam_id = 	$_SESSION['exam_id'] ; 	
+
+
+
+        $query = "  SELECT teoq.exam_name, 
+                           teoq.exam_pass_percentage,
+                           req.qid,
+                           tab.a_sortorder
+                    FROM t_exam_org_qp teoq,
+                         r_exam_que req,
+                         t_ansbank tab
+                    WHERE tab.qid = req.qid 
+                    AND tab.a_iscorrect = 1
+                    AND teoq.exam_id  = req.exam_id
+                    AND req.exam_id = '{$exam_id}' " ;
+        $result=mysqli_query($connection,$query);
+        $num_rows = mysqli_num_rows($result);
+        while ($row=mysqli_fetch_assoc($result)){
+            $exam_name = $row['exam_name'];
+            $exam_percentile = $row['exam_pass_percentage'];
+            echo     $string1[]= "A".$row['a_sortorder'];
+        }	
  		
- 		
- 		$query3 = " SELECT exam_name, 
-                       exam_pass_percentage 
-                FROM t_exam_org_qp 
-                WHERE exam_id  = '{$exam_id}' " ;
- 		$result3=mysqli_query($connection,$query3);
- 		while ($row3=mysqli_fetch_assoc($result3))
- 		
- 		{
-    $exam_name = $row3['exam_name'];
-    $exam_percentile = $row3['exam_pass_percentage'];
+        $lime = "SELECT * 
+               FROM lime_survey_.$survey_id. 
+               WHERE token = '{$token}' ";
+            $result=mysqli_query($connection,$lime);
+            while ($limerow=mysqli_fetch_assoc($result)){
+                foreach($limerow as $key => $value) {
+                $string[]=$value;
+                }
+            }
+ 		/*$query = "  SELECT exam_name, 
+                           exam_pass_percentage 
+                    FROM t_exam_org_qp 
+                    WHERE exam_id  = '{$exam_id}' " ;
+ 		$result=mysqli_query($connection,$query);
+ 		while ($row=mysqli_fetch_assoc($result)){
+            $exam_name = $row['exam_name'];
+            $exam_percentile = $row['exam_pass_percentage'];
  			
  			$Query = "SELECT * 
                 FROM r_exam_que 
@@ -65,37 +107,21 @@
  				}
  				
  			}
-      // " are replaced from survey id
- 			$lime = "SELECT * 
-               FROM lime_survey_.$survey_id. 
-               WHERE token = '{$token}' ";
- 			$result6=mysqli_query($connection,$lime);
- 			while ($limerow=mysqli_fetch_assoc($result6))
- 			
- 			{
- 				foreach($limerow as $key => $value) {
- 	 			$string[]=$value;
- 				}
- 				
- 			}
- 			
- 			
- 		}
-  }
- 		
- 		$num=5;
- 		$num2=0;
+        }  */  		
+ 
+ 		//don't know this one write now
+ 		$num=9;
+ 		$num1=0;
  		$marks=0;
-   // echo '<br>';
  		for ($x = 0; $x <= $num_rows-1; $x++) {
  			
- 			if( $string[$num] != $string2[$num2])
+ 			if( $string[$num] != $string1[$num2])
  			{
 
       echo "  ************start************ ";
       echo $string[$num];
       echo '<br>';
-       echo $string2[$num2];
+       echo $string1[$num2];
       echo " ***********end**********";
      
  			}else
