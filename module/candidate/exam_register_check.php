@@ -21,7 +21,8 @@
 	
 	$sql1 ="SELECT *
 		   FROM t_candidate_exam 
-		   WHERE exam_id =$exam_id"; 
+		   WHERE exam_id =$exam_id 
+		   AND exam_start_time = NULL "; 
 	$result1=mysqli_query($connection,$sql1);
 	if(mysqli_num_rows($result1)===0){
 		header('Location: register_exam.php/?exam_name='.$_GET['q']);

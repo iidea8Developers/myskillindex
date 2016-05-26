@@ -20,12 +20,12 @@
 				$connection->close();
 			}
 	// DB Connection to Limesurvey DB for myskillindex
-	/*$connection2 = mysqli_connect(dbhost21, dbuser21, dbpass21, dbname21);
+	$connection2 = mysqli_connect(dbhost21, dbuser21, dbpass21, dbname21);
 		if(!$connection2) 
 			{
 				$log->error("Could not connect to Limesurvey db. Check Connection paramanters for Connection2 in config.txt");
 				header('Location: ../../module/candidate/index.php');
 				$connection->close();
-			}*/
+			}
 		$log->debug("****END - db_connection.php****");
 ?>

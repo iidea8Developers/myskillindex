@@ -282,7 +282,7 @@
 				$type->appendChild($xml->createCDATASection($qd_row['q_type_code']));		   
 				$title=$xml->createElement("title");
 				$row->appendChild($title);
-				$title->appendChild($xml->createCDATASection("Q".($num + 1)));		//look what title question should have   
+				$title->appendChild($xml->createCDATASection($q_id));		//look what title question should have   
 				//need to update CDATA if queation have image or video
 				$question=$xml->createElement("question");
 				$row->appendChild($question);
@@ -651,7 +651,7 @@
 			//this is a link where user will come at the end of survey and we have to add code to export the result here to matchand show the number of correct reponse
 //************************************************************************************************************************************************************************************************************************************************************
 			//change localhost to 52.39.26.22 when upload the code to server
-			$surveyls_url->appendChild($xml->createCDATASection("http://localhost/myskillindex/module/candidate/Thank.php/?token={TOKEN}&survey_id={SID}&saveID={SAVEID}&lang={LANG}"));
+			$surveyls_url->appendChild($xml->createCDATASection("http://localhost/myskillindex/module/candidate/Thank.php/?token={TOKEN}&survey_id={SID}&lang={LANG}&saveID={SAVEDID}"));
 			$surveyls_urldescription=$xml->createElement("surveyls_urldescription");
 			$row->appendChild($surveyls_urldescription);
 			$surveyls_urldescription->appendChild($xml->createCDATASection("To see your result, Click on link above it"));
@@ -754,7 +754,7 @@
 
 			//activate tokens
 			$active_tokens=$myJSONRPCClient->activate_tokens($sessionKey, $new_survey_id);
-			if(($result === TRUE) && ($active['status']=='OK')){
+			if(($result === TRUE) && ($active['status']=='OK') && (logXML !== 'Y')){
 				unlink('../../tmp/'.$file);
 				unlink('../../tmp/'.$Filename);
 			}else{
