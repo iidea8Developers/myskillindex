@@ -7,8 +7,8 @@
 
 	define("dbhost21","localhost");
 	define("dbuser21","root");
-	define("dbpass21","shukla");
-	define("dbname21","tool"); 
+	define("dbpass21","");
+	define("dbname21","limesurvey"); 
 
 	define( 'LS_USER', 'jitendradayma' );
 	define( 'LS_PASSWORD', 'dayma@2016' );
@@ -21,5 +21,10 @@
  	define('LS_BASEURL', 'http://localhost/limesurvey/index.php/admin/remotecontrol');
  	define('admin', 'Jitendra Dayma');
  	define('adminMail','jitendradayma@gmail.com');
+
+ 	define('survey_STARTURL','http://localhost/limesurvey/index.php/');
+ 	define('survey_ENDURL', 'http://localhost/myskillindex/module/candidate/exam_result.php');
+
+ 	define('logXML','N');
 ?>
 
