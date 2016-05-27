@@ -649,9 +649,7 @@
 		 	$surveyls_url=$xml->createElement("surveyls_url");
 			$row->appendChild($surveyls_url);
 			//this is a link where user will come at the end of survey and we have to add code to export the result here to matchand show the number of correct reponse
-//************************************************************************************************************************************************************************************************************************************************************
-			//change localhost to 52.39.26.22 when upload the code to server
-			$surveyls_url->appendChild($xml->createCDATASection("http://localhost/myskillindex/module/candidate/Thank.php/?token={TOKEN}&survey_id={SID}&lang={LANG}&saveID={SAVEDID}"));
+			$surveyls_url->appendChild($xml->createCDATASection(survey_ENDURL."/?token={TOKEN}&survey_id={SID}&lang={LANG}&saveID={SAVEDID}"));
 			$surveyls_urldescription=$xml->createElement("surveyls_urldescription");
 			$row->appendChild($surveyls_urldescription);
 			$surveyls_urldescription->appendChild($xml->createCDATASection("To see your result, Click on link above it"));
@@ -731,10 +729,7 @@
 			$new_survey_id = $myJSONRPCClient->__call('import_survey',array($sessionKey,$file_string,$format,$sNewSurveyName));
 			//$log->debug($new_survey_id);
 			//to form a survey link
-//************************************************************************************************************************************************************************************************************************************************************
-			//change localhost to 52.39.26.22 when upload the code to server
-			$survey_link="http://localhost/limesurvey/index.php/" ;
-		    $survey_link .= $new_survey_id."?lang=en";
+		    $survey_link = survey_STARTURL.$new_survey_id."?lang=en";
 		    $_SESSION['survey_link'] = $survey_link;
 
 			//insert data in exam_survey table

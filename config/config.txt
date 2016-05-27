@@ -22,6 +22,9 @@
  	define('admin', 'Jitendra Dayma');
  	define('adminMail','jitendradayma@gmail.com');
 
+ 	define('survey_STARTURL','http://localhost/limesurvey/index.php/');
+ 	define('survey_ENDURL', 'http://localhost/myskillindex/module/candidate/exam_result.php');
+
  	define('logXML','N');
 ?>
 

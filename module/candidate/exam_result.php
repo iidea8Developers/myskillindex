@@ -1,9 +1,16 @@
 <?php
+    //this page show the candidate performance and thanks him for taking an exam
+    //This is called from limesurvey at the end of exam  
+    // created by: jitendra Dayma
+    //created on: 25-05-2016
+    //last modified by : Jitendra dayma
+    //modified on : 27-05-2016
+
     include_once('../../service/common/db_connection.php');
     include_once('../../lib/log4php/Logger.php');
     Logger::configure('../../config/log_config.xml');
-    $log = Logger::getLogger('Thank.php');
-    $log->debug("**** START - Thank.php ****");
+    $log = Logger::getLogger('exam_result.php');
+    $log->debug("**** START - exam_result.php ****");
     session_start();
     //$log->debug($survey_id = $_GET['survey_id']);
     //$log->debug($token = $_GET['token']);
@@ -16,6 +23,8 @@
         $sHeadingType='code';
         $sResponseType='short';
         $aFields=null;
+        //saveID is the id that is given to submission in lime survey table
+        $response_id = $_GET['saveID'];
         // without composer this line can be used
         include_once("../../lib/jsonrpcphp/JsonRPCClient.php");
 
@@ -32,14 +41,7 @@
         //this data should be fetched from table using survey id and token
         $candidate_id  = $_SESSION['id'];
         $email = $_SESSION['email'];
-        $exam_id = 	$_SESSION['exam_id'] ; 
-        $query = "SELECT id
-               FROM lime_survey_.$survey_id. 
-               WHERE token = '{$token}' ";
-        $result=mysqli_query($connection2,$query);
-        $row = mysqli_fetch_assoc($result);
-        $response_id = $row['id'];
-        $log->debug($response_id);
+        $exam_id = 	$_SESSION['exam_id'] ;
 
         $query = "  SELECT teoq.exam_name, 
                            teoq.exam_pass_percentage,
@@ -57,6 +59,7 @@
         $num_rows = mysqli_num_rows($result);
         $marks=0;
         $correct = 0;
+        $total_marks = 0;
         // should get response id from lime_survey_survey_id table or look for other solution
 
         while ($row=mysqli_fetch_assoc($result)){
@@ -70,6 +73,7 @@
                 $log->debug($marks); 
                 $log->debug($correct); 
             }
+            $total_marks = ($num_rows * 4 );
         }
         $myJSONRPCClient->release_session_key($sessionKey ); 
     } 
@@ -116,12 +120,13 @@
  		
  		$percentile = ($num_people/$num_people_app)*100 ;
  		
- 	    echo '	<body style="background-color:lightgrey;"> ';
-        echo '</body>';
-        echo '<h1>'.round($percentile).' Percentile <h1>';
-        echo '<h1>'.  $marks .' Marks Scored <h1>';
- 	    $total_marks = ($num_rows * 4 );
-        echo $total_marks;
+ 	    //echo '	<body style="background-color:lightgrey;"> ';
+        //echo '</body>';
+        //echo '<h1>'.round($percentile).' Percentile <h1>';
+        //echo '<h1>'.  $marks .' Marks Scored <h1>';
+ 	    
+        
+        //echo $total_marks;
        // echo "percent". $exam_percentage;
         $percentage_scored = (($marks)/($total_marks))*100;
        // echo "percentage_scored".$percentage_scored;
@@ -129,7 +134,6 @@
         //check whether candidate is fail or pass
         $date = date("Y/m/d");
         if ($exam_percentage < $percentage_scored){
-            echo "pass";
             $sql = "UPDATE t_candidate_exam 
                     SET fail = '1' , 
                         exam_date = '$date' 
@@ -166,14 +170,12 @@
             }
         }//end of pass if condiction
         else{
-            echo "fail";
-            $sql = "UPDATE t_candidate_exam 
+           $sql = "UPDATE t_candidate_exam 
                     SET  fail = '0' , exam_date = '$date' 
                     WHERE (candidate_id = '{$candidate_id}' 
                     AND exam_id = '{$exam_id}' ) " ;
  
             if (mysqli_query($connection, $sql)) {
-                echo "fail ho gya";
                 $subject = "Result of ".$exam_name." on MyskillIndex";
                 $msg = "Dear ".$_SESSION['name'].",
 
@@ -202,5 +204,18 @@
         } //end of pass fail else
 
         mysqli_close($connection);
-        $log->debug("**** END - Thank.php ****");
+        $log->debug("**** END - exam_result.php ****");
 ?>
+<!Doctype html>
+<html>
+    <head>
+        <title> Exam result </title>
+    </head>
+    <body style="background-color:lightgrey">
+        <div id = container> 
+            <h1>Result of <?php echo $exam_name ?> exam</h1>
+            <p> You scored <?php echo  round($percentile) ?> percentile and <?php echo $marks ?> marks  in this exam </p>
+        </div>    
+    </body>
+</html>
+
