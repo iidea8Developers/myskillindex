@@ -6,6 +6,7 @@
 	
 	//function for db conn and session check
     include_once('../../service/common/db_connection.php');
+    include_once('../../service/common/getGUID.php');
 	include_once('../../lib/log4php/Logger.php');
 	Logger::configure('../../config/log_config.xml');
 	$log = Logger::getLogger('createExamXML.php');
@@ -145,7 +146,7 @@
 	}
 	// file name should be like - userid_GUID_e.xml
 	$user_name = $_SESSION['user'];
-	$guid = com_create_guid();
+	$guid = getGUID();
 	$file_name = $user_name."_".$guid."_e.xml";
 	$log->debug("****file_name:$file_name****");
 
