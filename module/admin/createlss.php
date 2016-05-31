@@ -730,31 +730,35 @@
 			//$log->debug($new_survey_id);
 			//to form a survey link
 		    $survey_link = "http://".survey_address."/limesurvey/index.php/".$new_survey_id."?lang=en";
-		    $_SESSION['survey_link'] = $survey_link;
+		    
+		    if($active['status']=='OK'){
+		    	$_SESSION['survey_link'] = $survey_link;
+				//insert data in exam_survey table
+				$query = "INSERT INTO t_exam_survey(survey_link,
+													survey_id,
+													exam_id,
+													created_by,
+													modified_by,
+													created_time,
+													modified_time)
+							values('{$survey_link}','{$new_survey_id}','{$exam_id}','{$file_name[0]}','{$file_name[0]}',NOW(),NOW())";
+				//$log->debug($query);
+				$result = mysqli_query($connection,$query);
 
-			//insert data in exam_survey table
-			$query = "INSERT INTO t_exam_survey(survey_link,
-												survey_id,
-												exam_id,
-												created_by,
-												modified_by,
-												created_time,
-												modified_time)
-						values('{$survey_link}','{$new_survey_id}','{$exam_id}','{$file_name[0]}','{$file_name[0]}',NOW(),NOW())";
-			//$log->debug($query);
-			$result = mysqli_query($connection,$query);
+				//activate survey
+				$active = $myJSONRPCClient->activate_survey($sessionKey,$new_survey_id);
 
-			//activate survey
-			$active = $myJSONRPCClient->activate_survey($sessionKey,$new_survey_id);
-
-			//activate tokens
-			$active_tokens=$myJSONRPCClient->activate_tokens($sessionKey, $new_survey_id);
-			if(($result === TRUE) && ($active['status']=='OK') && (logXML !== 'Y')){
-				unlink('../../tmp/'.$file);
-				unlink('../../tmp/'.$Filename);
+				//activate tokens
+				$active_tokens=$myJSONRPCClient->activate_tokens($sessionKey, $new_survey_id);
+				if(($result === TRUE) && (logXML !== 'Y')){
+					unlink('../../tmp/'.$file);
+					unlink('../../tmp/'.$Filename);
+				}else{
+					throw new Exception("Error Processing Request", 1);
+					
+				}
 			}else{
-				throw new Exception("Error Processing Request", 1);
-				
+					throw new Exception("error in survey id",1);
 			}
 			// release the session key
 			$myJSONRPCClient->release_session_key( $sessionKey );
